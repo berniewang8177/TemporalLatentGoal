@@ -243,7 +243,6 @@ class RLBenchDataset(data.Dataset):
             # currently, we root has every thing we need
             # assert False, f"{root} {task} {var}"
             data_dir = root[0] + f"{task}+{taskvar}"
-            print(data_dir)
             if not os.path.isdir(data_dir):
                 raise ValueError(f"Can't find dataset folder {data_dir}")
             

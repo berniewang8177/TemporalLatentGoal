@@ -260,6 +260,9 @@ class RLBenchEnv:
             :param demos: whether to use the saved demos
             :return: success rate
         """
+        lang_feat, eos_feat, lang_pad, lang_num = instructions
+        lang_idx = 0
+        instruction = (lang_feat, eos_feat) 
 
         self.env.launch()
         # task_str: push_buttons.py
@@ -275,8 +278,6 @@ class RLBenchEnv:
             fetch_list = [i for i in range(num_demos)]
         else:
             fetch_list = demos
-
-        fetch_list = fetch_list[offset:]
 
         with torch.no_grad():
             for demo_id, demo in enumerate(tqdm(fetch_list)):
@@ -307,7 +308,7 @@ class RLBenchEnv:
                     pcds = torch.cat([pcds, pcd.unsqueeze(1)], dim=1)
                     grippers = torch.cat([grippers, gripper.unsqueeze(1)], dim=1)
 
-                    output = agend.act(step_id, rgbs, pcds, grippers)
+                    output = agend.act( step_id, rgbs, pcds, instructions[lang_idx:lang_idx+1], lang_pad[lang_idx:lang_idx+1])
                     action = output["action"]
 
                     if action is None:

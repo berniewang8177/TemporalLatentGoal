@@ -150,15 +150,29 @@ class Agent:
         """
         return self.model.state_dict(), self.optimizer
     
-    def act(self, x):
+    def act(self, step_idx, rgbs, pcds, instructions, lang_mask):
         """
-        Used for evaluation. Takes 1 observation, output 1 action.
+        Used for evaluation. Takes observations, output 1 action.
         
         Arguments
         ----------
-        x: 
+        step_idx:
+            current step id, uesd to calcualte horizon length
+        rgbs:
+            rgb images
+        pcds:
+            point clouds
+        instructions:
+            a tuple contains token and eos features
+        lang_mask:
+            a padding mask for language (true is padded token)
             
 
         """
-        pass
-    
+        device = rgbs.device
+        horizon_len = step_idx+2
+        # Note that true denotes unpad tokens
+        visual_mask = torch.tensor([True] * horizon_len).to(device)
+        pred = self.model(rgbs, pcds, visual_mask, instructions, lang_mask)
+
+        return pred
