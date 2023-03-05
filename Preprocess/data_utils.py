@@ -4,6 +4,7 @@ import numpy as np
 import random
 from typing import Tuple, Dict, List
 import einops
+import tqdm
 # RLbench 
 from rlbench.observation_config import ObservationConfig, CameraConfig
 from rlbench.environment import Environment
@@ -244,7 +245,6 @@ class RLBenchEnv:
         max_episodes: int,
         variation: int,
         num_demos: int,
-        log_dir: Optional[Path],
         agent,
         instructions,
         offset: int = 0,
@@ -260,32 +260,33 @@ class RLBenchEnv:
             :param demos: whether to use the saved demos
             :return: success rate
         """
-        lang_feat, eos_feat, lang_pad, lang_num = instructions
-        lang_idx = 0
-        instruction = (lang_feat, eos_feat) 
+        device = agent.device
 
+        lang_feats, eos_feats, lang_pads, lang_num = instructions
+        # now, let's always use 1st sentence (in the future, loop through all)
+        lang_idx = 0
+        if None not in lang_feats:
+            lang_feats = torch.tensor(lang_feats).to(device)
+            lang_pads = torch.tensor(lang_pads).to(device)
+        eos_feats = torch.tensor(eos_feats).to(device)
+        
+        instruction = (lang_feats[lang_idx:lang_idx+1], eos_feats[lang_idx:lang_idx+1]) 
         self.env.launch()
+        
         # task_str: push_buttons.py
         task_type = task_file_to_task_class(task_str)
         task = self.env.get_task(task_type)
         task.set_variation(variation)  # type: ignore
 
-        device = agent.device
-
         success_rate = 0.0
 
-        if demos is None:
-            fetch_list = [i for i in range(num_demos)]
-        else:
-            fetch_list = demos
+        fetch_list = [i for i in range(num_demos)]
 
         with torch.no_grad():
-            for demo_id, demo in enumerate(tqdm(fetch_list)):
-
+            # for fetch in fetch_list:
                 images = []
                 rgbs = torch.Tensor([]).to(device)
                 pcds = torch.Tensor([]).to(device)
-                grippers = torch.Tensor([]).to(device)
 
                 # reset a new demo or a defined demo in the demo list
                 _, obs = task.reset()
@@ -297,49 +298,54 @@ class RLBenchEnv:
                 reward = None
 
                 for step_id in range(max_episodes):
+                    print("Step:", step_id)
                     # fetch the current observation, and predict one action
                     rgb, pcd, gripper = self.get_rgb_pcd_gripper_from_obs(obs)
 
                     rgb = rgb.to(device)
                     pcd = pcd.to(device)
-                    gripper = gripper.to(device)
 
                     rgbs = torch.cat([rgbs, rgb.unsqueeze(1)], dim=1)
                     pcds = torch.cat([pcds, pcd.unsqueeze(1)], dim=1)
-                    grippers = torch.cat([grippers, gripper.unsqueeze(1)], dim=1)
 
-                    output = agend.act( step_id, rgbs, pcds, instructions[lang_idx:lang_idx+1], lang_pad[lang_idx:lang_idx+1])
-                    action = output["action"]
+
+                    output = agent.act( step_id, rgbs, pcds, instruction, lang_pads[lang_idx:lang_idx+1])
+                    position = output["position"]
+                    rotation = output["rotation"]
+                    gripper = output["gripper"]
+                    action = torch.cat( [ position, rotation, gripper ], dim = 1)
 
                     if action is None:
                         break
 
                     # update the observation based on the predicted action
-                    try:
-                        action_np = action[-1].detach().cpu().numpy()
+                    # try:
+                    action_np = action[-1].detach().cpu().numpy()
 
-                        obs, reward, terminate, step_images = move(action_np)
+                    obs, reward, terminate, step_images = move(action_np)
 
-                        images += step_images
+                    images += step_images
 
-                        if reward == 1:
-                            success_rate += 1 / num_demos
-                            break
-
-                        if terminate:
-                            print("The episode has terminated!")
-
-                    except (IKError, ConfigurationPathError, InvalidActionError) as e:
-                        print(task_type, demo, step_id, success_rate, e)
-                        reward = 0
+                    if reward == 1:
+                        success_rate += 1 / num_demos
                         break
+
+                    if terminate:
+                        print("The episode has terminated!")
+                    
+                    
+                    # excep
+                    # except (IKError, ConfigurationPathError, InvalidActionError) as e:
+                    #     print(task_type, demo, step_id, success_rate, e)
+                    #     reward = 0
+                    #     break
 
                 print(
                     task_str,
                     "Reward",
                     reward,
-                    "Step",
-                    demo_id,
+                    # "Step",
+                    # demo_id,
                 )
 
         self.env.shutdown()

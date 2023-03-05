@@ -8,7 +8,7 @@ class Arguments(tap.Tap):
     checkpoint: Optional[Path] = None
     checkpoint_period: int = 10
     dataset: List[Path] = ["/home/yiqiw2/experiment/language_rl/train_datasets/"]
-    dataset_val: List[Path] = ["/home/yiqiw2/experiment/language_rl/test_datasets/"]
+    dataset_val: List[Path] = ["/home/ubuntu/workspace/test_data/"]
     device: str = "cuda:0"
     xp: Path = Path(__file__).parent / "xp"
     name: str = "LAVA"
@@ -22,7 +22,7 @@ class Arguments(tap.Tap):
 
     tasks: str = "push_buttons" # # if multi-tasks, then "task_a task_b task_c "
     variations: str =  '1 ' # if variations 1 2 3 then "1 2 3"
-    episodes_json_path: str = "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Preprocess/episodes.json"
+    episodes_json_path: str = "/home/ubuntu/workspace/TemporalLatentGoal/Preprocess/episodes.json"
 
     # Train
     batch_size: int = 32
@@ -34,12 +34,13 @@ class Arguments(tap.Tap):
     load_model: bool = False
     load_name: str = ''
     save_model: bool = False # whether saviing the best model
-    save_path: str = '/home/yiqiw2/experiment/language_rl/saved_model'
+    save_path: str = '/home/ubuntu/workspace/saved_model'
 
     # tests
     headless: bool = True
     output: Path = Path(__file__).parent / "records.txt"
     var_num: int = 7 # the variation we want to test
+    num_episodes: int = 100
     # model
     depth: int = 4
     dim_feedforward: int = 64

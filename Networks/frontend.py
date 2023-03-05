@@ -2,7 +2,6 @@
 
 import einops
 # deep learning stuff
-from regex import D
 import torch
 import torch.nn as nn
 import torch.nn.functional as F

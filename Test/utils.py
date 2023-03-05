@@ -1,5 +1,6 @@
+import numpy as np
 class Mover:
-    def __init__(self, task: TaskEnvironment, disabled: bool = False, max_tries: int = 1):
+    def __init__(self, task, disabled: bool = False, max_tries: int = 1):
         self._task = task
         self._last_action: Optional[np.ndarray] = None
         self._step_id = 0
@@ -21,17 +22,18 @@ class Mover:
         reward = 0
 
         for try_id in range(self._max_tries):
-            obs, reward, terminate, other_obs = self._task.step(action)
-            if other_obs == []:
-                other_obs = [obs]
-            for o in other_obs:
-                images.append(
-                    {
-                        k.split("_")[0]: getattr(o, k)
-                        for k in o.__dict__.keys()
-                        if "_rgb" in k and getattr(o, k) is not None
-                    }
-                )
+            feedback = self._task.step(action)
+            obs, reward, terminate = feedback # we don't return other_obs
+            # if other_obs == []:
+            #     other_obs = [obs]
+            # for o in other_obs:
+            #     images.append(
+            #         {
+            #             k.split("_")[0]: getattr(o, k)
+            #             for k in o.__dict__.keys()
+            #             if "_rgb" in k and getattr(o, k) is not None
+            #         }
+            #     )
 
             pos = obs.gripper_pose[:3]
             rot = obs.gripper_pose[3:7]
@@ -41,6 +43,7 @@ class Mover:
             criteria = (dist_pos < 5e-2,)
 
             if all(criteria) or reward == 1:
+                
                 break
 
             print(
@@ -54,22 +57,23 @@ class Mover:
             and self._last_action is not None
             and action[7] != self._last_action[7]
         ):
-            obs, reward, terminate, other_obs = self._task.step(action)
-            if other_obs == []:
-                other_obs = [obs]
-            for o in other_obs:
-                images.append(
-                    {
-                        k.split("_")[0]: getattr(o, k)
-                        for k in o.__dict__.keys()
-                        if "_rgb" in k and getattr(o, k) is not None
-                    }
-                )
+            # obs, reward, terminate, other_obs = self._task.step(action)
+            obs, reward, terminate = self._task.step(action)
+            # if other_obs == []:
+            #     other_obs = [obs]
+            # for o in other_obs:
+            #     images.append(
+            #         {
+            #             k.split("_")[0]: getattr(o, k)
+            #             for k in o.__dict__.keys()
+            #             if "_rgb" in k and getattr(o, k) is not None
+            #         }
+            #     )
 
         if try_id == self._max_tries:
             print(f"Failure after {self._max_tries} tries")
 
         self._step_id += 1
         self._last_action = action.copy()
-
-        return obs, reward, terminate, images
+        print("terminate", terminate)
+        return obs, reward, terminate , images

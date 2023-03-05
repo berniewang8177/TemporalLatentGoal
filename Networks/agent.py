@@ -170,9 +170,9 @@ class Agent:
 
         """
         device = rgbs.device
-        horizon_len = step_idx+2
+        horizon_len = step_idx+1
         # Note that true denotes unpad tokens
-        visual_mask = torch.tensor([True] * horizon_len).to(device)
+        visual_mask = torch.tensor([True] * horizon_len).unsqueeze(0).to(device)
         pred = self.model(rgbs, pcds, visual_mask, instructions, lang_mask)
 
         return pred

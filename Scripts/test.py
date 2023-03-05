@@ -5,12 +5,20 @@ from pathlib import Path
 import torch
 import numpy as np
 import tap
-from filelock import FileLock
 import os
+os.environ["CUBLAS_WORKSPACE_CONFIG"]=":16:8"
+# deep learning stuff
+import torch
+torch.use_deterministic_algorithms(True, warn_only=True)
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
+import torch.nn as nn
+# for debugging
+torch.autograd.set_detect_anomaly(True)
 # project-specific
 from Test.arguments import Arguments
 from Networks.agent import Agent
-# from Preprocess.data_utils import RLBenchEnv
+from Preprocess.data_utils import RLBenchEnv
 from Utils.utils import (
     set_seed,
     load_episodes,
@@ -32,10 +40,10 @@ if __name__ == "__main__":
         print("Load model sucess")
     else:
         assert False, f"please load the model for the evaluation !"
-
+    
     # load RLBench environment
     env = RLBenchEnv(
-        data_path= None,
+        data_path= args.dataset_val[0], # place holder, we don't actually need it 
         apply_rgb=True,
         apply_pc=True,
         headless=args.headless,
@@ -49,21 +57,16 @@ if __name__ == "__main__":
         args.var_num,) # it should be int)
     
     max_eps_dict = load_episodes(args.episodes_json_path)["max_episode_length"]
-
+    
     for task_str in args.tasks:
-        for variation in args.variations:
-            success_rate = env.evaluate(
-                task_str = args.tasks,
-                max_episodes=max_eps_dict[task_str],
-                variation=variation,
-                num_demos=args.num_episodes,
-                demos=None,
-                offset=args.offset,
-                agent=agent,
-                instructions = instructions,
-                log_dir=log_dir / task_str if args.save_img else None,
-                max_tries=args.max_tries,
-                save_attn=args.attention,
-            )
 
-            print("Testing Success Rate {}: {:.04f}".format(task_str, success_rate))
+        success_rate = env.evaluate(
+            task_str = args.tasks[0],
+            max_episodes=max_eps_dict[task_str],
+            variation= args.var_num,
+            num_demos=args.num_episodes,
+            agent=agent,
+            instructions = instructions,
+        )
+
+        print("Testing Success Rate {}: {:.04f}".format(task_str, success_rate))

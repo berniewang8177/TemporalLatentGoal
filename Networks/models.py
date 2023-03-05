@@ -244,6 +244,7 @@ class Models(nn.Module):
         # LAVA: language vector (eos features as query) attends to visual tokens (keys and values)
         cross_feature, new_padding_mask = self.cross_atten1(
             visual_tokens, padding_mask_vision, eoses, padding_mask_lang)
+
         # VALA: visual queries attends to language tokens (keys and values)
         if self.cross_atten2 is not None:
             cross_feature2, _useless_mask = self.cross_atten2(

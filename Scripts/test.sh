@@ -1,10 +1,10 @@
 #!/bin/bash
 
-python3 Scripts/test.py \
---device cuda:1 \
+xvfb-run python3 Scripts/test.py \
+--device cuda:0 \
 --position_offset \
---name "VALA" \
+--name "LAVA" \
 --lang_emb "CLIP" \
---var_num 7 \
+--var_num 1 \
 --load_model \
---load_name "VALA_train_1_variation_7_film_once.pth"
+--load_name "LAVA_train_1_variation_7_film_once.pth"

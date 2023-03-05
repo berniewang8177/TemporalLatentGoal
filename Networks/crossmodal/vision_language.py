@@ -76,7 +76,7 @@ class VALA(nn.Module):
         vision:
             visual inputs supports keys,values for cross-modal attention.
         vision_padding:
-            a multi-view padding mask to avoid attention on padded multi-viewvision tokens.
+            a multi-view padding mask to avoid attention on padded multi-view vision tokens.
         language:
             language supports queries for cross-modal attention.
         language_padding:
@@ -101,12 +101,18 @@ class VALA(nn.Module):
         ref = einops.rearrange(ref, '(B pad_token) dim -> B pad_token dim', B = B)
 
         # only used for vision-attends-language
-        if self.causal_self and self.causal_mask == None:
+        if ref.requires_grad:
+            # during training, horizon is fix
+            if self.causal_self and self.causal_mask == None:
+                length = vision_padding.shape[1] // N
+                self.causal_mask = get_causal_mask(tgt, length)
+                # views within same timestep could attends to each other
+                self.causal_mask = self.causal_mask.repeat_interleave(N,dim = 1).repeat_interleave(N,dim = 0)
+        else:
             length = vision_padding.shape[1] // N
             self.causal_mask = get_causal_mask(tgt, length)
             # views within same timestep could attends to each other
             self.causal_mask = self.causal_mask.repeat_interleave(N,dim = 1).repeat_interleave(N,dim = 0)
-
         # we apply self-attention with cauasl mask on multi-view visual tokens
         # to learn temporal visual features. Collapse time and view dim for efficent training.
         temporal_features, self_attns_map, cross_attns_map = self.vala(
