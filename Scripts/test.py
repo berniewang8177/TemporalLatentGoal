@@ -1,4 +1,5 @@
 import random
+from time import time
 from typing import Tuple, Optional
 from copy import deepcopy
 from pathlib import Path
@@ -17,6 +18,7 @@ torch.backends.cudnn.benchmark = False
 import torch.nn as nn
 # for debugging
 torch.autograd.set_detect_anomaly(True)
+
 # project-specific
 from Test.arguments import Arguments
 from Networks.agent import Agent
@@ -62,7 +64,7 @@ if __name__ == "__main__":
     
     for task_str in args.tasks:
 
-        success_rate, rgbs = env.evaluate(
+        success_rate, sucess_rgbs_episode, failed_rgbs_episode = env.evaluate(
             task_str = args.tasks[0],
             max_episodes=max_eps_dict[task_str],
             variation= args.var_num,
@@ -74,14 +76,21 @@ if __name__ == "__main__":
         print("Testing Success Rate {}: {:.04f}".format(task_str, success_rate))
         
         # store what we have
-
-        rgbs = einops.rearrange(rgbs, "B T V C H W -> B T V H W C")
-        rgbs = rgbs[0,:,0,:,:,:3].detach().cpu().numpy() * 255
-        print("rgb", rgbs.shape)
-
-        for i, rgb in enumerate(rgbs):
-            rgb = rgb.astype(np.uint8)
-            rgb_img = Image.fromarray(rgb, mode="RGB")
-            img_path = f'/home/ubuntu/workspace/imgs/img{i}.jpg'
-            rgb_img.save(img_path)
+        for idx, rgbs in enumerate( sucess_rgbs_episode ):
+            rgbs = (rgbs[:,0,:,:,:] ).astype(np.uint8)
+            for i, rgb in enumerate(rgbs):
+                rgb_img = Image.fromarray(rgb)
+                name = args.load_name.replace(".pth", "")
+                suffix = str(time())[:2]
+                img_path = f'/home/ubuntu/workspace/imgs/sucess-{idx}-{name}-{i}-{suffix}.jpg'
+                rgb_img.save(img_path)
+        for idx, rgbs in enumerate( failed_rgbs_episode ):
+            rgbs = (rgbs[:,0,:,:,:] ).astype(np.uint8)
+            for i, rgb in enumerate(rgbs):
+                rgb_img = Image.fromarray(rgb)
+                name = args.load_name.replace(".pth", "")
+                suffix = str(time())[:2]
+                img_path = f'/home/ubuntu/workspace/imgs/failed-{idx}-{name}-{i}-{suffix}.jpg'
+                rgb_img.save(img_path)
+            break
         print('Done')

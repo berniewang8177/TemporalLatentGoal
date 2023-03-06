@@ -264,32 +264,40 @@ class RLBenchEnv:
 
         lang_feats, eos_feats, lang_pads, lang_num = instructions
         # now, let's always use 1st sentence (in the future, loop through all)
-        lang_idx = 1
+        lang_idx = 2
         if None not in lang_feats:
             lang_feats = torch.tensor(lang_feats).to(device)
             lang_pads = torch.tensor(lang_pads).to(device)
         eos_feats = torch.tensor(eos_feats).to(device)
         
         instruction = (lang_feats[lang_idx:lang_idx+1], eos_feats[lang_idx:lang_idx+1]) 
-        self.env.launch()
-        
-        # task_str: push_buttons.py
-        task_type = task_file_to_task_class(task_str)
-        task = self.env.get_task(task_type)
-        task.set_variation(variation)  # type: ignore
-
+        success_rgbs_episode = []
+        failed_rgbs_episode = []
         success_rate = 0.0
+        self.env.launch()
+        max_iterations = 100
+        for iteration in range(max_iterations):
+            raw_rgbs = []
+            # task_str: push_buttons.py
+            task_type = task_file_to_task_class(task_str)
+            task = self.env.get_task(task_type)
+            task.set_variation(variation)  # type: ignore
 
-        fetch_list = [i for i in range(num_demos)]
-
-        with torch.no_grad():
-            # for fetch in fetch_list:
+            with torch.no_grad():
+                # for fetch in fetch_list:
                 images = []
                 rgbs = torch.Tensor([]).to(device)
                 pcds = torch.Tensor([]).to(device)
 
                 # reset a new demo or a defined demo in the demo list
-                _, obs = task.reset()
+                try:
+                    desc, obs = task.reset()
+                    # fetch again to log the true rgb without transformation
+                    raw_states, _ = self.get_obs_action(obs)
+                    raw_rgbs.append( raw_states['rgb'] )
+                    print("Desc:\t", desc)
+                except:
+                    continue
 
                 images.append(
                     {cam: getattr(obs, f"{cam}_rgb") for cam in self.apply_cameras}
@@ -301,8 +309,9 @@ class RLBenchEnv:
                     print("Step:", step_id)
                     # fetch the current observation, and predict one action
                     rgb, pcd, gripper = self.get_rgb_pcd_gripper_from_obs(obs)
-
+                    
                     rgb = rgb.to(device)
+                
                     pcd = pcd.to(device)
 
                     rgbs = torch.cat([rgbs, rgb.unsqueeze(1)], dim=1)
@@ -319,37 +328,29 @@ class RLBenchEnv:
                         break
 
                     # update the observation based on the predicted action
-                    # try:
-                    action_np = action[-1].detach().cpu().numpy()
+                    try:
+                        action_np = action[-1].detach().cpu().numpy()
 
-                    obs, reward, terminate, step_images = move(action_np)
+                        obs, reward, terminate, step_images = move(action_np)
+                        # fetch again to log the true rgb without transformation
+                        raw_states, _ = self.get_obs_action(obs)
+                        raw_rgbs.append( raw_states['rgb'] )
 
-                    images += step_images
+                        images += step_images
 
-                    if reward == 1:
-                        success_rate += 1 / num_demos
+                        if reward == 1:      
+                            success_rate += 1 / num_demos
+                            success_rgbs_episode.append(np.stack( raw_rgbs ))
+                            break
+
+                    except:
                         break
-
-                    if terminate:
-                        print("The episode has terminated!")
-                    
-                    
-                    # excep
-                    # except (IKError, ConfigurationPathError, InvalidActionError) as e:
-                    #     print(task_type, demo, step_id, success_rate, e)
-                    #     reward = 0
-                    #     break
-
-                print(
-                    task_str,
-                    "Reward",
-                    reward,
-                    # "Step",
-                    # demo_id,
-                )
+            if reward == 0:
+                failed_rgbs_episode.append(np.stack( raw_rgbs ))
 
         self.env.shutdown()
-        return success_rate, rgbs
+
+        return success_rate, success_rgbs_episode, failed_rgbs_episode
 
 def get_observation(task_str: str, variation: int, episode: int, env: RLBenchEnv):
     demos = env.get_demo(task_str, variation, episode)

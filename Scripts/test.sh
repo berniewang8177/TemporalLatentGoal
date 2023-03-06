@@ -5,6 +5,6 @@ xvfb-run python3 Scripts/test.py \
 --position_offset \
 --name "VALA" \
 --lang_emb "CLIP" \
---var_num 1 \
+--var_num 0 \
 --load_model \
---load_name "VALA_train_1_variation_7_film_once.pth"
+--load_name "VALA_train_0_variation_0_cross_decode.pth"
