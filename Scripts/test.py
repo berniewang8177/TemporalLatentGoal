@@ -2,10 +2,12 @@ import random
 from typing import Tuple, Optional
 from copy import deepcopy
 from pathlib import Path
+from PIL import Image
 import torch
 import numpy as np
 import tap
 import os
+import einops
 os.environ["CUBLAS_WORKSPACE_CONFIG"]=":16:8"
 # deep learning stuff
 import torch
@@ -47,7 +49,7 @@ if __name__ == "__main__":
         apply_rgb=True,
         apply_pc=True,
         headless=args.headless,
-        apply_cameras=("left_shoulder", "right_shoulder", "wrist"),
+        apply_cameras= args.cameras,
     )
 
     # load instruction including: lang_feat, eos_feat, lang_pad, lang_num
@@ -60,7 +62,7 @@ if __name__ == "__main__":
     
     for task_str in args.tasks:
 
-        success_rate = env.evaluate(
+        success_rate, rgbs = env.evaluate(
             task_str = args.tasks[0],
             max_episodes=max_eps_dict[task_str],
             variation= args.var_num,
@@ -70,3 +72,16 @@ if __name__ == "__main__":
         )
 
         print("Testing Success Rate {}: {:.04f}".format(task_str, success_rate))
+        
+        # store what we have
+
+        rgbs = einops.rearrange(rgbs, "B T V C H W -> B T V H W C")
+        rgbs = rgbs[0,:,0,:,:,:3].detach().cpu().numpy() * 255
+        print("rgb", rgbs.shape)
+
+        for i, rgb in enumerate(rgbs):
+            rgb = rgb.astype(np.uint8)
+            rgb_img = Image.fromarray(rgb, mode="RGB")
+            img_path = f'/home/ubuntu/workspace/imgs/img{i}.jpg'
+            rgb_img.save(img_path)
+        print('Done')
