@@ -191,24 +191,24 @@ class HiveFormerVisionFrontend(nn.Module):
         time_emb = self.time_norm(time_emb).squeeze(0)
         time_emb = einops.repeat(time_emb, "t d -> b t n h w d", b=B, n=N, h=H, w=W)
 
-        patch_id = torch.arange(H * W).type_as(x).unsqueeze(0).long()
-        patch_emb = self.patch_emb(patch_id)
-        patch_emb = self.patch_norm(patch_emb).squeeze(0)
-        patch_emb = einops.repeat(
-            patch_emb, "(h w) d -> b t n h w d", b=B, n=N, t=T, h=H, w=W
-        )
+        # patch_id = torch.arange(H * W).type_as(x).unsqueeze(0).long()
+        # patch_emb = self.patch_emb(patch_id)
+        # patch_emb = self.patch_norm(patch_emb).squeeze(0)
+        # patch_emb = einops.repeat(
+        #     patch_emb, "(h w) d -> b t n h w d", b=B, n=N, t=T, h=H, w=W
+        # )
 
-        cam_id = torch.arange(N).type_as(x).unsqueeze(0).long()
-        cam_emb = self.camera_emb(cam_id)
-        cam_emb = self.camera_norm(cam_emb).squeeze(0)
-        cam_emb = einops.repeat(cam_emb, "n d -> b t n h w d", b=B, h=H, w=W, t=T)
+        # cam_id = torch.arange(N).type_as(x).unsqueeze(0).long()
+        # cam_emb = self.camera_emb(cam_id)
+        # cam_emb = self.camera_norm(cam_emb).squeeze(0)
+        # cam_emb = einops.repeat(cam_emb, "n d -> b t n h w d", b=B, h=H, w=W, t=T)
 
         # encoding history
         xe = einops.rearrange(x, "b t n c h w -> b t n h w c")
         # emb dim 19 to 64
         xe = self.visual_embedding(xe)
         xe = self.visual_norm(xe)
-        xe += patch_emb + cam_emb + time_emb
+        xe += time_emb # + patch_emb  + cam_emb 
 
         xe = einops.rearrange(xe, "b t n h w c -> b t n (h w) c")
 

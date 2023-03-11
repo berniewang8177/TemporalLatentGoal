@@ -6,21 +6,10 @@ do
     --position_offset \
     --name "LAVA" \
     --lang_emb "CLIP" \
-    --variations 1 \
-    --val_variations "7 " \
+    --variations $var \
+    --val_variations $var \
     --log_to_wandb \
-    --save_model \
-    --train_iters 200 &\
-    python3 Scripts/train.py \
-    --device cuda:2 \
-    --position_offset \
-    --name LAVA \
-    --variations 2 \
-    --val_variations "5 11 14 17" \
-    --cross_decode \
-    --log_to_wandb \
-    --save_model \
-    --train_iters 200
+    --train_iters 400
 done
 
 # python3 Scripts/train.py \

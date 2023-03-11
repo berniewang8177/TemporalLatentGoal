@@ -249,38 +249,35 @@ class Models(nn.Module):
         if self.cross_atten2 is not None:
             cross_feature2, _useless_mask = self.cross_atten2(
                 cross_feature, new_padding_mask, tokens, padding_mask_lang, views)
-            lang_attend_vision = einops.rearrange(cross_feature, "B (T N) dim -> B T N dim", N = views)
-            B,T,N,dim = lang_attend_vision.shape
-            vision_attend_language = einops.rearrange(cross_feature2, "B (T N) dim -> B T N dim", N = views)
-            cross_feature = torch.cat([vision_attend_language, lang_attend_vision], dim = 2)
-            cross_feature = einops.rearrange(cross_feature, "B T N dim -> B (T N) dim")
-            new_padding_mask = new_padding_mask.repeat_interleave(2, dim = 1)
+
+            lang_attend_vision = cross_feature
+            vision_attend_language = cross_feature2
+            joint_cross_feature = torch.cat([vision_attend_language, lang_attend_vision], dim = 1)
+            joint_cross_feature = einops.rearrange(joint_cross_feature, "B (M T) dim -> B (T M) dim", M = 2)
+            B,T = padding_mask_vision.shape
+            new_padding_mask = einops.repeat( padding_mask_vision, "B T -> (B N) (T M)", N = views, M =2 )
             # add view and modality embedding
-            mod_embs = self.modality_emb(self.mod_id.to(cross_feature.device))[None,None,:]
-            mod_embs = einops.repeat(mod_embs, 'b t M d -> (B b) (T t M view) d',B = B, T = T, view = views )
-            if self.policy.expert_counts == 6:
-                view_embs = self.view_emb(self.view_id.to(cross_feature.device))[None, None,:] 
-                view_embs = einops.repeat(view_embs, "b t view d -> (B b) (T t M view) d", B = B, T = T, M = 2)
-                cross_feature = self.emb_norm( cross_feature + mod_embs + view_embs)
-            else:
-                cross_feature = self.emb_norm( cross_feature + mod_embs)
-        
+            mod_embs = self.modality_emb(self.mod_id.to(joint_cross_feature.device))[None,None,:]
+            mod_embs = einops.repeat(mod_embs, 'b t M d -> (B b view) (T t M) d', B = B, T = T, view = views )
+            joint_cross_feature = self.emb_norm( joint_cross_feature + mod_embs)
+        else:
+            joint_cross_feature = cross_feature
         # decision backbone
-        causal_mask = get_causal_mask(cross_feature)
+        causal_mask = get_causal_mask(joint_cross_feature)
         # original padding is used to choose unpadded one, reverse it.
         policy_padding_mask = ~new_padding_mask 
         # temporal transformer policy
         out  = self.policy(
-                x = cross_feature,
+                x = joint_cross_feature,
                 causal_mask = causal_mask, padding_mask = policy_padding_mask)
         if self.cross_atten2 is not None:
             # M is the number of modalities (2)
-            features = einops.rearrange( out, 'B (T M N) d -> B T M N d',  M = 2, N = views)
+            features = einops.rearrange( out, '(B N) (T M) d -> B T M N d',  M = 2, N = views)
             # select visual features instead of language
             vision_features = features[:,:,1]
             lang_features = features[:,:,0]
         else:
-            vision_features = einops.rearrange( out, 'B (T N) d -> B T N d',  N = views)
+            vision_features = einops.rearrange( out, '(B N) T d -> B T N d',  N = views)
             lang_features = None
         B,T,views,d = vision_features.shape
 
@@ -295,7 +292,7 @@ class Models(nn.Module):
         
         # unet decoding with Film's scaling and biasing
         if self.film is not None:
-            decode_features = self.unet_decode_film(decode_feat0, residuals, scales, biases, padding_mask_vision)
+            decode_features = self.unet_decode_film2(decode_feat0, residuals, scales, biases, padding_mask_vision)
 
         else:
             decode_features = self.unet_decode_crossatten(views, decode_feat0, vision_features, residuals, padding_mask_vision)
@@ -315,6 +312,47 @@ class Models(nn.Module):
         biases = einops.rearrange(biases, 'v L b h d -> L b h v d')
         return scales, biases
     
+    def unet_decode_film2(self, decode_feat, residuals, scales, biases, padding_mask_vision):
+        """During decoding, the feature map of unet decoder is affected by the 
+        multi-view FiLM generater. Particularly, the residuals from encoder 
+        during decoding is affected by FiLM' generated scale and bias
+        
+        Arguments
+        ----------
+        decode_feat:
+            the unet feature from unet encoder that is need to be decoded by unet decoder
+        residuals:
+            the residuals (feature map) from unet encoder 
+        scales:
+            the channel-wise scaling of the residuals
+        biases:
+            the channel-wise biasing of the residuals
+        padding_mask_vision:
+            if true, it means the timestep is not padded, false is padded.
+            Use to select unpad visual feature
+        """
+        b, t, n, ch, h, w =  decode_feat.shape
+        decode_feat = einops.rearrange(
+                decode_feat[padding_mask_vision],
+                'unpad n ch h w -> (unpad n) ch h w')
+
+        for l, unet_decode_layer in enumerate(self.trans_decoder):
+            residual = residuals[l]
+            scale = einops.rearrange( scales[l][padding_mask_vision], 'unpad view dim -> (unpad view) dim' )
+            bias = einops.rearrange( biases[l][padding_mask_vision],  'unpad view dim -> (unpad view) dim')
+            if l == 0:
+                # directly modifying the input froom unet-encoder without residuals
+                decode_feat = scale[:,:, None,None]*decode_feat + bias[:,:, None,None] 
+            else:
+                residual = einops.rearrange(
+                    residual, 
+                    "(b t n) c h w -> b t n c h w", b=b, t=t, n=n)[padding_mask_vision]
+                residual = einops.rearrange(residual, "pad_batch n c h w -> (pad_batch n) c h w")
+                decode_feat = torch.cat([decode_feat, residual  ], dim =1)
+            
+            decode_feat = unet_decode_layer(decode_feat)
+        return einops.rearrange( decode_feat, "(pad_b n) ch h w -> pad_b n ch h w", n = n)
+
     def unet_decode_film(self, decode_feat, residuals, scales, biases, padding_mask_vision):
         """During decoding, the feature map of unet decoder is affected by the 
         multi-view FiLM generater. Particularly, the residuals from encoder 

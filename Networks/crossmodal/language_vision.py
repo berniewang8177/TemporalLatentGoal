@@ -100,7 +100,7 @@ class LAVA(nn.Module):
         tgt = einops.repeat(tgt, 'B d -> (B T N) d', T = T, N = N)
         tgt = tgt[:,None,:]
         # tgt has been inflated, so does the padding mask (not used by cross-attn transformer)
-        multi_view_mask = vision_padding.repeat_interleave(N, dim = 1)
+        multi_view_mask = vision_padding.repeat_interleave(N, dim = 0)
 
         # we do cross-attn between a language vector and batchxviewxhorizon visual tokens
         features, self_attns_map, cross_attns_map = self.lava(
@@ -112,6 +112,6 @@ class LAVA(nn.Module):
             ref_key_padding_mask=None) 
         # (B T views) dummy d --> B (T views) d
         lava_features = einops.rearrange(
-            features, '(B T N) dummy dim -> B (T N dummy) dim', B = B, T = T, N = N )
+            features, '(B T N) dummy dim -> (B N) (T dummy) dim', B = B, T = T, N = N )
         
         return lava_features, multi_view_mask 

@@ -49,7 +49,7 @@ if __name__ == "__main__":
     if args.cross_decode:
         name += '-cross_decode'
     else:
-        name = name + '-film_once' if args.film_once else name + '-film_layer_wise'
+        name = name + '-film_once_res_intact' if args.film_once else name + '-film_layer_wise'
     name = args.lang_emb + "-" + name
 
     # log for wandb

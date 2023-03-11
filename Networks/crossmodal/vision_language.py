@@ -86,43 +86,41 @@ class VALA(nn.Module):
         """
 
         tgt = vision
-        # make sure visual input have 4 dim Batch x (TxN) x dim 
+        # make sure visual input have 3 dim (Batch x N) x (T) x dim 
         # where N is number of cameras
         assert len(tgt.shape) == 3
-        B,_,dim = tgt.shape
 
         ref = language
         B,tokens,dim = ref.shape
-        # make sure language vector have 3 dim Batch x T x dim 
-        # where T = number of bpe tokens
+        # language vector have 3 dim Batch x T x dim where T = number of bpe tokens
         assert len(ref.shape) == 3
-        ref = einops.rearrange(ref, 'B pad_tokens dim -> (B pad_tokens) dim')
+        # inflate Batch dim by number of views
+        ref = einops.repeat(ref, 'B pad_tokens dim -> (B N pad_tokens) dim', N = N)
         ref = self.proj_instr_encoder(ref)
-        ref = einops.rearrange(ref, '(B pad_token) dim -> B pad_token dim', B = B)
-
+        ref = einops.rearrange(ref, '(B N pad_token) dim -> (B N) pad_token dim', B = B, N = N, pad_token = tokens)
+        inflate_language_padding = einops.repeat(language_padding, 'B tokens -> (B N) tokens', N = N )
+        
         # only used for vision-attends-language
         if ref.requires_grad:
             # during training, horizon is fix
             if self.causal_self and self.causal_mask == None:
-                length = vision_padding.shape[1] // N
+                length = vision_padding.shape[1] 
                 self.causal_mask = get_causal_mask(tgt, length)
-                # views within same timestep could attends to each other
-                self.causal_mask = self.causal_mask.repeat_interleave(N,dim = 1).repeat_interleave(N,dim = 0)
+
         else:
-            length = vision_padding.shape[1] // N
+            # during evaluation, causal mask needs to be re-made since horizon isn't fixed
+            length = vision_padding.shape[1] 
             self.causal_mask = get_causal_mask(tgt, length)
-            # views within same timestep could attends to each other
-            self.causal_mask = self.causal_mask.repeat_interleave(N,dim = 1).repeat_interleave(N,dim = 0)
         # we apply self-attention with cauasl mask on multi-view visual tokens
-        # to learn temporal visual features. Collapse time and view dim for efficent training.
+        # to learn temporal visual features. Collapse Batch and view dim for efficent training.
         temporal_features, self_attns_map, cross_attns_map = self.vala(
             tgt,
             ref,
             tgt_mask=self.causal_mask,
             ref_mask=None,
             tgt_key_padding_mask=None,
-            ref_key_padding_mask=language_padding) 
-
+            ref_key_padding_mask= inflate_language_padding) 
+ 
         # the final step
         # return the feature and also an inflated vision padding mask W.R.T the # of cameras
         return temporal_features, vision_padding

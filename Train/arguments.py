@@ -8,7 +8,7 @@ class Arguments(tap.Tap):
     checkpoint: Optional[Path] = None
     checkpoint_period: int = 10
     dataset: List[Path] = ["/home/yiqiw2/experiment/language_rl/train_datasets/"]
-    dataset_val: List[Path] = ["/home/yiqiw2/experiment/language_rl/test_datasets/"]
+    dataset_val: List[Path] = ["/home/yiqiw2/experiment/language_rl/val_datasets/"]
     device: str = "cuda:0"
     xp: Path = Path(__file__).parent / "xp"
     name: str = "LAVA"
@@ -24,11 +24,12 @@ class Arguments(tap.Tap):
     variations: str =  '1 ' # if variations 1 2 3 then "1 2 3"
     val_variations: str = '7 '
     episodes_json_path: str = "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Preprocess/episodes.json"
-
+    val_number: int = 10 # frequency of validation
+    
     # Train
     batch_size: int = 32
     lr: float = 0.001
-    val_number: int = 10 # frequency of validation
+    
     val_batch_size: int = 10 # given the fact that the dataset has only 10 episodes
     train_iters: int = 100
     jitter: bool = False
