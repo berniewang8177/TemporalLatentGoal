@@ -124,6 +124,7 @@ class FiLMGenerator(nn.Module):
 class FiLMGeneratorOnce(nn.Module):
     def __init__(
             self,
+            film_first,
             hidden,
             channel,
             depth,
@@ -133,6 +134,8 @@ class FiLMGeneratorOnce(nn.Module):
         
         Arguments
         ----------
+        film_first:
+            whether modify 1st feature map or feature map of all layers
         hidden:
             the dimension of input features
         channel:
@@ -141,10 +144,11 @@ class FiLMGeneratorOnce(nn.Module):
             depth of the Unet decoder we want to influence
         """
         super().__init__()
+        self.film_first = film_first
         self.hidden = hidden
-        
         self.depth = depth
         new_hidden = self.depth * channel * 2
+        # new_hidden = 1 * channel * 2 if film_first else self.depth * channel * 2
 
         self.layers = nn.Sequential(
             nn.Linear(hidden, new_hidden ),
@@ -152,10 +156,14 @@ class FiLMGeneratorOnce(nn.Module):
             nn.Linear(new_hidden, new_hidden ),
             nn.ReLU(),
         )
-        self.scale = nn.Linear(new_hidden, self.depth * channel)
-        self.bias = nn.Linear(new_hidden, self.depth * channel)
+        
+        if film_first:
+            self.scale = nn.Linear(new_hidden, channel)
+            self.bias = nn.Linear(new_hidden,  channel)
+        else:
+            self.scale = nn.Linear(new_hidden, self.depth * channel)
+            self.bias = nn.Linear(new_hidden, self.depth * channel)
 
-    
     def forward(self, x):
         """predicts channel wise scaling and bias for all layers at once"""
         B,T,dim = x.shape
@@ -164,13 +172,14 @@ class FiLMGeneratorOnce(nn.Module):
         x2 = self.layers(x1 )
         scales = self.scale(x2)
         biases = self.bias(x2)
-
+    
+        d = 1 if self.film_first else self.depth
         scales_reshape  = einops.rearrange(
             scales, 
-            '(b t) (depth channel) -> depth b t channel', b = B, t = T, depth = self.depth )  
+            '(b t) (depth channel) -> depth b t channel', b = B, t = T, depth = d )  
         biases_reshape = einops.rearrange(
             biases,
-            '(b t) (depth channel) -> depth b t channel', b = B, t = T, depth = self.depth) 
+            '(b t) (depth channel) -> depth b t channel', b = B, t = T, depth = d) 
 
         return scales_reshape, biases_reshape
 
@@ -181,7 +190,8 @@ class MultiViewFiLM(nn.Module):
             channel,
             views,
             depth,
-            film_once
+            film_once,
+            film_first,
         ):
         """
         For a Bxdxv tensors where B is batch, d is dim, v is number of views,
@@ -199,15 +209,17 @@ class MultiViewFiLM(nn.Module):
             depth of the Unet decoder we want to influence
         film_once:
             whether generate scales/biases for all unet decoder layers once
+        film_first:
+            whether modify 1st feature map or feature map of all layers
         """
         super().__init__()
         self.hidden = hidden
         self.films = nn.ModuleList()
         self.film_once = film_once
- 
+        self.film_first = film_first
         for v in range(views):
             if film_once:
-                self.films.append(FiLMGeneratorOnce(hidden, channel, depth))
+                self.films.append(FiLMGeneratorOnce(film_first, hidden, channel, depth))
             else:
                 self.films.append(FiLMGenerator(hidden, channel, depth))
     def forward(self, z):

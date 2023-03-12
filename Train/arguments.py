@@ -52,10 +52,12 @@ class Arguments(tap.Tap):
     cross_layers: int = 3
     policy_layers: int = 3
     expert_counts: int = 1 # default 1, if using VALA, then 6 = 2 modalities x 3 views
-    position_offset: bool = False
+    position_offset: bool = True
     lang_offset: bool = False
     offset_emb: bool = False # add multi-view and time embedding before making a prediction
+    no_film: bool = False # use for debuggging
     film_once: bool = True # generate scales and biases for all layers once
+    film_first: bool = False # only modify first feature map using FiLM
     cross_decode: bool = False
     max_episode_length: int = 10
 

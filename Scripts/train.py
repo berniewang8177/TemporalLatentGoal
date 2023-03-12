@@ -38,7 +38,7 @@ if __name__ == "__main__":
     if args.name == 'LAVA' and args.lang_emb != 'CLIP':
         assert False, f"LAVA should use CLIP, not wave2vec"
     # creating wandb setup
-    project_name = "Latent_Goal-val"
+    project_name = "Latent_Goal-seen-validation"
     group_name = args.tasks[0] + '-variation-' + str(args.variations)
     if args.position_offset:
         name = args.name + "-lang_offset" if args.lang_offset else args.name + "-vision_offset"
@@ -49,7 +49,10 @@ if __name__ == "__main__":
     if args.cross_decode:
         name += '-cross_decode'
     else:
-        name = name + '-film_once_res_intact' if args.film_once else name + '-film_layer_wise'
+        if args.film_first:
+            name = name + '-film_first_res_intact' if args.film_once else name + '-film_layer_wise'
+        else:
+            name = name + '-film_all_res_intact' if args.film_once else name + '-film_layer_wise'
     name = args.lang_emb + "-" + name
 
     # log for wandb

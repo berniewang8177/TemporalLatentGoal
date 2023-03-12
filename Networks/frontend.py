@@ -191,12 +191,12 @@ class HiveFormerVisionFrontend(nn.Module):
         time_emb = self.time_norm(time_emb).squeeze(0)
         time_emb = einops.repeat(time_emb, "t d -> b t n h w d", b=B, n=N, h=H, w=W)
 
-        # patch_id = torch.arange(H * W).type_as(x).unsqueeze(0).long()
-        # patch_emb = self.patch_emb(patch_id)
-        # patch_emb = self.patch_norm(patch_emb).squeeze(0)
-        # patch_emb = einops.repeat(
-        #     patch_emb, "(h w) d -> b t n h w d", b=B, n=N, t=T, h=H, w=W
-        # )
+        patch_id = torch.arange(H * W).type_as(x).unsqueeze(0).long()
+        patch_emb = self.patch_emb(patch_id)
+        patch_emb = self.patch_norm(patch_emb).squeeze(0)
+        patch_emb = einops.repeat(
+            patch_emb, "(h w) d -> b t n h w d", b=B, n=N, t=T, h=H, w=W
+        )
 
         # cam_id = torch.arange(N).type_as(x).unsqueeze(0).long()
         # cam_emb = self.camera_emb(cam_id)

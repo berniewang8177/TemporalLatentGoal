@@ -93,7 +93,7 @@ class Agent:
             expert_counts = args.expert_counts,
             cameras = len(args.cameras),
             ).to(self.device)
-
+        
         # modify unet decoding by FiLM or cross-attentino
         if args.cross_decode:
             self.film = None
@@ -116,7 +116,8 @@ class Agent:
             channel = 16,
             views = len(args.cameras),
             depth = args.depth,
-            film_once = args.film_once
+            film_once = args.film_once,
+            film_first = args.film_first
             ).to(self.device)
 
         self.backend = PredictionHead(
@@ -133,10 +134,11 @@ class Agent:
             cross_atten1 = self.lang_vision,
             cross_atten2 = self.vision_lang,
             policy = self.policy,
+            no_film = args.no_film,
             film = self.film,
             unet_cross = self.unet_cross,
             backend = self.backend,
-            depth = args.depth
+            depth = args.depth,
             ).to(self.device)
         
         self.optimizer = optim.AdamW(

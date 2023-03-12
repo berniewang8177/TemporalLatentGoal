@@ -132,6 +132,7 @@ class Models(nn.Module):
         cross_atten1,
         cross_atten2,
         policy,
+        no_film,
         film,
         unet_cross,
         backend,
@@ -143,6 +144,7 @@ class Models(nn.Module):
         self.cross_atten1 = cross_atten1
         self.cross_atten2 = cross_atten2
         self.policy = policy
+        self.no_film = no_film
         self.film = film
         self.unet_cross = unet_cross
         self.backend = backend
@@ -282,7 +284,7 @@ class Models(nn.Module):
         B,T,views,d = vision_features.shape
 
         # FiLM generator, used to generate params to modify Unet-decoding
-        if self.film is not None:
+        if self.no_film == False and self.film is not None:
             scales, biases = self.get_film(vision_features)
         
         # Prepare U-net decoder's input 
@@ -291,7 +293,9 @@ class Models(nn.Module):
         decode_feat0 = einops.rearrange(decode_feat0, '(b t n) ch h w -> b t n ch h w', b = B, t = T, n = views)
         
         # unet decoding with Film's scaling and biasing
-        if self.film is not None:
+        if self.no_film:
+            decode_features = self.unet_decode(decode_feat0, residuals, None, None, padding_mask_vision)
+        elif self.film is not None:
             decode_features = self.unet_decode_film2(decode_feat0, residuals, scales, biases, padding_mask_vision)
 
         else:
@@ -338,9 +342,9 @@ class Models(nn.Module):
 
         for l, unet_decode_layer in enumerate(self.trans_decoder):
             residual = residuals[l]
-            scale = einops.rearrange( scales[l][padding_mask_vision], 'unpad view dim -> (unpad view) dim' )
-            bias = einops.rearrange( biases[l][padding_mask_vision],  'unpad view dim -> (unpad view) dim')
             if l == 0:
+                scale = einops.rearrange( scales[l][padding_mask_vision], 'unpad view dim -> (unpad view) dim' )
+                bias = einops.rearrange( biases[l][padding_mask_vision],  'unpad view dim -> (unpad view) dim')
                 # directly modifying the input froom unet-encoder without residuals
                 decode_feat = scale[:,:, None,None]*decode_feat + bias[:,:, None,None] 
             else:
@@ -348,8 +352,49 @@ class Models(nn.Module):
                     residual, 
                     "(b t n) c h w -> b t n c h w", b=b, t=t, n=n)[padding_mask_vision]
                 residual = einops.rearrange(residual, "pad_batch n c h w -> (pad_batch n) c h w")
+                if self.film.film_first == False:
+                    scale = einops.rearrange( scales[l][padding_mask_vision], 'unpad view dim -> (unpad view) dim' )
+                    bias = einops.rearrange( biases[l][padding_mask_vision],  'unpad view dim -> (unpad view) dim')
+                    decode_feat = scale[:,:, None,None]*decode_feat + bias[:,:, None,None] 
                 decode_feat = torch.cat([decode_feat, residual  ], dim =1)
             
+            decode_feat = unet_decode_layer(decode_feat)
+        return einops.rearrange( decode_feat, "(pad_b n) ch h w -> pad_b n ch h w", n = n)
+
+    def unet_decode(self, decode_feat, residuals, scales, biases, padding_mask_vision):
+        """During decoding, the feature map of unet decoder is affected by the 
+        multi-view FiLM generater. Particularly, the residuals from encoder 
+        during decoding is affected by FiLM' generated scale and bias
+        
+        Arguments
+        ----------
+        decode_feat:
+            the unet feature from unet encoder that is need to be decoded by unet decoder
+        residuals:
+            the residuals (feature map) from unet encoder 
+        scales:
+            the channel-wise scaling of the residuals
+        biases:
+            the channel-wise biasing of the residuals
+        padding_mask_vision:
+            if true, it means the timestep is not padded, false is padded.
+            Use to select unpad visual feature
+        """
+        b, t, n, ch, h, w =  decode_feat.shape
+        decode_feat = einops.rearrange(
+                decode_feat[padding_mask_vision],
+                'unpad n ch h w -> (unpad n) ch h w')
+
+        for l, unet_decode_layer in enumerate(self.trans_decoder):
+            residual = residuals[l]
+            if l == 0:
+                pass 
+            else:
+                residual = einops.rearrange(
+                    residual, 
+                    "(b t n) c h w -> b t n c h w", b=b, t=t, n=n)[padding_mask_vision]
+                residual = einops.rearrange(residual, "pad_batch n c h w -> (pad_batch n) c h w") 
+                decode_feat = torch.cat([decode_feat, residual  ], dim =1)
             decode_feat = unet_decode_layer(decode_feat)
         return einops.rearrange( decode_feat, "(pad_b n) ch h w -> pad_b n ch h w", n = n)
 
