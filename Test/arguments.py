@@ -8,7 +8,7 @@ class Arguments(tap.Tap):
     checkpoint: Optional[Path] = None
     checkpoint_period: int = 10
     dataset: List[Path] = ["/home/yiqiw2/experiment/language_rl/train_datasets/"]
-    dataset_val: List[Path] = ["/home/yiqiw2/experiment/language_rl/val_datasets"]
+    dataset_val: List[Path] = ["/home/ubuntu/workspace/test_data"]
     device: str = "cuda:0"
     xp: Path = Path(__file__).parent / "xp"
     name: str = "LAVA"
@@ -54,7 +54,9 @@ class Arguments(tap.Tap):
     position_offset: bool = False
     lang_offset: bool = False
     offset_emb: bool = False # add multi-view and time embedding before making a prediction
+    no_film: bool = False # use for debuggging
     film_once: bool = True # generate scales and biases for all layers once
+    film_first: bool = False # only modify first feature map using FiLM
     cross_decode: bool = False
     max_episode_length: int = 10
 
