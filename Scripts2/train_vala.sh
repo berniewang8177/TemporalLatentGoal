@@ -1,6 +1,6 @@
 #!/bin/bash
 # 0:400 1:1000 2:1000
-for var_setup in 0:400 1:1000 2:1000
+for var_setup in 0:400
 do
     var=$(echo $var_setup | cut -d ":" -f 1)
     train_num=$(echo $var_setup | cut -d ":" -f 2)
