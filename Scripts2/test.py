@@ -74,7 +74,7 @@ if __name__ == "__main__":
         )
 
         print("Testing Success Rate {}: {:.04f}".format(task_str, success_rate))
-        
+        print( "Sucess trials", len(sucess_rgbs_episode), "  failed trials: ", len(failed_rgbs_episode)  )
         # store what we have
         for idx, rgbs in enumerate( sucess_rgbs_episode ):
             rgbs = (rgbs[:,0,:,:,:] ).astype(np.uint8)

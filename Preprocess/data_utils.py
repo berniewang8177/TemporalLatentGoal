@@ -276,7 +276,8 @@ class RLBenchEnv:
         success_rate = 0.0
         self.env.launch()
         max_iterations = 100
-        for iteration in range(max_iterations):
+        trails = 0
+        while trails < max_iterations:
             raw_rgbs = []
             # task_str: push_buttons.py
             task_type = task_file_to_task_class(task_str)
@@ -297,6 +298,7 @@ class RLBenchEnv:
                     raw_rgbs.append( raw_states['rgb'] )
                     print("Desc:\t", desc)
                 except:
+                    print("Task reset failure, Continue")
                     continue
 
                 images.append(
@@ -309,9 +311,7 @@ class RLBenchEnv:
                     print("Step:", step_id)
                     # fetch the current observation, and predict one action
                     rgb, pcd, gripper = self.get_rgb_pcd_gripper_from_obs(obs)
-                    
                     rgb = rgb.to(device)
-                
                     pcd = pcd.to(device)
 
                     rgbs = torch.cat([rgbs, rgb.unsqueeze(1)], dim=1)
@@ -341,12 +341,14 @@ class RLBenchEnv:
                         if reward == 1:      
                             success_rate += 1 / num_demos
                             success_rgbs_episode.append(np.stack( raw_rgbs ))
+                            trails += 1
                             break
 
                     except:
                         break
-            if reward == 0:
-                failed_rgbs_episode.append(np.stack( raw_rgbs ))
+                if reward == 0:
+                    trails += 1
+                    failed_rgbs_episode.append(np.stack( raw_rgbs ))
 
         self.env.shutdown()
 
