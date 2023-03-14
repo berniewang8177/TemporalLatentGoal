@@ -29,7 +29,7 @@ def validating(
     """
     device = agent.device
     val_log_losses = None
-    for sample in loader:
+    for s_id, sample in enumerate(loader):
         # fetch samples rgb, point cloud, gripper(not used?), outputs
         rgbs = sample["rgbs"].to(device)
         pcds = sample["pcds"].to(device)

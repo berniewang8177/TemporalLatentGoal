@@ -22,10 +22,13 @@ def save_model(args, path, train_idx, val_idx, model):
         save its parameters 
     """
     best_model = copy.deepcopy(model)
-    film = 'film_once' if args.film_once else 'film_layer_wise'
-    if args.cross_decode:
-        film = 'cross_decode'
-    name = f'{args.name}_train_{train_idx}_variation_{val_idx}_{film}.pth'
+    if args.no_film:
+        film = 'no_film'
+    else:
+        film = 'film_once' if args.film_once else 'film_layer_wise'
+        if args.cross_decode:
+            film = 'cross_decode'
+    name = f'{args.lang_emb}_{args.name}_train_{train_idx}_variation_{val_idx}_{film}.pth'
     final_path = os.path.join(path, name)
     if os.path.exists(final_path):
         print("Delete one!", end = '\t')

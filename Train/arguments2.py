@@ -30,7 +30,7 @@ class Arguments(tap.Tap):
     batch_size: int = 32
     lr: float = 0.001
     
-    val_batch_size: int = 10 # given the fact that the dataset has only 10 episodes
+    val_batch_size: int = 1 # given the fact that the dataset has only 10 episodes
     train_iters: int = 100
     jitter: bool = False
     load_model: bool = False
@@ -43,22 +43,19 @@ class Arguments(tap.Tap):
     output: Path = Path(__file__).parent / "records.txt"
 
     # model
-    depth: int = 4
-    dim_feedforward: int = 64
-    hidden_dim: int = 64
+    depth: int = 5
+    dim_feedforward: int = 512
+    hidden_dim: int = 32 # used for visual tokens
     instr_size: int = 512
     mask_obs_prob: float = 0.0
     num_layers: int = 1
-    cross_layers: int = 3
+    cross_layers: int = 3 # will be double for LAVA since it doesn't have policy
     policy_layers: int = 3
     expert_counts: int = 1 # default 1, if using VALA, then 6 = 2 modalities x 3 views
     position_offset: bool = True
     lang_offset: bool = False
     offset_emb: bool = False # add multi-view and time embedding before making a prediction
     no_film: bool = True # use for debuggging
-    film_once: bool = True # generate scales and biases for all layers once
-    film_first: bool = False # only modify first feature map using FiLM
-    cross_decode: bool = False
     max_episode_length: int = 10
 
     log_to_wandb: bool = False

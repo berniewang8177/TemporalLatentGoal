@@ -21,6 +21,7 @@ class ArgumentParser(tap.Tap):
     variations: str
 args = ArgumentParser().parse_args()
 variations = args.variations.split()
+
 for variation in variations:
     data_path = args.data_path + variation
     save_path = args.save_path + variation

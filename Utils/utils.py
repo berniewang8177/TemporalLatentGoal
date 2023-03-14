@@ -358,7 +358,7 @@ def get_data_loader(args):
             max_episode_length=max_episode_length,
             max_episodes_per_taskvar=args.max_episodes_per_taskvar,
             cache_size=args.cache_size,
-            num_iters=args.train_iters,
+            num_iters=None,
             cameras=args.cameras,  # type: ignore
             )
             val_loader = DataLoader(
