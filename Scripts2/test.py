@@ -21,7 +21,7 @@ torch.autograd.set_detect_anomaly(True)
 
 # project-specific
 from Test.arguments import Arguments
-from Networks.agent import Agent
+from Networks.agent2 import Agent
 from Preprocess.data_utils import RLBenchEnv
 from Utils.utils import (
     set_seed,
