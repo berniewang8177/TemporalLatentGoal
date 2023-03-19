@@ -16,6 +16,7 @@ from .crossmodal.language_vision2 import LAVA
 from .crossmodal.vision_language2 import VALA
 from .models2 import TemporalTransformer, Models
 from .backend2 import PredictionHead
+from .networks import AdditiveFusion
 # masking
 from .utils import get_causal_mask, get_padding_mask
 
@@ -79,6 +80,13 @@ class Agent:
                 lang_emb = args.lang_emb # determine dimension to reduce
             ).to(self.device)
             # temporla transformer policy, only used by VALA
+            if args.modality_fusion:
+                self.fusion = AdditiveFusion(
+                    d_ffn = args.dim_feedforward*2,
+                    input_size = args.dim_feedforward )
+            else:
+                self.fusion = None
+            
             self.policy = TemporalTransformer( 
                 num_layers = args.policy_layers,
                 nhead = 1,
@@ -109,6 +117,7 @@ class Agent:
             policy = self.policy,
             backend = self.backend,
             depth = args.depth,
+            fusion = self.fusion
             ).to(self.device)
         
         self.optimizer = optim.AdamW(

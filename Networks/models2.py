@@ -77,7 +77,6 @@ class TemporalTransformer(nn.Module):
                     normalize_before=normalize_before,
                     expert_counts = expert_counts,
                     views = self.cameras)
-
     
     def forward(self, x, causal_mask, padding_mask):
         """
@@ -121,6 +120,8 @@ class Models(nn.Module):
         an NN predicting rotations, positions and gripper state
     depth: int
         depth of the Unet-decoder (should be similar to the Unet encoder depth)
+    fusion: nn.Module
+        additive fusion to fuse language goal and vision observation
     """
 
     def __init__(
@@ -131,6 +132,7 @@ class Models(nn.Module):
         policy,
         backend,
         depth,
+        fusion,
     ):
         super().__init__()
         
@@ -139,7 +141,7 @@ class Models(nn.Module):
         self.cross_atten2 = cross_atten2
         self.policy = policy
         self.backend = backend
-
+        self.fusion = fusion
         self.trans_decoder = nn.ModuleList()
         self.depth = depth
         for i in range(depth):
@@ -220,9 +222,13 @@ class Models(nn.Module):
             lang_goal, inflate_pad_mask = self.VALA_forward( tokens, padding_mask_lang, visual_tokens.clone(), padding_mask_vision)
             visual_obs = einops.rearrange(visual_tokens, 'B T views dim -> (B views) T dim')
             features = self.policy_forward(lang_goal, visual_obs, inflate_pad_mask)
-            features = einops.rearrange( features, '(B N) (T M) (H W ch) -> B T M N ch H W', N = views, M = 2, H = H, W = W )
-            vision_features = features[:,:,1]
-            lang_features = features[:,:,0]
+            if self.fusion is not None:
+                vision_features = einops.rearrange( features, '(B N) T (H W ch) -> B T N ch H W', N = views, H = H, W = W )
+                lang_features = None
+            else:
+                features = einops.rearrange( features, '(B N) (T M) (H W ch) -> B T M N ch H W', N = views, M = 2, H = H, W = W )
+                vision_features = features[:,:,1]
+                lang_features = features[:,:,0]
             decoded_features = self.unet_decode(vision_features, residuals, padding_mask_vision)
         
         # prediction and rotations and position separately
@@ -286,13 +292,17 @@ class Models(nn.Module):
         vision_padding:
             denotes unpadd visual tokens
         """
-        joint_features = einops.rearrange(
-            torch.cat([lang_goal, vision], dim = 1),
-            "B (M T) dim -> B (T M) dim",M = 2)
-        policy_padding = einops.repeat(
-            ~vision_padding, # reverse the unpad mask to pad mask
-            "B_N T -> B_N (T M)", M = 2
-        )
+        if self.fusion is not None:
+            joint_features = self.fusion(lang_goal, vision)
+            policy_padding = ~vision_padding
+        else:
+            joint_features = einops.rearrange(
+                torch.cat([lang_goal, vision], dim = 1),
+                "B (M T) dim -> B (T M) dim",M = 2)
+            policy_padding = einops.repeat(
+                ~vision_padding, # reverse the unpad mask to pad mask
+                "B_N T -> B_N (T M)", M = 2
+            )
         causal_mask = get_causal_mask(joint_features)
         out = self.policy(
             x = joint_features,

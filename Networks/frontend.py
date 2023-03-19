@@ -41,12 +41,12 @@ class UnetFrontend(nn.Module):
         super().__init__()
 
         # embeddings
+        # self.time_emb = emb(max_horizons, 512)
+        # self.time_norm = nn.LayerNorm(512)
         self.time_emb = emb(max_horizons, d_model)
-
+        self.time_norm = nn.LayerNorm(d_model)
         # 19 = 16 + 3 (encoded rgb + 3 from pointcloud)
         self.visual_embedding = nn.Linear(19, d_model)
-
-        self.time_norm = nn.LayerNorm(d_model)
         self.visual_norm = nn.LayerNorm(d_model)
         
         # Input RGB + Point Cloud Preprocess (SiameseNet)
@@ -137,6 +137,7 @@ class UnetFrontend(nn.Module):
         time_emb = self.time_emb(timesteps)
 
         time_emb = self.time_norm(time_emb).squeeze(0)
+        # time_emb = einops.repeat(time_emb, "t d -> b t n d", b=B, n=N)
         time_emb = einops.repeat(time_emb, "t d -> b t n h w d", b=B, n=N, h=H, w=W)
 
         # encoding history
@@ -144,11 +145,10 @@ class UnetFrontend(nn.Module):
         # emb dim 19 to 32
         xe = self.visual_embedding(xe)
         xe = self.visual_norm(xe)
-        xe += time_emb # + patch_emb  + cam_emb 
-
+        xe += time_emb
         # batch x horizon x views x 512
         xe = einops.rearrange(xe, "b t n h w c -> b t n (h w c)")
-
+        # xe += time_emb
         return xe
 
 

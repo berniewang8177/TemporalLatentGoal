@@ -305,8 +305,9 @@ class RLBenchDataset(data.Dataset):
         pad_vec = [0] * (2 * attns.dim())
         pad_vec[-1] = pad_len
         attns = F.pad(attns, pad_vec)
+        # clean_rgbs = rgbs
         rgbs = torch.cat([rgbs, attns], 2)
-
+        
         if self._training:
             modals = self._transform(rgbs=rgbs, pcds=pcds)
             rgbs = modals["rgbs"]
@@ -347,6 +348,7 @@ class RLBenchDataset(data.Dataset):
             "eoses": eos_feat,
             "instr_mask": lang_pad,
             "gripper": gripper,
+            # "clean_rgbs": clean_rgbs 
         }
 
     def __len__(self):

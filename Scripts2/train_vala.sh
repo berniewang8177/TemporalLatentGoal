@@ -1,6 +1,6 @@
 #!/bin/bash
 # 0:400 1:1000 2:1000
-for var_setup in 0:400
+for var_setup in  0:400 1:1000 2:1000
 do
     var=$(echo $var_setup | cut -d ":" -f 1)
     train_num=$(echo $var_setup | cut -d ":" -f 2)
@@ -10,7 +10,6 @@ do
 
     python3 Scripts2/train.py \
     --log_to_wandb \
-    --save_model \
     --lr 0.0005 \
     --device cuda:1 \
     --name "VALA" \

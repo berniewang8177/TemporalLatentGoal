@@ -4,10 +4,25 @@ import wandb
 import gc
 import copy
 import os
+from PIL import Image
+import numpy as np
+import einops
 # deep learning stuff
 import torch
 # project-specific
 from Train.validation import validating
+
+def check_training(batch_rgbs):
+    B,T,view, channel, H,W = batch_rgbs.shape
+    # only take 1 sample, 1 view, remove attention map at channel dim
+    _rgbs = batch_rgbs[0,:,0,:3,:,:] * 255
+
+    _rgbs = _rgbs.astype(np.uint8)
+    for i, rgb in enumerate(_rgbs):
+        rgb = einops.rearrange(rgb, "channel H W -> H W channel")
+        rgb_img = Image.fromarray(rgb )
+        img_path = f'./{i}.jpg'
+        rgb_img.save(img_path)
 
 def save_model(args, path, train_idx, val_idx, model):
     """save the model
@@ -83,6 +98,8 @@ def training(
             agent.model.train()
             # fetch samples rgb, point cloud, gripper(not used?), outputs
             rgbs = sample["rgbs"].to(device)
+            # check_training(sample['clean_rgbs'].cpu().numpy())
+            # assert False, f"{rgbs.shape}"
             pcds = sample["pcds"].to(device)
             gripper = sample["gripper"].to(device)
             outputs = sample["action"].to(device)

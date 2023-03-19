@@ -20,7 +20,7 @@ import torch.nn as nn
 torch.autograd.set_detect_anomaly(True)
 
 # project-specific
-from Test.arguments import Arguments
+from Test.arguments2 import Arguments
 from Networks.agent2 import Agent
 from Preprocess.data_utils import RLBenchEnv
 from Utils.utils import (
@@ -84,6 +84,8 @@ if __name__ == "__main__":
                 suffix = str(time())[:2]
                 img_path = f'/home/ubuntu/workspace/imgs/sucess-{idx}-{name}-{i}-{suffix}.jpg'
                 rgb_img.save(img_path)
+            if idx >= args.failed_demo:
+                break
         for idx, rgbs in enumerate( failed_rgbs_episode ):
             rgbs = (rgbs[:,0,:,:,:] ).astype(np.uint8)
             for i, rgb in enumerate(rgbs):
@@ -92,5 +94,6 @@ if __name__ == "__main__":
                 suffix = str(time())[:2]
                 img_path = f'/home/ubuntu/workspace/imgs/failed-{idx}-{name}-{i}-{suffix}.jpg'
                 rgb_img.save(img_path)
-            break
+            if idx >= args.success_demo:
+                break
         print('Done')

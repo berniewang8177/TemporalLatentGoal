@@ -249,3 +249,55 @@ class MultiViewFiLM(nn.Module):
 
         # scales/biases dim: views x layers x B x T x dim
         return scales, biases
+
+class AdditiveFusion(nn.Module):
+    """The class implements and additive fusion
+    Arguments
+    ----------
+    d_ffn: int
+        Hidden layer size.
+    input_shape : tuple, optional
+        Expected shape of the input. Alternatively use ``input_size``.
+    input_size : int, optional
+        Expected size of the input. Alternatively use ``input_shape``.
+    dropout: float, optional
+        Dropout rate.
+    activation: torch.nn.Module, optional
+        activation functions to be applied (Recommendation: ReLU, GELU).
+    """
+
+    def __init__(
+        self,
+        d_ffn,
+        input_shape=None,
+        input_size=None,
+        dropout=0.0,
+        activation=nn.ReLU,
+    ):
+        super().__init__()
+
+        if input_shape is None and input_size is None:
+            raise ValueError("Expected one of input_shape or input_size")
+
+        if input_size is None:
+            input_size = input_shape[-1]
+
+        self.linear1 = nn.Linear(input_size, d_ffn)
+        self.linear2 = nn.Linear(input_size, d_ffn)
+        self.activation = activation()
+        self.linear3 = nn.Linear(d_ffn, input_size)
+
+    def forward(self, x, y):
+        """Applies Additive fusion to the input tensor x and y"""
+        # give a tensor of shap (time, batch, fea)
+        x = x.permute(1, 0, 2)
+        y = y.permute(1, 0, 2)
+        x_new = self.linear1(x)
+        y_new = self.linear2(y)
+        fused = self.activation( x_new + y_new )
+        project_fused = self.linear3(fused)
+
+        # reshape the output back to (batch, time, fea)
+        final = project_fused.permute(1, 0, 2)
+
+        return final

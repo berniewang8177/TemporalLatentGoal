@@ -1,0 +1,24 @@
+
+Random seed for training set as 2
+In total, 47.860601 M # of params
+get instruction path: /home/yiqiw2/experiment/language_rl/train_datasets/push_buttons+2
+Num ep. 100
+get instruction path: /home/yiqiw2/experiment/language_rl/val_datasets/push_buttons+2
+Num ep. 10
+  0%|                                                                                          | 0/1000 [00:04<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Scripts2/train.py", line 78, in <module>
+    training(
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Train/training.py", line 104, in training
+    pred = agent.model(
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Networks/models2.py", line 202, in forward
+    visual_tokens, residuals, views = self.frontend(rgb, pcd)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Networks/frontend.py", line 118, in forward
+    return self.tokenize_and_embed(x), enc_feat, N
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Networks/frontend.py", line 146, in tokenize_and_embed
+    xe += time_emb
+RuntimeError: The size of tensor a (32) must match the size of tensor b (512) at non-singleton dimension 5

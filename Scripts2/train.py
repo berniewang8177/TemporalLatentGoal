@@ -40,7 +40,7 @@ if __name__ == "__main__":
     # creating wandb setup
     project_name = "Latent_Goal2-seen-validation"
     group_name = args.tasks[0] + '-variation-' + str(args.variations)
-    name = args.lang_emb + "_" + args.name + "_pos_offset_" + str(args.position_offset) + "_lr_" + str(args.lr)
+    name = args.lang_emb + "_" + args.name + "_pos_offset_" + str(args.position_offset) + f"_fusion_{args.modality_fusion}_" + "_lr_" + str(args.lr)
 
     # log for wandb
     logger = dict()
