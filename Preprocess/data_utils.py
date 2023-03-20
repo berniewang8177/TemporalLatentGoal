@@ -264,7 +264,7 @@ class RLBenchEnv:
 
         lang_feats, eos_feats, lang_pads, lang_num = instructions
         # now, let's always use 1st sentence (in the future, loop through all)
-        lang_idx = 2
+        lang_idx = 0
         if None not in lang_feats:
             lang_feats = torch.tensor(lang_feats).to(device)
             lang_pads = torch.tensor(lang_pads).to(device)

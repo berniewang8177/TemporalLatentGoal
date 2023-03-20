@@ -420,7 +420,6 @@ class Models(nn.Module):
                 new_decode_feat[padding_mask_vision],
                 'unpad n ch h w -> (unpad n) ch h w')
         
- 
         for l, unet_decode_layer in enumerate(self.trans_decoder):
             if l > 0:
                 residual = residuals[l]

@@ -17,4 +17,4 @@ xvfb-run python3 Scripts2/test.py \
 --lang_emb "W2V" \
 --var_num $VARIATION \
 --load_model \
---load_name "W2V_VALA_train_1_variation_1_no_film.pth"
+--load_name "W2V_VALA_train_1_variation_1_film.pth"

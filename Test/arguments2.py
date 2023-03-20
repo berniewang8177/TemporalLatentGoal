@@ -41,8 +41,8 @@ class Arguments(tap.Tap):
     output: Path = Path(__file__).parent / "records.txt"
     var_num: int = 7 # the variation we want to test
     num_episodes: int = 100
-    success_demo: int = 1 # how many demo I want to collect?
-    failed_demo: int = 1
+    success_demo: int = 10 # how many demo I want to collect?
+    failed_demo: int = 10
     # model
     depth: int = 4
     dim_feedforward: int = 64
