@@ -1,0 +1,10 @@
+
+Random seed for training set as 2
+Traceback (most recent call last):
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Scripts2/train.py", line 59, in <module>
+    agent = Agent(args)
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Networks/agent2.py", line 87, in __init__
+    self.fusion = AdditiveFusion(
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Networks/networks.py", line 290, in __init__
+    self.norm = nn.LayerNorm(nput_size, eps=1e-6)
+NameError: name 'nput_size' is not defined

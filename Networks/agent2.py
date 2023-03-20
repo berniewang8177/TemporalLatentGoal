@@ -16,7 +16,7 @@ from .crossmodal.language_vision2 import LAVA
 from .crossmodal.vision_language2 import VALA
 from .models2 import TemporalTransformer, Models
 from .backend2 import PredictionHead
-from .networks import AdditiveFusion
+from .networks import AdditiveFusion, OracleGoal
 # masking
 from .utils import get_causal_mask, get_padding_mask
 
@@ -65,28 +65,31 @@ class Agent:
         self.vision_lang = None
         self.policy = None
         if self.cross_atten == 'VALA':
-            # use ours Vision-temporally-Attends-Language-to-Act
-            self.vision_lang = VALA(
-                num_layers = args.cross_layers,
-                nhead = 1,
-                d_ffn = args.dim_feedforward * 4,
-                d_model= args.dim_feedforward,
-                kdim=None,
-                vdim=None,
-                dropout=0.0,
-                activation=nn.ReLU,
-                normalize_before=False,
-                causal_self = True, # True when using VALA
-                lang_emb = args.lang_emb # determine dimension to reduce
-            ).to(self.device)
-            # temporla transformer policy, only used by VALA
+            if args.oracle_goal:
+                self.goal_emb = OracleGoal(32)
+            else:
+                self.goal_emb = None
+                # use ours Vision-temporally-Attends-Language-to-Act
+                self.vision_lang = VALA(
+                    num_layers = args.cross_layers,
+                    nhead = 1,
+                    d_ffn = args.dim_feedforward * 4,
+                    d_model= args.dim_feedforward,
+                    kdim=None,
+                    vdim=None,
+                    dropout=0.0,
+                    activation=nn.ReLU,
+                    normalize_before=False,
+                    causal_self = True, # True when using VALA
+                    lang_emb = args.lang_emb # determine dimension to reduce
+                ).to(self.device)
             if args.modality_fusion:
                 self.fusion = AdditiveFusion(
                     d_ffn = args.dim_feedforward*2,
                     input_size = args.dim_feedforward )
             else:
                 self.fusion = None
-            
+            # temporla transformer policy, only used by VALA
             self.policy = TemporalTransformer( 
                 num_layers = args.policy_layers,
                 nhead = 1,
@@ -100,7 +103,7 @@ class Agent:
                 expert_counts = args.expert_counts,
                 cameras = len(args.cameras),
                 ).to(self.device)
-            pass
+            
         self.backend = PredictionHead(
             views = len(args.cameras),
             max_horizons = args.max_episode_length,
@@ -117,7 +120,8 @@ class Agent:
             policy = self.policy,
             backend = self.backend,
             depth = args.depth,
-            fusion = self.fusion
+            fusion = self.fusion,
+            goal_emb = self.goal_emb
             ).to(self.device)
         
         self.optimizer = optim.AdamW(
@@ -131,7 +135,7 @@ class Agent:
         """
         return self.model.state_dict(), self.optimizer
     
-    def act(self, step_idx, rgbs, pcds, instructions, lang_mask):
+    def act(self, step_idx, rgbs, pcds, instructions, lang_mask, variation = -1):
         """
         Used for evaluation. Takes observations, output 1 action.
         
@@ -147,13 +151,13 @@ class Agent:
             a tuple contains token and eos features
         lang_mask:
             a padding mask for language (true is padded token)
-            
-
+        variation:
+            the variation of the test task
         """
         device = rgbs.device
         horizon_len = step_idx+1
         # Note that true denotes unpad tokens
         visual_mask = torch.tensor([True] * horizon_len).unsqueeze(0).to(device)
-        pred = self.model(rgbs, pcds, visual_mask, instructions, lang_mask)
+        pred = self.model(rgbs, pcds, visual_mask, instructions, lang_mask, variation)
 
         return pred

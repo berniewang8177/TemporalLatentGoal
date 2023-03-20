@@ -117,6 +117,7 @@ def training(
 
             if step_id % args.accumulate_grad_batches == 0:
                 optimizer.zero_grad()
+
             # forward
             pred = agent.model(
                 rgbs,
@@ -124,6 +125,7 @@ def training(
                 padding_mask,
                 instr,
                 instr_mask ,
+                variation = args.variations[0]
             )
             # loss compute
             train_losses = metrics.compute_loss(pred, sample)

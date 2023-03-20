@@ -59,4 +59,6 @@ class Arguments(tap.Tap):
     no_film: bool = True # use for debuggging
     max_episode_length: int = 10
 
+    oracle_goal: bool = False # we manually provide sub-goal per step
+
     log_to_wandb: bool = False

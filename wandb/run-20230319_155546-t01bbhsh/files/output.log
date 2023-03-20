@@ -1,0 +1,226 @@
+
+Random seed for training set as 2
+In total, 36.663545 M # of params
+get instruction path: /home/yiqiw2/experiment/language_rl/train_datasets/push_buttons+1
+Num ep. 100
+get instruction path: /home/yiqiw2/experiment/language_rl/val_datasets/push_buttons+1
+Num ep. 10
+get instruction path: /home/yiqiw2/experiment/language_rl/val_datasets/push_buttons+7
+Num ep. 20
+  0%|                                                                                                                 | 0/1000 [00:00<?, ?it/s]/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/autograd/__init__.py:197: UserWarning: replication_pad2d_backward_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at ../aten/src/ATen/Context.cpp:82.)
+  Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/autograd/__init__.py:197: UserWarning: upsample_bilinear2d_backward_out_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at ../aten/src/ATen/Context.cpp:82.)
+  Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 64%|█████████████████████████████████████████████████████████████████▉                                     | 640/1000 [06:20<03:34,  1.68it/s]
+Traceback (most recent call last):
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Train/training.py", line 94, in training
+    sample = next(iter_loader)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 628, in __next__
+    data = self._next_data()
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1306, in _next_data
+    raise StopIteration
+StopIteration
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Scripts2/train.py", line 78, in <module>
+    training(
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Train/training.py", line 97, in training
+    sample = next(iter_loader)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 628, in __next__
+    data = self._next_data()
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1316, in _next_data
+    idx, data = self._get_data()
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1282, in _get_data
+    success, data = self._try_get_data()
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1120, in _try_get_data
+    data = self._data_queue.get(timeout=timeout)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/multiprocessing/queues.py", line 113, in get
+    if not self._poll(timeout):
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/multiprocessing/connection.py", line 257, in poll
+    return self._poll(timeout)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/multiprocessing/connection.py", line 424, in _poll
+    r = wait([self], timeout)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/multiprocessing/connection.py", line 931, in wait
+    ready = selector.select(timeout)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/selectors.py", line 416, in select
+    fd_event_list = self._selector.poll(timeout)
+KeyboardInterrupt

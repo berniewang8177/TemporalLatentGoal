@@ -287,6 +287,8 @@ class AdditiveFusion(nn.Module):
         self.activation = activation()
         self.linear3 = nn.Linear(d_ffn, input_size)
 
+        self.norm = nn.LayerNorm(input_size, eps=1e-6)
+
     def forward(self, x, y):
         """Applies Additive fusion to the input tensor x and y"""
         # give a tensor of shap (time, batch, fea)
@@ -300,4 +302,36 @@ class AdditiveFusion(nn.Module):
         # reshape the output back to (batch, time, fea)
         final = project_fused.permute(1, 0, 2)
 
+
         return final
+
+class OracleGoal(nn.Module):
+    
+    def __init__(
+            self,
+            hidden,
+        ):
+        """
+        Only support push buttons. Assume we have 3 goals for 3 buttons
+        
+        Arguments
+        ----------
+        hidden:
+            the dimension of input features
+        """
+        super().__init__()
+        self.hidden = hidden
+        self.goal_emb = emb(3, hidden)
+        self.goals = {
+            0: torch.tensor([[0] * 6]).long(),
+            1: torch.tensor([ [0,0,1,1,0,0] ]).long(),
+            2: torch.tensor([ [0,0,1,1,2,2] ]).long(),
+            5: torch.tensor([ [0,0,2,2,1,1] ]).long(),
+            7: torch.tensor([ [1,1,0,0,0,0] ]).long(),
+        }
+
+    def forward(self, variation, horizon, device):
+        """Retrieve proper goal embedding"""
+
+        indices = self.goals[variation][:,:horizon].to(device)
+        return self.goal_emb(indices)

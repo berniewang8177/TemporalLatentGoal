@@ -38,9 +38,9 @@ if __name__ == "__main__":
     if args.name == 'LAVA' and args.lang_emb != 'CLIP':
         assert False, f"LAVA should use CLIP, not wave2vec"
     # creating wandb setup
-    project_name = "Latent_Goal2-seen-validation"
+    project_name = "Latent_Goal2-oracle"
     group_name = args.tasks[0] + '-variation-' + str(args.variations)
-    name = args.lang_emb + "_" + args.name + "_pos_offset_" + str(args.position_offset) + f"_fusion_{args.modality_fusion}_" + "_lr_" + str(args.lr)
+    name = args.lang_emb + "_" + args.name + "_pos_offset_" + str(args.position_offset) + f"_Oracle_{args.oracle_goal}" + f"_late_fusion_{args.modality_fusion}_" + "lr_" + str(args.lr)
 
     # log for wandb
     logger = dict()

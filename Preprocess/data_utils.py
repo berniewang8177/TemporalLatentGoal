@@ -318,7 +318,7 @@ class RLBenchEnv:
                     pcds = torch.cat([pcds, pcd.unsqueeze(1)], dim=1)
 
 
-                    output = agent.act( step_id, rgbs, pcds, instruction, lang_pads[lang_idx:lang_idx+1])
+                    output = agent.act( step_id, rgbs, pcds, instruction, lang_pads[lang_idx:lang_idx+1], variation)
                     position = output["position"]
                     rotation = output["rotation"]
                     gripper = output["gripper"]

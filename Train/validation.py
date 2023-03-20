@@ -46,7 +46,6 @@ def validating(
             instr_mask = sample["instr_mask"].to(device)
         else:
             instr_mask = None
-    
 
         # forward
         pred = agent.model(
@@ -55,6 +54,7 @@ def validating(
             padding_mask,
             instr,
             instr_mask ,
+            variation = val_idx
         )
         # loss compute
         val_losses = metrics.compute_loss(pred, sample)

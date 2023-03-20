@@ -84,7 +84,7 @@ if __name__ == "__main__":
                 suffix = str(time())[:2]
                 img_path = f'/home/ubuntu/workspace/imgs/sucess-{idx}-{name}-{i}-{suffix}.jpg'
                 rgb_img.save(img_path)
-            if idx >= args.failed_demo:
+            if idx >= args.sucess_demo:
                 break
         for idx, rgbs in enumerate( failed_rgbs_episode ):
             rgbs = (rgbs[:,0,:,:,:] ).astype(np.uint8)
@@ -94,6 +94,6 @@ if __name__ == "__main__":
                 suffix = str(time())[:2]
                 img_path = f'/home/ubuntu/workspace/imgs/failed-{idx}-{name}-{i}-{suffix}.jpg'
                 rgb_img.save(img_path)
-            if idx >= args.success_demo:
+            if idx >= args.failed_demo:
                 break
         print('Done')

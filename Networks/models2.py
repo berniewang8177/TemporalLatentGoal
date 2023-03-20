@@ -97,6 +97,20 @@ class TemporalTransformer(nn.Module):
                 src_mask = causal_mask,
                 src_key_padding_mask = padding_mask,
         )
+        # last_attn = attn[-1].detach().cpu().numpy()
+        # name = "/home/ubuntu/workspace/attns_map/policy_map.pkl"
+        # if os.path.exists(name):
+        #     with open(name, 'rb') as f:
+        #         dict_maps = pickle.load(f)
+        #     if last_attn.shape[1] in dict_maps:
+        #         dict_maps[last_attn.shape[1]].append(last_attn)
+        #     else:
+        #         dict_maps[ last_attn.shape[1] ]= [ last_attn ]
+        # else:
+        #     data = [last_attn]
+        #     dict_maps = {last_attn.shape[1]: data}
+        # with open(name, 'wb') as f:
+        #     pickle.dump(dict_maps, f)
         return out
 
 class Models(nn.Module):
@@ -133,6 +147,7 @@ class Models(nn.Module):
         backend,
         depth,
         fusion,
+        goal_emb,
     ):
         super().__init__()
         
@@ -144,6 +159,7 @@ class Models(nn.Module):
         self.fusion = fusion
         self.trans_decoder = nn.ModuleList()
         self.depth = depth
+        self.goal_emb = goal_emb
         for i in range(depth):
             self.trans_decoder.extend(
                 [
@@ -179,6 +195,7 @@ class Models(nn.Module):
         padding_mask_vision,
         instructions,
         padding_mask_lang,
+        variation = -1
         ):
         """
         chain front-end, vision_language, policy, and backend in a role
@@ -198,6 +215,7 @@ class Models(nn.Module):
             padding mask created by lang_feature.py for padded language instructions
             it is only used by VALA
         """
+
         tokens, eoses = instructions
         # obtain visual features in patch. Vectorize each patch and add embeddings
         # last layer feature and residuals from U-net encoder are alway returned
@@ -206,7 +224,7 @@ class Models(nn.Module):
         residuals.reverse()
         _, _ch, H,W = residuals[0].shape
         
-        if self.cross_atten2 is None:
+        if self.goal_emb is None and self.cross_atten2 is None:
             # LAVA forward
             features = self.LAVA_forward( eoses, visual_tokens, padding_mask_vision)
             features = einops.rearrange(
@@ -218,11 +236,23 @@ class Models(nn.Module):
             vision_features = features
         else:
             # VALA forward
-            # vision mask is inflated so that 1st dim: Bxviews
-            lang_goal, inflate_pad_mask = self.VALA_forward( tokens, padding_mask_lang, visual_tokens.clone(), padding_mask_vision)
+            if self.goal_emb is not None:
+                # inflate vision mask and flip it
+                inflate_pad_mask = einops.repeat( 
+                    padding_mask_vision,
+                    "B T -> (B views) T", views = views)
+                # oracle language goal
+                goals = self.goal_emb( int(variation), inflate_pad_mask.shape[1], visual_tokens.device)
+                lang_goal = einops.repeat(goals, "dummy T dim -> (B_view dummy) T dim", B_view = inflate_pad_mask.shape[0])
+            else:
+                # vision mask is inflated so that 1st dim: Bxviews
+                lang_goal, inflate_pad_mask = self.VALA_forward( tokens, padding_mask_lang, visual_tokens.clone(), padding_mask_vision)
             visual_obs = einops.rearrange(visual_tokens, 'B T views dim -> (B views) T dim')
+  
             features = self.policy_forward(lang_goal, visual_obs, inflate_pad_mask)
             if self.fusion is not None:
+                lang_goal = einops.repeat(lang_goal, "B T dim -> B T (dim H W)", H = H, W = W)
+                feature = self.fusion(lang_goal, features)
                 vision_features = einops.rearrange( features, '(B N) T (H W ch) -> B T N ch H W', N = views, H = H, W = W )
                 lang_features = None
             else:
@@ -293,7 +323,9 @@ class Models(nn.Module):
             denotes unpadd visual tokens
         """
         if self.fusion is not None:
-            joint_features = self.fusion(lang_goal, vision)
+            # don't fuse them here but after the policy
+            # joint_features = self.fusion(lang_goal, vision)
+            joint_features = vision
             policy_padding = ~vision_padding
         else:
             joint_features = einops.rearrange(
