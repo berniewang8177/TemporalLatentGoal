@@ -39,6 +39,8 @@ def save_model(args, path, train_idx, val_idx, model):
     best_model = copy.deepcopy(model)
     if args.no_film:
         film = 'no_film'
+        if args.modality_fusion == False:
+            film = 'film'
     else:
         film = 'film_once' if args.film_once else 'film_layer_wise'
         if args.cross_decode:

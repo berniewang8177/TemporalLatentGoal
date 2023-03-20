@@ -52,7 +52,7 @@ class Arguments(tap.Tap):
     cross_layers: int = 3 # will be double for LAVA since it doesn't have policy
     policy_layers: int = 3
     expert_counts: int = 1 # default 1, if using VALA, then 6 = 2 modalities x 3 views
-    modality_fusion: bool = True # whether we fuse lang_goal and vision or not
+    modality_fusion: bool = False # whether we fuse lang_goal and vision or not
     position_offset: bool = True
     lang_offset: bool = False
     offset_emb: bool = False # add multi-view and time embedding before making a prediction

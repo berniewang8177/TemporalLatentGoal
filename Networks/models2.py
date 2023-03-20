@@ -96,20 +96,20 @@ class TemporalTransformer(nn.Module):
                 src_key_padding_mask = padding_mask,
         )
 
-        last_attn = attn[-1].detach().cpu().numpy()
-        name = "/home/ubuntu/workspace/attns_map/policy_map.pkl"
-        if os.path.exists(name):
-            with open(name, 'rb') as f:
-                dict_maps = pickle.load(f)
-            if last_attn.shape[1] in dict_maps:
-                dict_maps[last_attn.shape[1]].append(last_attn)
-            else:
-                dict_maps[ last_attn.shape[1] ]= [ last_attn ]
-        else:
-            data = [last_attn]
-            dict_maps = {last_attn.shape[1]: data}
-        with open(name, 'wb') as f:
-            pickle.dump(dict_maps, f)
+        # last_attn = attn[-1].detach().cpu().numpy()
+        # name = "/home/ubuntu/workspace/attns_map/policy_map.pkl"
+        # if os.path.exists(name):
+        #     with open(name, 'rb') as f:
+        #         dict_maps = pickle.load(f)
+        #     if last_attn.shape[1] in dict_maps:
+        #         dict_maps[last_attn.shape[1]].append(last_attn)
+        #     else:
+        #         dict_maps[ last_attn.shape[1] ]= [ last_attn ]
+        # else:
+        #     data = [last_attn]
+        #     dict_maps = {last_attn.shape[1]: data}
+        # with open(name, 'wb') as f:
+        #     pickle.dump(dict_maps, f)
 
         return out
 
@@ -157,6 +157,16 @@ class Models(nn.Module):
         self.policy = policy
         self.backend = backend
         self.fusion = fusion
+        if self.fusion is None:
+            # use FiLM
+            self.proj_net = nn.Sequential(
+                nn.Linear(32, 64),
+                nn.ReLU(),
+                nn.Linear(64, 64),
+                nn.ReLU(),
+            )
+            self.scale_net = nn.Linear(64,32)
+            self.bias_net = nn.Linear(64,32)
         self.trans_decoder = nn.ModuleList()
         self.depth = depth
         self.goal_emb = goal_emb
@@ -255,12 +265,14 @@ class Models(nn.Module):
                 feature = self.fusion(lang_goal, features)
                 vision_features = einops.rearrange( features, '(B N) T (H W ch) -> B T N ch H W', N = views, H = H, W = W )
                 lang_features = None
+                decoded_features = self.unet_decode(vision_features, residuals, padding_mask_vision)
             else:
-                features = einops.rearrange( features, '(B N) (T M) (H W ch) -> B T M N ch H W', N = views, M = 2, H = H, W = W )
-                vision_features = features[:,:,1]
-                lang_features = features[:,:,0]
-            decoded_features = self.unet_decode(vision_features, residuals, padding_mask_vision)
-        
+                # if not fusion, then FiLM
+                scale, bias = self.Film(lang_goal)
+                vision_features = einops.rearrange( features, '(B N) T (H W ch) -> B T N ch H W', N = views,H = H, W = W )
+                lang_features = None
+                decoded_features = self.unet_decode_film(scale.clone(), bias.clone(), vision_features.clone(), residuals, padding_mask_vision)
+
         # prediction and rotations and position separately
         vision_features = einops.rearrange(
                 vision_features,
@@ -270,6 +282,12 @@ class Models(nn.Module):
             views, pcd, lang_features, vision_features, decoded_features, padding_mask_vision, instructions)
 
         return predictions
+
+    def Film(self, features):
+        expand_features = self.proj_net(features)
+        scale = self.scale_net(expand_features)
+        bias = self.bias_net(expand_features)
+        return scale,bias
 
     def LAVA_forward(self, eoses, visual_tokens, padding_mask_vision):
         """Language-Attends-Vision-to-Act (LAVA): language queries visual tokens
@@ -328,13 +346,15 @@ class Models(nn.Module):
             joint_features = vision
             policy_padding = ~vision_padding
         else:
-            joint_features = einops.rearrange(
-                torch.cat([lang_goal, vision], dim = 1),
-                "B (M T) dim -> B (T M) dim",M = 2)
-            policy_padding = einops.repeat(
-                ~vision_padding, # reverse the unpad mask to pad mask
-                "B_N T -> B_N (T M)", M = 2
-            )
+            joint_features = vision
+            policy_padding = ~vision_padding
+        #     joint_features = einops.rearrange(
+        #         torch.cat([lang_goal, vision], dim = 1),
+        #         "B (M T) dim -> B (T M) dim",M = 2)
+        #     policy_padding = einops.repeat(
+        #         ~vision_padding, # reverse the unpad mask to pad mask
+        #         "B_N T -> B_N (T M)", M = 2
+        #     )
         causal_mask = get_causal_mask(joint_features)
         out = self.policy(
             x = joint_features,
@@ -376,7 +396,46 @@ class Models(nn.Module):
             
         return einops.rearrange( decode_feat, "(pad_b n) ch h w -> pad_b n ch h w", n = n)
 
-    
+    def unet_decode_film(self, scale, bias, decode_feat, residuals, padding_mask_vision):
+        """During decoding, the feature map of unet decoder is affected by the 
+        multi-view FiLM generater. Particularly, the residuals from encoder 
+        during decoding is affected by FiLM' generated scale and bias
+        
+        Arguments
+        ----------
+        decode_feat:
+            the unet feature from unet encoder that is need to be decoded by unet decoder
+        residuals:
+            the residuals (feature map) from unet encoder 
+        padding_mask_vision:
+            if true, it means the timestep is not padded, false is padded.
+            Use to select unpad visual feature
+        """
+        b, t, n, ch, h, w =  decode_feat.shape
+        new_scale = einops.repeat(scale, "(B N) T ch -> B T N ch h w", N = n, h = h, w = w)
+        new_bias = einops.repeat(bias, "(B N) T ch -> B T N ch h w", N = n, h = h, w = w)
+        new_decode_feat = decode_feat * new_scale + new_bias
+        
+        new_decode_feat = einops.rearrange(
+                new_decode_feat[padding_mask_vision],
+                'unpad n ch h w -> (unpad n) ch h w')
+        
+ 
+        for l, unet_decode_layer in enumerate(self.trans_decoder):
+            if l > 0:
+                residual = residuals[l]
+                residual = einops.rearrange(
+                    residual, 
+                    "(b t n) c h w -> b t n c h w", b=b, t=t, n=n)[padding_mask_vision]
+                residual = einops.rearrange(residual, "pad_batch n c h w -> (pad_batch n) c h w")
+                try:
+                    new_decode_feat = torch.cat([new_decode_feat, residual  ], dim =1)
+                except:
+                    assert False, f"strange dim: {new_decode_feat.shape}, {residual.shape}"
+
+            new_decode_feat = unet_decode_layer(new_decode_feat)
+            
+        return einops.rearrange( new_decode_feat, "(pad_b n) ch h w -> pad_b n ch h w", n = n)
 
     def _init_params(self):
         for p in self.parameters():
