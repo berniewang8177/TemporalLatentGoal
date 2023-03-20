@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VARIATION=2
+VARIATION=7
 
 # xvfb-run python3 Scripts2/test.py \
 # --device cuda:0 \
@@ -12,8 +12,9 @@ VARIATION=2
 
 xvfb-run python3 Scripts2/test.py \
 --device cuda:0 \
+--oracle_goal \
 --name "VALA" \
 --lang_emb "W2V" \
 --var_num $VARIATION \
 --load_model \
---load_name "W2V_VALA_train_2_variation_2_no_film.pth"
+--load_name "W2V_VALA_train_1_variation_1_no_film.pth"
