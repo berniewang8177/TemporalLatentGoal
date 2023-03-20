@@ -96,20 +96,20 @@ class TemporalTransformer(nn.Module):
                 src_key_padding_mask = padding_mask,
         )
 
-        # last_attn = attn[-1].detach().cpu().numpy()
-        # name = "/home/ubuntu/workspace/attns_map/policy_map.pkl"
-        # if os.path.exists(name):
-        #     with open(name, 'rb') as f:
-        #         dict_maps = pickle.load(f)
-        #     if last_attn.shape[1] in dict_maps:
-        #         dict_maps[last_attn.shape[1]].append(last_attn)
-        #     else:
-        #         dict_maps[ last_attn.shape[1] ]= [ last_attn ]
-        # else:
-        #     data = [last_attn]
-        #     dict_maps = {last_attn.shape[1]: data}
-        # with open(name, 'wb') as f:
-        #     pickle.dump(dict_maps, f)
+        last_attn = attn[-1].detach().cpu().numpy()
+        name = "/home/ubuntu/workspace/attns_map/policy_map.pkl"
+        if os.path.exists(name):
+            with open(name, 'rb') as f:
+                dict_maps = pickle.load(f)
+            if last_attn.shape[1] in dict_maps:
+                dict_maps[last_attn.shape[1]].append(last_attn)
+            else:
+                dict_maps[ last_attn.shape[1] ]= [ last_attn ]
+        else:
+            data = [last_attn]
+            dict_maps = {last_attn.shape[1]: data}
+        with open(name, 'wb') as f:
+            pickle.dump(dict_maps, f)
 
         return out
 
