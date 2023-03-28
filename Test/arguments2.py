@@ -42,7 +42,7 @@ class Arguments(tap.Tap):
     var_num: int = 7 # the variation we want to test
     num_episodes: int = 100
     success_demo: int = 10 # how many demo I want to collect?
-    failed_demo: int = 10
+    failed_demo: int = 2
     # model
     depth: int = 4
     dim_feedforward: int = 64
