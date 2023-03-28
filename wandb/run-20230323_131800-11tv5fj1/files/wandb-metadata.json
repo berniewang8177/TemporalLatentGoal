@@ -1,0 +1,240 @@
+{
+    "os": "Linux-3.10.0-1160.36.2.el7.x86_64-x86_64-with-glibc2.17",
+    "python": "3.9.16",
+    "heartbeatAt": "2023-03-23T17:18:01.270782",
+    "startedAt": "2023-03-23T17:18:00.757458",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--log_to_wandb",
+        "--accumulate_grad_batches",
+        "1",
+        "--oracle_goal",
+        "--lr",
+        "0.0005",
+        "--device",
+        "cuda:1",
+        "--name",
+        "VALA",
+        "--lang_emb",
+        "W2V",
+        "--variations",
+        "10 1",
+        "--val_variations",
+        "10 1",
+        "--train_iters",
+        "2000",
+        "--val_number",
+        "40",
+        "--warmup",
+        "666"
+    ],
+    "state": "running",
+    "program": "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Scripts2/train.py",
+    "codePath": "Scripts2/train.py",
+    "git": {
+        "remote": "https://github.com/berniewang8177/TemporalLatentGoal.git",
+        "commit": "982aa9454b38614e5a419caf9f50791860b8e807"
+    },
+    "email": null,
+    "root": "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal",
+    "host": "mead.ece.local.cmu.edu",
+    "username": "yiqiw2",
+    "executable": "/home/yiqiw2/miniconda3/envs/rlnlp/bin/python3",
+    "cpu_count": 16,
+    "cpu_count_logical": 32,
+    "cpu_freq": {
+        "current": 4242.7616874999985,
+        "min": 1200.0,
+        "max": 4400.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 4299.829,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4300.048,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4022.534,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4217.871,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4274.78,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4275.0,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4262.036,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4299.829,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4299.829,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 3974.414,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4299.829,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4297.412,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4271.704,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4299.829,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4287.744,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4200.952,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4300.268,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4306.86,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4115.917,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4279.614,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4299.169,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 3587.695,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4257.861,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4299.829,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4295.874,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4359.594,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4298.071,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4299.829,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4293.457,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4299.609,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4292.797,
+            "min": 1200.0,
+            "max": 4400.0
+        },
+        {
+            "current": 4298.071,
+            "min": 1200.0,
+            "max": 4400.0
+        }
+    ],
+    "disk": {
+        "total": 157.70965576171875,
+        "used": 43.80508804321289
+    },
+    "gpu": "Tesla V100-PCIE-32GB",
+    "gpu_count": 4,
+    "gpu_devices": [
+        {
+            "name": "Tesla V100-PCIE-32GB",
+            "memory_total": 34089730048
+        },
+        {
+            "name": "Tesla V100-PCIE-32GB",
+            "memory_total": 34089730048
+        },
+        {
+            "name": "Tesla V100-PCIE-32GB",
+            "memory_total": 34089730048
+        },
+        {
+            "name": "Tesla V100-PCIE-32GB",
+            "memory_total": 34089730048
+        }
+    ],
+    "memory": {
+        "total": 251.4088363647461
+    }
+}

@@ -1,0 +1,107 @@
+
+Random seed for training set as 2
+In total, 35.096089 M # of params
+get instruction path: /home/yiqiw2/experiment/language_rl/new_train_data/push_buttons+1
+get instruction path: /home/yiqiw2/experiment/language_rl/new_train_data/push_buttons+10
+Num ep. 200
+get instruction path: /home/yiqiw2/experiment/language_rl/new_val_data/push_buttons+1
+Num ep. 10
+get instruction path: /home/yiqiw2/experiment/language_rl/new_val_data/push_buttons+4
+Num ep. 10
+get instruction path: /home/yiqiw2/experiment/language_rl/new_val_data/push_buttons+10
+Num ep. 10
+  0%|          | 0/2000 [00:00<?, ?it/s]/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/autograd/__init__.py:197: UserWarning: replication_pad2d_backward_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at ../aten/src/ATen/Context.cpp:82.)
+  Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/autograd/__init__.py:197: UserWarning: upsample_bilinear2d_backward_out_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at ../aten/src/ATen/Context.cpp:82.)
+  Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:138: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn("Detected call of `lr_scheduler.step()` before `optimizer.step()`. "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 11%|█         | 221/2000 [02:16<18:22,  1.61it/s]
+Traceback (most recent call last):
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Scripts2/train.py", line 77, in <module>
+    training(
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Train/training.py", line 124, in training
+    pred = agent.model(
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Networks/models2.py", line 279, in forward
+    decoded_features = self.unet_decode_film(scale.clone(), bias.clone(), vision_features.clone(), residuals, padding_mask_vision)
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Networks/models2.py", line 440, in unet_decode_film
+    new_decode_feat = unet_decode_layer(new_decode_feat)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/nn/modules/container.py", line 204, in forward
+    input = module(input)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Networks/networks.py", line 48, in forward
+    out = self.conv(ft)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/nn/modules/conv.py", line 463, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward
+    return F.conv2d(F.pad(input, self._reversed_padding_repeated_twice, mode=self.padding_mode),
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 206.00 MiB (GPU 1; 31.75 GiB total capacity; 4.94 GiB already allocated; 18.50 MiB free; 5.31 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF

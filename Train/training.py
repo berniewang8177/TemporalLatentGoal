@@ -106,6 +106,8 @@ def training(
             gripper = sample["gripper"].to(device)
             outputs = sample["action"].to(device)
             padding_mask = sample["padding_mask"].to(device)
+            variation_nums = sample['variation'].tolist()
+
             if sample["tokens"] is not None:
                 tokens = sample["tokens"].to(device)
             else:
@@ -127,17 +129,23 @@ def training(
                 padding_mask,
                 instr,
                 instr_mask ,
-                variation = args.variations[0]
+                variation = variation_nums
             )
             # loss compute
             train_losses = metrics.compute_loss(pred, sample)
             
             train_losses["total"] = sum(list(train_losses.values()))  # type: ignore
             train_losses["total"].backward()
-
+            # backward
             if step_id % args.accumulate_grad_batches == args.accumulate_grad_batches - 1:
+                # grandient clip
+                torch.nn.utils.clip_grad_norm_(agent.model.parameters(), .25)
                 optimizer.step()
             
+            # move this inside the if state before
+            if agent.scheduler is not None:
+                agent.scheduler.step()
+
             del sample
             del pred
             gc.collect()
@@ -157,6 +165,7 @@ def training(
                             wandb.log(val_logs)
             if args.log_to_wandb:
                 train_log_losses = { "train " + k :train_losses[k].detach().cpu().numpy() for k in train_losses}
+                train_log_losses['lr'] = agent.scheduler.get_last_lr()[0]
                 # training log
                 wandb.log(train_log_losses)
     

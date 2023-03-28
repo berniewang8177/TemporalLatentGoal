@@ -36,6 +36,8 @@ def validating(
         gripper = sample["gripper"].to(device)
         outputs = sample["action"].to(device)
         padding_mask = sample["padding_mask"].to(device)
+        variation_nums = sample['variation'].tolist()
+
         if sample["tokens"] is not None:
             tokens = sample["tokens"].to(device)
         else:
@@ -54,7 +56,7 @@ def validating(
             padding_mask,
             instr,
             instr_mask ,
-            variation = val_idx
+            variation = variation_nums
         )
         # loss compute
         val_losses = metrics.compute_loss(pred, sample)

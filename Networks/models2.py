@@ -252,17 +252,22 @@ class Models(nn.Module):
                     padding_mask_vision,
                     "B T -> (B views) T", views = views)
                 # oracle language goal
-                goals = self.goal_emb( int(variation), inflate_pad_mask.shape[1], visual_tokens.device)
-                lang_goal = einops.repeat(goals, "dummy T dim -> (B_view dummy) T dim", B_view = inflate_pad_mask.shape[0])
-            else:
+                goals = self.goal_emb( variation, inflate_pad_mask.shape[1], visual_tokens.device)
+                if self.proj_net is None:
+                    # not FiLM setup
+                    lang_goal = einops.repeat(goals, "dummy T dim -> (B_view dummy) T (dim H W )", B_view = inflate_pad_mask.shape[0], H = H, W= W)
+                else:
+                    # FiLM setup
+                    lang_goal = einops.repeat(goals, "B T dim -> (B view) T dim", view = views)
+            else: 
                 # vision mask is inflated so that 1st dim: Bxviews
                 lang_goal, inflate_pad_mask = self.VALA_forward( tokens, padding_mask_lang, visual_tokens.clone(), padding_mask_vision)
             visual_obs = einops.rearrange(visual_tokens, 'B T views dim -> (B views) T dim')
   
             features = self.policy_forward(lang_goal, visual_obs, inflate_pad_mask)
             if self.fusion is not None:
-                lang_goal = einops.repeat(lang_goal, "B T dim -> B T (dim H W)", H = H, W = W)
-                feature = self.fusion(lang_goal, features)
+                # lang_goal = einops.repeat(lang_goal, "B T dim -> B T (dim H W)", H = H, W = W)
+                # feature = self.fusion(lang_goal, features)
                 vision_features = einops.rearrange( features, '(B N) T (H W ch) -> B T N ch H W', N = views, H = H, W = W )
                 lang_features = None
                 decoded_features = self.unet_decode(vision_features, residuals, padding_mask_vision)
@@ -341,8 +346,8 @@ class Models(nn.Module):
             denotes unpadd visual tokens
         """
         if self.fusion is not None:
-            # don't fuse them here but after the policy
-            # joint_features = self.fusion(lang_goal, vision)
+            # fuse them here
+            joint_features = self.fusion(lang_goal, vision)
             joint_features = vision
             policy_padding = ~vision_padding
         else:

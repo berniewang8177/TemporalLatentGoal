@@ -58,7 +58,7 @@ def get_max_episode_length(tasks,  episodes_json_path) -> int:
 def load_instructions(
     args,
     path,
-    var_num,
+    var_nums,
     ):
     """
     load the language features and its padding mask
@@ -69,57 +69,68 @@ def load_instructions(
         has everything
     path: str
         it has the path to the task data (training or validation)
-    var_num: int
+    var_num: list of int
         which variation should I retrieve
     """
     numbers = 0
 
+    return_datas = {
+            'instr':[],
+            'eos':[],
+            'pad':[],
+            'numbers':[],
+            }
+
     if path is not None:
-        instru_path = os.path.join( path, args.tasks[0] + f'+{var_num}')
-        print("get instruction path:", instru_path)
-        if args.name == 'LAVA':
-            eos_path = os.path.join(instru_path, 'language', 'eos_features.pkl')
-            instructions_path = None
-            padding_path = None
-        else:
-            # VALA case
-            if args.lang_emb == 'CLIP':
-                instructions_path = os.path.join(instru_path, 'language', 'token_features.pkl')
-                padding_path = os.path.join(instru_path, 'language', 'padding_mask.pkl')
+        for var_num in var_nums:
+            instru_path = os.path.join( path, args.tasks[0] + f'+{var_num}')
+            print("get instruction path:", instru_path)
+            if args.name == 'LAVA':
+                eos_path = os.path.join(instru_path, 'language', 'eos_features.pkl')
+                instructions_path = None
+                padding_path = None
             else:
-                instructions_path = os.path.join(instru_path, 'language', 'w2v_features.pkl')
-                padding_path = os.path.join(instru_path, 'language', 'w2v_mask.pkl')
-            eos_path = os.path.join(instru_path, 'language', 'eos_features.pkl')
+                # VALA case
+                if args.lang_emb == 'CLIP':
+                    instructions_path = os.path.join(instru_path, 'language', 'token_features.pkl')
+                    padding_path = os.path.join(instru_path, 'language', 'padding_mask.pkl')
+                else:
+                    instructions_path = os.path.join(instru_path, 'language', 'w2v_features.pkl')
+                    padding_path = os.path.join(instru_path, 'language', 'w2v_mask.pkl')
+                eos_path = os.path.join(instru_path, 'language', 'eos_features.pkl')
+
+            if instructions_path != None:
+                with open(instructions_path, "rb") as fid:
+                    instr = pickle.load(fid).numpy()
+                    numbers = len(instr)
+            else:
+                instr = None
+
+            if eos_path != None:
+                with open(eos_path, "rb") as fid:
+                    eos = pickle.load(fid).numpy()
+                    numbers = len(eos)
+            else:
+                eos = None
+
+            if padding_path != None:
+                with open(padding_path, "rb") as fid:
+                    pad = pickle.load(fid).numpy()
+            else:
+                pad = None
+            return_data = [instr, eos, pad, numbers]
             
+            for i, data in enumerate(return_data):
+                if data is None:
+                    return_data[i] = [None] * numbers
+            return_datas['instr'].append(instr)
+            return_datas['eos'].append(eos)
+            return_datas['pad'].append(pad)
+            return_datas['numbers'].append(numbers)
 
-        if instructions_path != None:
-            with open(instructions_path, "rb") as fid:
-                instr = pickle.load(fid).numpy()
-                numbers = len(instr)
-        else:
-            instr = None
-
-        if eos_path != None:
-            with open(eos_path, "rb") as fid:
-                eos = pickle.load(fid).numpy()
-                numbers = len(eos)
-        else:
-            eos = None
-
-        if padding_path != None:
-            with open(padding_path, "rb") as fid:
-                pad = pickle.load(fid).numpy()
-        else:
-            pad = None
-        return_data = [instr, eos, pad, numbers]
-        
-        for i, data in enumerate(return_data):
-            if data is None:
-                return_data[i] = [None] * numbers
-
-        return return_data
-
-    return None, None, None, None
+        return return_datas
+    assert False, f"Path shoulnd't be None"
+    return return_datas
 ############################# Demo usage #############################
 def obs_to_attn(obs, camera: str) -> Tuple[int, int]:
     """
@@ -315,19 +326,24 @@ def get_data_loader(args):
 
     # get instruction features and padding (if needed)
     # i hard code so that I will take the first element (1st path)
-    lang_feat, eos_feat, lang_pad, lang_num  = load_instructions( 
+    # lang_feat, eos_feat, lang_pad, lang_num  = load_instructions( 
+    #     args,
+    #     path = args.dataset[0],
+    #     var_num = args.variations[0] )
+
+    train_language  = load_instructions( 
         args,
         path = args.dataset[0],
-        var_num = args.variations[0] )
+        var_nums = args.variations)
 
     max_episode_length = get_max_episode_length(args.tasks, args.episodes_json_path)
 
     dataset = RLBenchDataset(
         root=args.dataset,
         tasks = args.tasks,
-        taskvar=args.variations[0],
+        taskvar=args.variations,
         name=args.name,
-        instructions=(lang_feat, eos_feat, lang_pad, lang_num ),
+        instructions= train_language,
         max_episode_length=max_episode_length,
         max_episodes_per_taskvar=args.max_episodes_per_taskvar,
         cache_size=args.cache_size,
@@ -344,17 +360,18 @@ def get_data_loader(args):
     val_loaders = {}
     if args.dataset_val[0] != None:
         for var_index in args.val_variations:
-            lang_feat, eos_feat, lang_pad, lang_num = load_instructions( 
+
+            val_language = load_instructions( 
                 args,
                 path = args.dataset_val[0],
-                var_num = var_index )
+                var_nums = [ var_index ] )
 
             val_dataset = RLBenchDataset(
             root= args.dataset_val,
             tasks = args.tasks,
-            taskvar= var_index,
+            taskvar= [ var_index ], # make sure the format is list of str, where each str is var index
             name=args.name,
-            instructions=(lang_feat, eos_feat, lang_pad, lang_num ),
+            instructions= val_language,
             max_episode_length=max_episode_length,
             max_episodes_per_taskvar=args.max_episodes_per_taskvar,
             cache_size=args.cache_size,

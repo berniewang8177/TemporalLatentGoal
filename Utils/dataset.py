@@ -19,6 +19,7 @@ from pathlib import Path
 import pathlib
 import numpy as np
 import os
+import einops
 # deep learning stuff
 import torch
 import torch.utils.data as data
@@ -207,42 +208,35 @@ class RLBenchDataset(data.Dataset):
         cameras: Tuple[Camera, ...] = ("wrist", "left_shoulder", "right_shoulder"),
         training: bool = True,
     ):
-        # self._cache = Cache(cache_size, loader)
         self._cameras = cameras
         self._max_episode_length = max_episode_length
         self._max_episodes_per_taskvar = max_episodes_per_taskvar
         self._num_iters = num_iters
         self._training = training
-        # model name, used to determine lang feature loading
-        self._name = name
-        if isinstance(root, (Path, str)):
-            root = [Path(root)]
-        self._root: List[Path] = [Path(r).expanduser() for r in root]
-
-        (lang_feat, eos_feat, lang_pad, lang_num) = instructions
         # clip lang feature excluding bos/eos
-        self.lang_feat = lang_feat
+        self.lang_feat = instructions['instr']
         # clip eos feature
-        self.eos_feat = eos_feat
+        self.eos_feat = instructions['eos']
         # language padding mask
-        self.lang_pad = lang_pad
+        self.lang_pad = instructions['pad']
         # number of instructions we have
-        self.lang_num = lang_num
+        self.lang_num = instructions['numbers']
 
-        # We keep only useful instructions to save mem
-        # self._instructions: Instructions = defaultdict(dict)
-        # for task, var in taskvar:
-        #     self._instructions[task][var] = instructions[task][var]
+        self.taskvar = taskvar
+        self.task = tasks[0]
 
         self._transform = DataTransform((0.75, 1.25))
 
         self._data_dirs = []
         self._episodes = []
+        self._episode_idxs = [] # use to fetch instruction
         self._num_episodes = 0
-        for task in tasks:
+        self._vars = [] # variation number of per sample
+
+        for idx, var in enumerate(self.taskvar):
             # currently, we root has every thing we need
             # assert False, f"{root} {task} {var}"
-            data_dir = root[0] + f"{task}+{taskvar}"
+            data_dir = root[0] + f"{self.task}+{var}"
             if not os.path.isdir(data_dir):
                 raise ValueError(f"Can't find dataset folder {data_dir}")
             
@@ -255,12 +249,21 @@ class RLBenchDataset(data.Dataset):
 
             self._data_dirs.append(data_dir)
             self._episodes += episodes
+            self._episode_idxs+= [idx] * num_episodes
             self._num_episodes += num_episodes
-            
+            self._vars += [int(var)] * num_episodes
             # remove this if including multi-variation training
-            break
+            # break
 
         print("Num ep.", self._num_episodes)
+        
+        indices = einops.rearrange( 
+            np.arange(self._num_episodes),
+            "(var_num episode) -> (episode var_num)", var_num = len(self.taskvar)  )
+
+        self._episode_idxs = np.array(self._episode_idxs)[indices]
+        self._episodes = np.array(self._episodes)[indices]
+        self._vars = np.array(self._vars)[indices]
 
     def __getitem__(self, episode_id):
         episode_id %= self._num_episodes
@@ -268,6 +271,9 @@ class RLBenchDataset(data.Dataset):
         # task, variation, file = self._episodes[episode_id]
         # episode = self._cache(file)
         episode_path = self._episodes[episode_id]
+        episode_idx = self._episode_idxs[episode_id]
+        var_num = self._vars[episode_id]
+
         with open(episode_path, 'rb') as f:
             episode = pickle.load(f)
         
@@ -321,10 +327,10 @@ class RLBenchDataset(data.Dataset):
         mask = torch.tensor([True] * num_ind + [False] * pad_len)
 
         # randomly pick 1 instructions (randint is inclusive at both side)
-        lang_idx = random.randint(0, self.lang_num -1)
-        lang_feat = self.lang_feat[lang_idx]
-        eos_feat = self.eos_feat[lang_idx]
-        lang_pad = self.lang_pad[lang_idx]
+        lang_idx = random.randint(0, self.lang_num[episode_idx] -1)
+        lang_feat = self.lang_feat[episode_idx][lang_idx]
+        eos_feat = self.eos_feat[episode_idx][lang_idx]
+        lang_pad = self.lang_pad[episode_idx][lang_idx]
         
         gripper = torch.cat([episode[4][i] for i in frame_ids])
         shape = [0, 0] * gripper.dim()
@@ -339,7 +345,7 @@ class RLBenchDataset(data.Dataset):
         return {
             "frame_id": tframe_ids,
             # "task": task,
-            # "variation": variation,
+            "variation": var_num,
             "rgbs": rgbs,
             "pcds": pcds,
             "action": action,

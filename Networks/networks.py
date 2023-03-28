@@ -1,5 +1,6 @@
 from typing import Tuple, Union
 import einops
+from operator import itemgetter
 # deep learning stuff
 import torch
 import torch.nn as nn
@@ -323,15 +324,23 @@ class OracleGoal(nn.Module):
         self.hidden = hidden
         self.goal_emb = emb(3, hidden)
         self.goals = {
-            0: torch.tensor([[0] * 6]).long(),
+            # 0: torch.tensor([ [0] * 6]).long(),
+            # 1: torch.tensor([ [1] * 6 ]).long(),
+            # 2: torch.tensor([ [2] * 6  ]).long(),
+            # 4: torch.tensor([ [4] * 6  ]).long(),
+            # 5: torch.tensor([ [5] * 6  ]).long(),
+            # 7: torch.tensor([ [7] * 6  ]).long(),
+            # 10: torch.tensor([ [10] * 6 ]).long(),
             1: torch.tensor([ [0,0,1,1,0,0] ]).long(),
             2: torch.tensor([ [0,0,1,1,2,2] ]).long(),
+            4: torch.tensor([ [0,0,2,2,0,0] ]).long(),
             5: torch.tensor([ [0,0,2,2,1,1] ]).long(),
             7: torch.tensor([ [1,1,0,0,0,0] ]).long(),
+            10: torch.tensor([ [1,1,2,2,0,0] ]).long(),
         }
 
     def forward(self, variation, horizon, device):
         """Retrieve proper goal embedding"""
-
-        indices = self.goals[variation][:,:horizon].to(device)
-        return self.goal_emb(indices)
+        goal_indices = torch.cat( itemgetter( *variation )(self.goals), dim = 0 )
+        goal_indices =  goal_indices[:,:horizon].to(device)
+        return self.goal_emb(goal_indices)

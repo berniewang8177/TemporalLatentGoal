@@ -38,7 +38,7 @@ if __name__ == "__main__":
     if args.name == 'LAVA' and args.lang_emb != 'CLIP':
         assert False, f"LAVA should use CLIP, not wave2vec"
     # creating wandb setup
-    project_name = "Latent_Goal2-oracle"
+    project_name = "Latent_Goal-oracle-multitasking"
     group_name = args.tasks[0] + '-variation-' + str(args.variations)
     name = args.lang_emb + "_" + args.name + "_pos_offset_" + str(args.position_offset) + f"_Oracle_{args.oracle_goal}" + f"_Film_" + "lr_" + str(args.lr)
 
@@ -64,7 +64,6 @@ if __name__ == "__main__":
         agent.model = torch.load(load_name, map_location=torch.device(args.device))
         print("Load model sucess")
     params, optimizer = agent.get_model()
-    
     
     # get metric
     loss_and_metrics = LossAndMetrics()

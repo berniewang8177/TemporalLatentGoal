@@ -7,8 +7,8 @@ class Arguments(tap.Tap):
     cameras: Tuple[str, ...] = ("wrist", "left_shoulder", "right_shoulder")
     checkpoint: Optional[Path] = None
     checkpoint_period: int = 10
-    dataset: List[Path] = ["/home/yiqiw2/experiment/language_rl/train_datasets/"]
-    dataset_val: List[Path] = ["/home/yiqiw2/experiment/language_rl/val_datasets/"]
+    dataset: List[Path] = ["/home/yiqiw2/experiment/language_rl/new_train_data/"]
+    dataset_val: List[Path] = ["/home/yiqiw2/experiment/language_rl/new_val_data/"]
     device: str = "cuda:0"
     xp: Path = Path(__file__).parent / "xp"
     name: str = "LAVA"
@@ -29,8 +29,9 @@ class Arguments(tap.Tap):
     # Train
     batch_size: int = 32
     lr: float = 0.001
+    warmup: int = 100
     
-    val_batch_size: int = 1 # given the fact that the dataset has only 10 episodes
+    val_batch_size: int = 10 # given the fact that the dataset has only 10 episodes
     train_iters: int = 100
     jitter: bool = False
     load_model: bool = False
@@ -56,9 +57,8 @@ class Arguments(tap.Tap):
     position_offset: bool = True
     lang_offset: bool = False
     offset_emb: bool = False # add multi-view and time embedding before making a prediction
-    no_film: bool = True # use for debuggging
     max_episode_length: int = 10
 
-    oracle_goal: bool = False # we manually provide sub-goal per step
+    oracle_goal: bool = True # we manually provide sub-goal per step
 
     log_to_wandb: bool = False

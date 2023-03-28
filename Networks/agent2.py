@@ -8,7 +8,7 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-
+from lion_pytorch import Lion
 # project-specific
 # architectures
 from .frontend import UnetFrontend
@@ -124,8 +124,17 @@ class Agent:
             goal_emb = self.goal_emb
             ).to(self.device)
         
-        self.optimizer = optim.AdamW(
-            self.model.parameters(), lr = args.lr)
+        self.optimizer = optim.AdamW( self.model.parameters(), lr = args.lr)
+        # self.optimizer = Lion(self.model.parameters(), lr = args.lr)
+        lr_ratio = 0.5 
+        self.scheduler = torch.optim.lr_scheduler.LambdaLR(
+            self.optimizer,
+            lambda steps: min((steps+1)/args.warmup, 1) if steps < args.warmup else lr_ratio + (1-lr_ratio) * ( 0.9970 ** (steps-args.warmup) )
+        )
+        # self.scheduler = optim.lr_scheduler.LambdaLR(
+        #     self.optimizer,
+        #     lambda steps: min((steps+1)/args.warmup, 1) 
+        #     )
 
     def get_model(self):
         """
