@@ -13,6 +13,7 @@ do
     let WARMUP="$TRAIN / $WARM"
 
     python3 Scripts2/train.py \
+    --log_to_wandb \
     --accumulate_grad_batches 2\
     --lr 0.0001 \
     --device cuda:1 \
