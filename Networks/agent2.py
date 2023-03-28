@@ -8,7 +8,7 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from lion_pytorch import Lion
+
 # project-specific
 # architectures
 from .frontend import UnetFrontend
@@ -167,6 +167,8 @@ class Agent:
         horizon_len = step_idx+1
         # Note that true denotes unpad tokens
         visual_mask = torch.tensor([True] * horizon_len).unsqueeze(0).to(device)
+        variation = [ variation ]
+
         pred = self.model(rgbs, pcds, visual_mask, instructions, lang_mask, variation)
 
         return pred

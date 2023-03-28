@@ -341,6 +341,10 @@ class OracleGoal(nn.Module):
 
     def forward(self, variation, horizon, device):
         """Retrieve proper goal embedding"""
-        goal_indices = torch.cat( itemgetter( *variation )(self.goals), dim = 0 )
+        if len(variation) == 1:
+            # test time (batch size =  1)
+            goal_indices = itemgetter( *variation )(self.goals)
+        else:
+            goal_indices = torch.cat( itemgetter( *variation )(self.goals), dim = 0 )
         goal_indices =  goal_indices[:,:horizon].to(device)
         return self.goal_emb(goal_indices)

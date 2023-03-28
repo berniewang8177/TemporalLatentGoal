@@ -8,7 +8,7 @@ class Arguments(tap.Tap):
     checkpoint: Optional[Path] = None
     checkpoint_period: int = 10
     dataset: List[Path] = ["/home/yiqiw2/experiment/language_rl/train_datasets/"]
-    dataset_val: List[Path] = ["/home/ubuntu/workspace/test_data"]
+    dataset_val: List[Path] = ["/home/ubuntu/workspace/new_val_data"]
     device: str = "cuda:0"
     xp: Path = Path(__file__).parent / "xp"
     name: str = "LAVA"
@@ -35,11 +35,12 @@ class Arguments(tap.Tap):
     load_name: str = ''
     save_model: bool = False # whether saviing the best model
     save_path: str = '/home/ubuntu/workspace/saved_model'
+    warmup: int = 100
 
     # tests
     headless: bool = True
     output: Path = Path(__file__).parent / "records.txt"
-    var_num: int = 7 # the variation we want to test
+    var_num: str = "7" # the variation we want to test
     num_episodes: int = 100
     success_demo: int = 10 # how many demo I want to collect?
     failed_demo: int = 2

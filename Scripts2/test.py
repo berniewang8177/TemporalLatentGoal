@@ -33,6 +33,7 @@ from Utils.utils import (
 if __name__ == "__main__":
     args = Arguments().parse_args()
     args.tasks = args.tasks.split() # create a list of task
+
     # fix training seed
     set_seed(args.seed)
 
@@ -55,11 +56,16 @@ if __name__ == "__main__":
     )
 
     # load instruction including: lang_feat, eos_feat, lang_pad, lang_num
+    var_num = [ int(v) for v in args.var_num.split()]
     instructions = load_instructions(
         args,
         args.dataset_val[0],
-        args.var_num,) # it should be int)
-    
+        var_num,) # it should be list of int)
+    instr = instructions['instr'][0]
+    eos = instructions['eos'][0]
+    pad = instructions['pad'][0]
+    number = instructions['numbers'][0]
+    instruction = (instr, eos, pad, number)
     max_eps_dict = load_episodes(args.episodes_json_path)["max_episode_length"]
     
     for task_str in args.tasks:
@@ -67,10 +73,10 @@ if __name__ == "__main__":
         success_rate, sucess_rgbs_episode, failed_rgbs_episode = env.evaluate(
             task_str = args.tasks[0],
             max_episodes=max_eps_dict[task_str],
-            variation= args.var_num,
+            variation= var_num[0],
             num_demos=args.num_episodes,
             agent=agent,
-            instructions = instructions,
+            instructions = instruction,
         )
 
         print("Testing Success Rate {}: {:.04f}".format(task_str, success_rate))
