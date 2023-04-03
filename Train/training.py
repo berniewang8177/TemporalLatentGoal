@@ -37,10 +37,8 @@ def save_model(args, path, train_idx, val_idx, model):
         save its parameters 
     """
     best_model = copy.deepcopy(model)
-    if args.no_film:
-        film = 'no_film'
-        if args.modality_fusion == False:
-            film = 'film'
+    if args.modality_fusion == False:
+        film = 'film'
     else:
         film = 'film_once' if args.film_once else 'film_layer_wise'
         if args.cross_decode:
@@ -160,7 +158,7 @@ def training(
                         val_loss, val_logs = validating(agent, val_idx, val_loader, metrics)
                         if args.save_model and val_loss < best_loss:
                             best_losss = val_loss
-                            save_model(args, args.save_path, args.variations[0], val_idx, agent.model)
+                            save_model(args, args.save_path, str(args.variations), val_idx, agent.model)
                         if args.log_to_wandb:
                             wandb.log(val_logs)
             if args.log_to_wandb:

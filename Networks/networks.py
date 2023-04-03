@@ -337,6 +337,8 @@ class OracleGoal(nn.Module):
             5: torch.tensor([ [0,0,2,2,1,1] ]).long(),
             7: torch.tensor([ [1,1,0,0,0,0] ]).long(),
             10: torch.tensor([ [1,1,2,2,0,0] ]).long(),
+            13: torch.tensor([ [2,2,0,0,0,0] ]).long(),
+            16: torch.tensor([ [2,2,1,1,0,0] ]).long(),
         }
 
     def forward(self, variation, horizon, device):

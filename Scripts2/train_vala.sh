@@ -1,7 +1,8 @@
 #!/bin/bash
 # "0:0:400" "1:1 7:1000" "2:2 5:1000"
 WARM=3
-for var_setup in "1 10:1 4 10:2000"
+# "10 13:7 10:2000" "4 16:1 4:2000" "4 7:4 7 10:2000"
+for var_setup in "10 13:7 10:2000" "4 16:1 4:2000" "4 7:4 7 10:2000"
 do
     var=$(echo $var_setup | cut -d ":" -f 1)
     var_val=$(echo $var_setup | cut -d ":" -f 2) 
@@ -14,9 +15,10 @@ do
 
     python3 Scripts2/train.py \
     --log_to_wandb \
+    --save_model \
     --accumulate_grad_batches 2\
     --lr 0.0001 \
-    --device cuda:1 \
+    --device cuda:0 \
     --name "VALA" \
     --lang_emb "W2V" \
     --variations "$var" \
