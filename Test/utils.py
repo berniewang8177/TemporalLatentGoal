@@ -98,27 +98,26 @@ class NearestNeighbor:
         self.ref_data = []
         self.ref_action = []
 
-        episodes = list(pathlib.Path(self.paths).glob('low_dim_ep*'))
+        for path in self.paths:
+            episodes = list(pathlib.Path(path).glob('low_dim_ep*'))
 
-        for episode_path in episodes:
-            with open(episode_path, 'rb') as f:
-                episode = pickle.load(f)
+            for episode_path in episodes:
+                with open(episode_path, 'rb') as f:
+                    episode = pickle.load(f)
 
-                frame_id = episode[0]
-                state = episode[1][0]
-                action = episode[2][0]
-            self.ref_data.append(state)
-            self.ref_action.append(action)
+                    frame_id = episode[0]
+                    state = episode[1][0]
+                    action = episode[2][0]
+                self.ref_data.append(state)
+                self.ref_action.append(action)
+        
         self.size = len(self.ref_data)
 
-        self.ref_state = torch.cat(self.ref_data)
-        self.ref_action =  torch.cat(self.ref_action)
-        assert False, f"{self.ref_state.shape} {self.ref_action.shape}"
+        self.ref_states = torch.cat(self.ref_data)
+        self.ref_actions =  torch.cat(self.ref_action)
 
     def get_action(self, state):
-        assert False, f"{state.shape}"
-        states = einops.repeat(state, "B d -> (B repeat) d", repeat = self.size)
-        ref_states = torch.tensor(self.ref_data)
+        states = einops.repeat(state, "d -> repeat d", repeat = self.size)
         states = torch.tensor(states)
-        index = F.cosine_similarity(ref_states,states).argmax().item()
-        return self.ref_action[index]
+        index = F.cosine_similarity(self.ref_states, states).argmax().item()
+        return self.ref_actions[index:index+1]

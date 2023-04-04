@@ -21,10 +21,12 @@ class Arguments(tap.Tap):
     seed: int = 2
 
     tasks: str = "push_buttons" # # if multi-tasks, then "task_a task_b task_c "
-    variations: str =  '1 ' # if variations 1 2 3 then "1 2 3"
+    
+    # variations: str =  '4 ' # if variations 1 2 3 then "1 2 3"
     episodes_json_path: str = "/home/ubuntu/workspace/TemporalLatentGoal/Preprocess/episodes.json"
 
     # Train
+    ref_variations: str = '1 10'
     batch_size: int = 32
     lr: float = 0.001
     val_number: int = 10 # frequency of validation

@@ -74,13 +74,15 @@ class RLBenchEnv:
     def __init__(
         self,
         data_path,
+        low_dim=False,
         apply_rgb=False,
         apply_depth=False,
         apply_pc=False,
         headless=False,
         apply_cameras=("left_shoulder", "right_shoulder", "wrist", "front"),
     ):
-
+        # low_dim = True for nearest neighbor
+        self.low_dim = low_dim
         # setup required inputs
         self.data_path = data_path
         self.apply_rgb = apply_rgb
@@ -90,7 +92,7 @@ class RLBenchEnv:
 
         # setup RLBench environments
         self.obs_config = self.create_obs_config(
-            apply_rgb, apply_depth, apply_pc, apply_cameras
+            self.low_dim, apply_rgb, apply_depth, apply_pc, apply_cameras
         )
         self.action_mode = MoveArmThenGripper(
             arm_action_mode=EndEffectorPoseViaPlanning(),
@@ -205,7 +207,7 @@ class RLBenchEnv:
             demos = Demo(pickle.load(f))
         return demos
     def create_obs_config(
-        self, apply_rgb, apply_depth, apply_pc, apply_cameras, **kwargs
+        self, low_dim, apply_rgb, apply_depth, apply_pc, apply_cameras, **kwargs
     ):
         """
         Set up observation config for RLBench environment.
@@ -240,7 +242,7 @@ class RLBenchEnv:
             joint_forces=False,
             joint_positions=False,
             joint_velocities=True,
-            task_low_dim_state=False,
+            task_low_dim_state=low_dim,
             gripper_touch_forces=False,
             gripper_pose=True,
             gripper_open=True,
@@ -272,17 +274,18 @@ class RLBenchEnv:
             :param demos: whether to use the saved demos
             :return: success rate
         """
-        device = agent.device
-
-        lang_feats, eos_feats, lang_pads, lang_num = instructions
-        # now, let's always use 1st sentence (in the future, loop through all)
-        lang_idx = 0
-        # if None not in lang_feats:
-        lang_feats = torch.tensor(lang_feats).to(device)
-        lang_pads = torch.tensor(lang_pads).to(device)
-        eos_feats = torch.tensor(eos_feats).to(device)
-        
-        instruction = (lang_feats[lang_idx:lang_idx+1], eos_feats[lang_idx:lang_idx+1]) 
+        device = 'cpu'
+        if low_dim == False:
+            device = agent.device
+            lang_feats, eos_feats, lang_pads, lang_num = instructions
+            # now, let's always use 1st sentence (in the future, loop through all)
+            lang_idx = 0
+            # if None not in lang_feats:
+            lang_feats = torch.tensor(lang_feats).to(device)
+            lang_pads = torch.tensor(lang_pads).to(device)
+            eos_feats = torch.tensor(eos_feats).to(device)
+            
+            instruction = (lang_feats[lang_idx:lang_idx+1], eos_feats[lang_idx:lang_idx+1]) 
         success_rgbs_episode = []
         failed_rgbs_episode = []
         success_rate = 0.0
@@ -328,7 +331,7 @@ class RLBenchEnv:
 
                     rgbs = torch.cat([rgbs, rgb.unsqueeze(1)], dim=1)
                     pcds = torch.cat([pcds, pcd.unsqueeze(1)], dim=1)
-                    if low_dim:
+                    if low_dim == False:
                         output = agent.act( step_id, rgbs, pcds, instruction, lang_pads[lang_idx:lang_idx+1], variation)
                         position = output["position"]
                         rotation = output["rotation"]
@@ -338,11 +341,10 @@ class RLBenchEnv:
                         action = agent.get_action(obs.task_low_dim_state)
                     if action is None:
                         break
-
                     # update the observation based on the predicted action
                     try:
                         action_np = action[-1].detach().cpu().numpy()
-
+                        
                         obs, reward, terminate, step_images = move(action_np)
                         # fetch again to log the true rgb without transformation
                         raw_states, _ = self.get_obs_action(obs)

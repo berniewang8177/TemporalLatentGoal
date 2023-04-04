@@ -34,22 +34,14 @@ from Utils.utils import (
 if __name__ == "__main__":
     args = Arguments().parse_args()
     args.tasks = args.tasks.split() # create a list of task
-
+    args.ref_variations = args.ref_variations.split()
     # fix training seed
     set_seed(args.seed)
 
-    agent = Agent(args)
-    # load model
-    if args.load_model:
-        load_name = os.path.join(args.save_path, args.load_name)
-        agent.model = torch.load(load_name, map_location=torch.device(args.device))
-        print("Load model sucess")
-    else:
-        assert False, f"please load the model for the evaluation !"
-    
     # load RLBench environment
     env = RLBenchEnv(
         data_path= args.dataset_val[0], # place holder, we don't actually need it 
+        low_dim=True,
         apply_rgb=True,
         apply_pc=True,
         headless=args.headless,
@@ -58,24 +50,20 @@ if __name__ == "__main__":
 
     # load instruction including: lang_feat, eos_feat, lang_pad, lang_num
     var_num = [ int(v) for v in args.var_num.split()]
-    instructions = load_instructions(
-        args,
-        args.dataset_val[0],
-        var_num,) # it should be list of int)
-    instr = instructions['instr'][0]
-    eos = instructions['eos'][0]
-    pad = instructions['pad'][0]
-    number = instructions['numbers'][0]
-    instruction = (instr, eos, pad, number)
+    instruction = (None, None, None, None)
     max_eps_dict = load_episodes(args.episodes_json_path)["max_episode_length"]
     
     task_path = args.dataset[0]
-    task_var = os.path.join( args.tasks[0] + f'+{var_num[0]}' ) 
-    path = os.path.join(task_path, 'datasets', task_var)
+    paths = []
+    for ref_var in args.ref_variations:
+        task_var = os.path.join( args.tasks[0] + f'+{ref_var}' ) 
+        path = os.path.join(task_path, 'datasets', task_var)
+        paths.append(path)
+
     for task_str in args.tasks:
         # get 1 nearest neighbor actor
         goals = None 
-        nn_actor = NearestNeighbor( args, path, goals)
+        nn_actor = NearestNeighbor( args, paths, goals)
 
         success_rate, sucess_rgbs_episode, failed_rgbs_episode = env.evaluate(
             task_str = args.tasks[0],
