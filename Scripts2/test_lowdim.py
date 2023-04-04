@@ -69,11 +69,13 @@ if __name__ == "__main__":
     instruction = (instr, eos, pad, number)
     max_eps_dict = load_episodes(args.episodes_json_path)["max_episode_length"]
     
-    paths = [ os.path.join( args.tasks[0] + f'+{single_var_num}' ) for single_var_num in var_num ]
-
+    task_path = args.dataset[0]
+    task_var = os.path.join( args.tasks[0] + f'+{var_num[0]}' ) 
+    path = os.path.join(task_path, 'datasets', task_var)
     for task_str in args.tasks:
         # get 1 nearest neighbor actor
-        nn_actor = NearestNeighbor( paths )
+        goals = None 
+        nn_actor = NearestNeighbor( args, path, goals)
 
         success_rate, sucess_rgbs_episode, failed_rgbs_episode = env.evaluate(
             task_str = args.tasks[0],

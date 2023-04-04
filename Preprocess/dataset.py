@@ -34,7 +34,7 @@ class Dataset(torch.utils.data.Dataset):
         for task_str in self.args.tasks:
             if task_str in self.max_eps_dict:
                 continue
-            _, state_ls, _ = get_observation(task_str, self.args.offset, 0, self.env)
+            _, state_ls, _ = get_observation(args, task_str, self.args.offset, 0, self.env)
             self.max_eps_dict[task_str] = len(state_ls) - 1
             raise ValueError(
                 f"Guessing that the size of {task_str} is {len(state_ls) - 1}"
@@ -64,11 +64,12 @@ class Dataset(torch.utils.data.Dataset):
             os.mkdir(taskvar_dir)
         try:
             demo, state_ls, action_ls = get_observation(
-                task, self.low_dim, variation, episode, self.env
+                self.args, task, self.low_dim, variation, episode, self.env
             )
         except (FileNotFoundError, RuntimeError, IndexError) as e:
             print(e)
             return
+
         if self.low_dim == False:
             state_ls = einops.rearrange(
                 state_ls,
@@ -77,13 +78,11 @@ class Dataset(torch.utils.data.Dataset):
                 n=len(self.args.cameras),
                 m=2,
             )
-        else:
-            assert False, f"{ len(state_ls) }"
+            attn_indices = get_attn_indices_from_demo(task, demo, self.args.cameras)
 
         frame_ids = list(range(len(state_ls) - 1))
         num_frames = len(frame_ids)
-        attn_indices = get_attn_indices_from_demo(task, demo, self.args.cameras)
-
+        
         if (task in self.variable_lengths and num_frames > self.max_eps_dict[task]) or (
             task not in self.variable_lengths and num_frames != self.max_eps_dict[task]
         ):
@@ -99,18 +98,22 @@ class Dataset(torch.utils.data.Dataset):
         state_dict[1].extend(state_ls[:-1])
         state_dict[2].extend(action_ls[1:])
         # make sure number of attn_indices match number of state_dict
-        if len(attn_indices) > horizon:
-            attn_indices = attn_indices[:horizon]
         if self.low_dim == False:
+            if len(attn_indices) > horizon:
+                attn_indices = attn_indices[:horizon]
             state_dict[3].extend(attn_indices) 
             state_dict[4].extend(action_ls[:-1])  # gripper pos
         print("Success !")
-        print("Gonna save at", taskvar_dir + '/' + f"low_dim_ep{episode}.npy")
+        print("Gonna save at", taskvar_dir + '/' + f"ep{episode}.npy")
+
         try:
             # np.save(taskvar_dir + '/' + f"ep{episode}.npy", state_dict)  # type: ignore
-            with open(f"{taskvar_dir}/ep{episode}.pkl", 'wb') as f:
-                pickle.dump(state_dict, f, protocol=pickle.HIGHEST_PROTOCOL)
-
+            if self.low_dim == False:
+                with open(f"{taskvar_dir}/ep{episode}.pkl", 'wb') as f:
+                    pickle.dump(state_dict, f, protocol=pickle.HIGHEST_PROTOCOL)
+            else:
+                with open(f"{taskvar_dir}/low_dim_ep{episode}.pkl", 'wb') as f:
+                    pickle.dump(state_dict, f, protocol=pickle.HIGHEST_PROTOCOL)
         except Exception as e: 
             print(e)
             

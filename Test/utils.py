@@ -1,6 +1,8 @@
 import numpy as np
+import pathlib
 import einops
 import torch
+import pickle
 import torch.nn.functional as F
 
 class Mover:
@@ -83,26 +85,36 @@ class Mover:
         return obs, reward, terminate , images
 
 class NearestNeighbor:
-    def __init__(self, ref_data_paths, goals):
+    def __init__(self, args, ref_data_paths, goals):
         """Init the reference dataset for retrieval
         
         ref_data_paths: reference data location
         goals (Optional): goals for each dataset
         
         """
+        self.args = args
         self.paths = ref_data_paths
         self.goals = goals
         self.ref_data = []
         self.ref_action = []
-        for data_dir in self.paths:
-            episodes = list(pathlib.Path(data_dir).glob('low_dim_ep*'))
+
+        episodes = list(pathlib.Path(self.paths).glob('low_dim_ep*'))
+
+        for episode_path in episodes:
             with open(episode_path, 'rb') as f:
                 episode = pickle.load(f)
-                frame_id, state, action = episode
-            assert False, f"Sucess"
-            self.ref_state.append(state)
+
+                frame_id = episode[0]
+                state = episode[1][0]
+                action = episode[2][0]
+            self.ref_data.append(state)
             self.ref_action.append(action)
         self.size = len(self.ref_data)
+
+        self.ref_state = torch.cat(self.ref_data)
+        self.ref_action =  torch.cat(self.ref_action)
+        assert False, f"{self.ref_state.shape} {self.ref_action.shape}"
+
     def get_action(self, state):
         assert False, f"{state.shape}"
         states = einops.repeat(state, "B d -> (B repeat) d", repeat = self.size)

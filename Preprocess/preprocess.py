@@ -12,19 +12,20 @@ from Utils.utils import set_seed
 from Preprocess.dataset import Dataset
 
 class Arguments(tap.Tap):
-    data_dir = "/home/ubuntu/workspace/test_data/"
+    data_dir = "/home/ubuntu/workspace/new_train_data/"
     seed: int = 2
     tasks = ("push_buttons",)
     cameras = ("left_shoulder", "right_shoulder", "wrist")
     output = data_dir + "datasets"
     max_variations: int = 3
-    specific_vars: str = '5 8 11 14 17 '
+    specific_vars: str = '0 1 2 4 7 10 13 16 '
     offset: int = 0
     num_workers: int = 4
-    low_dim: bool = False # whether we use low_dim_obs or not.
+    low_dim: bool = False # whether we use low_dim_obs (1) or 0.
 
 if __name__ == "__main__":
-    args = Arguments()
+    args = Arguments().parse_args()
+
     set_seed(args.seed)
     args.specific_vars = [ int(x) for x in args.specific_vars.split() ]
     if os.path.exists(args.output) is False:

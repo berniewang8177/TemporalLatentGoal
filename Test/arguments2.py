@@ -7,7 +7,7 @@ class Arguments(tap.Tap):
     cameras: Tuple[str, ...] = ("wrist", "left_shoulder", "right_shoulder")
     checkpoint: Optional[Path] = None
     checkpoint_period: int = 10
-    dataset: List[Path] = ["/home/yiqiw2/experiment/language_rl/train_datasets/"]
+    dataset: List[Path] = ["/home/ubuntu/workspace/new_train_data/"]
     dataset_val: List[Path] = ["/home/ubuntu/workspace/new_val_data"]
     device: str = "cuda:0"
     xp: Path = Path(__file__).parent / "xp"

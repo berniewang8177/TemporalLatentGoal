@@ -5,6 +5,7 @@ import random
 from typing import Tuple, Dict, List
 import einops
 import tqdm
+import pickle
 # RLbench 
 from rlbench.observation_config import ObservationConfig, CameraConfig
 from rlbench.environment import Environment
@@ -191,8 +192,18 @@ class RLBenchEnv:
             random_selection=False,
         )
         return demos
-
-
+    
+    def get_low_dim_demo(self, args, task_name, variation, episode_index):
+        path = os.path.join(
+            args.data_dir, 
+            task_name, 
+            f"variation{variation}",
+            'episodes', 
+            f"episode{episode_index}",
+            "low_dim_obs.pkl")
+        with open(path, 'rb') as f:
+            demos = Demo(pickle.load(f))
+        return demos
     def create_obs_config(
         self, apply_rgb, apply_depth, apply_pc, apply_cameras, **kwargs
     ):
@@ -355,9 +366,12 @@ class RLBenchEnv:
 
         return success_rate, success_rgbs_episode, failed_rgbs_episode
 
-def get_observation(task_str: str, low_dim, variation: int, episode: int, env: RLBenchEnv):
-    demos = env.get_demo(task_str, variation, episode)
-    demo = demos[0]
+def get_observation(args, task_str: str, low_dim, variation: int, episode: int, env: RLBenchEnv):
+    if low_dim == False:
+        demos = env.get_demo(task_str, variation, episode)
+        demo = demos[0]
+    else:
+        demo = env.get_low_dim_demo(args, task_str, variation, episode)
 
     key_frame = keypoint_discovery(demo)
     # HACK for tower3
@@ -370,13 +384,15 @@ def get_observation(task_str: str, low_dim, variation: int, episode: int, env: R
 
     state_ls = []
     action_ls = []
+
     for f in key_frame:
         state, action = env.get_obs_action(demo._observations[f])
         if low_dim == False:
             state = transform(state)
         else:
             state = demo._observations[f].task_low_dim_state
-            assert False, f"{state.shape}"
+            state= torch.tensor(state)
+
         state_ls.append(state.unsqueeze(0))
         action_ls.append(action.unsqueeze(0))
 
