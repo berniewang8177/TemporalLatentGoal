@@ -21,6 +21,7 @@ class Arguments(tap.Tap):
     specific_vars: str = '5 8 11 14 17 '
     offset: int = 0
     num_workers: int = 4
+    low_dim: bool = False # whether we use low_dim_obs or not.
 
 if __name__ == "__main__":
     args = Arguments()

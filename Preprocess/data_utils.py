@@ -245,6 +245,7 @@ class RLBenchEnv:
         max_episodes: int,
         variation: int,
         num_demos: int,
+        low_dim,
         agent,
         instructions,
         offset: int = 0,
@@ -316,14 +317,14 @@ class RLBenchEnv:
 
                     rgbs = torch.cat([rgbs, rgb.unsqueeze(1)], dim=1)
                     pcds = torch.cat([pcds, pcd.unsqueeze(1)], dim=1)
-
-
-                    output = agent.act( step_id, rgbs, pcds, instruction, lang_pads[lang_idx:lang_idx+1], variation)
-                    position = output["position"]
-                    rotation = output["rotation"]
-                    gripper = output["gripper"]
-                    action = torch.cat( [ position, rotation, gripper ], dim = 1)
-
+                    if low_dim:
+                        output = agent.act( step_id, rgbs, pcds, instruction, lang_pads[lang_idx:lang_idx+1], variation)
+                        position = output["position"]
+                        rotation = output["rotation"]
+                        gripper = output["gripper"]
+                        action = torch.cat( [ position, rotation, gripper ], dim = 1)
+                    else:
+                        action = agent.get_action(obs.task_low_dim_state)
                     if action is None:
                         break
 
@@ -354,7 +355,7 @@ class RLBenchEnv:
 
         return success_rate, success_rgbs_episode, failed_rgbs_episode
 
-def get_observation(task_str: str, variation: int, episode: int, env: RLBenchEnv):
+def get_observation(task_str: str, low_dim, variation: int, episode: int, env: RLBenchEnv):
     demos = env.get_demo(task_str, variation, episode)
     demo = demos[0]
 
@@ -371,7 +372,11 @@ def get_observation(task_str: str, variation: int, episode: int, env: RLBenchEnv
     action_ls = []
     for f in key_frame:
         state, action = env.get_obs_action(demo._observations[f])
-        state = transform(state)
+        if low_dim == False:
+            state = transform(state)
+        else:
+            state = demo._observations[f].task_low_dim_state
+            assert False, f"{state.shape}"
         state_ls.append(state.unsqueeze(0))
         action_ls.append(action.unsqueeze(0))
 

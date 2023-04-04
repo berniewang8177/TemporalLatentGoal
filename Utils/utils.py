@@ -21,7 +21,7 @@ from torch.utils.data import DataLoader
 from .dataset import RLBenchDataset
 
 # Camera = Literal["wrist", "left_shoulder", "right_shoulder", "overhead", "front"]
-# Instructions = Dict[str, Dict[int, torch.Tensor]]
+# Instructions = Dict[str, Dict[int, tload_instructionsorch.Tensor]]
 
 class Demo(object):
 

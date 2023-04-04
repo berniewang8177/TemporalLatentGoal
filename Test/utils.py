@@ -1,4 +1,8 @@
 import numpy as np
+import einops
+import torch
+import torch.nn.functional as F
+
 class Mover:
     def __init__(self, task, disabled: bool = False, max_tries: int = 1):
         self._task = task
@@ -77,3 +81,32 @@ class Mover:
         self._last_action = action.copy()
         print("terminate", terminate)
         return obs, reward, terminate , images
+
+class NearestNeighbor:
+    def __init__(self, ref_data_paths, goals):
+        """Init the reference dataset for retrieval
+        
+        ref_data_paths: reference data location
+        goals (Optional): goals for each dataset
+        
+        """
+        self.paths = ref_data_paths
+        self.goals = goals
+        self.ref_data = []
+        self.ref_action = []
+        for data_dir in self.paths:
+            episodes = list(pathlib.Path(data_dir).glob('low_dim_ep*'))
+            with open(episode_path, 'rb') as f:
+                episode = pickle.load(f)
+                frame_id, state, action = episode
+            assert False, f"Sucess"
+            self.ref_state.append(state)
+            self.ref_action.append(action)
+        self.size = len(self.ref_data)
+    def get_action(self, state):
+        assert False, f"{state.shape}"
+        states = einops.repeat(state, "B d -> (B repeat) d", repeat = self.size)
+        ref_states = torch.tensor(self.ref_data)
+        states = torch.tensor(states)
+        index = F.cosine_similarity(ref_states,states).argmax().item()
+        return self.ref_action[index]

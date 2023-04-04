@@ -21,6 +21,7 @@ torch.autograd.set_detect_anomaly(True)
 
 # project-specific
 from Test.arguments2 import Arguments
+from Test.utils import NearestNeighbor
 from Networks.agent2 import Agent
 from Preprocess.data_utils import RLBenchEnv
 from Utils.utils import (
@@ -68,15 +69,19 @@ if __name__ == "__main__":
     instruction = (instr, eos, pad, number)
     max_eps_dict = load_episodes(args.episodes_json_path)["max_episode_length"]
     
+    paths = [ os.path.join( args.tasks[0] + f'+{single_var_num}' ) for single_var_num in var_num ]
+
     for task_str in args.tasks:
+        # get 1 nearest neighbor actor
+        nn_actor = NearestNeighbor( paths )
 
         success_rate, sucess_rgbs_episode, failed_rgbs_episode = env.evaluate(
             task_str = args.tasks[0],
             max_episodes=max_eps_dict[task_str],
             variation= var_num[0],
             num_demos=args.num_episodes,
-            low_dim = False,
-            agent=agent,
+            low_dim = True,
+            agent=nn_actor,
             instructions = instruction,
         )
 

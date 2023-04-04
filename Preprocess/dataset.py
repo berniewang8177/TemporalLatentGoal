@@ -17,6 +17,7 @@ from Utils.utils import get_attn_indices_from_demo
 class Dataset(torch.utils.data.Dataset):
     def __init__(self, args):
         self.args = args
+        self.low_dim = args.low_dim
         # load RLBench environment
         self.env = RLBenchEnv(
             data_path=args.data_dir,
@@ -63,19 +64,21 @@ class Dataset(torch.utils.data.Dataset):
             os.mkdir(taskvar_dir)
         try:
             demo, state_ls, action_ls = get_observation(
-                task, variation, episode, self.env
+                task, self.low_dim, variation, episode, self.env
             )
         except (FileNotFoundError, RuntimeError, IndexError) as e:
             print(e)
             return
-
-        state_ls = einops.rearrange(
-            state_ls,
-            "t 1 (m n ch) h w -> t n m ch h w",
-            ch=3,
-            n=len(self.args.cameras),
-            m=2,
-        )
+        if self.low_dim == False:
+            state_ls = einops.rearrange(
+                state_ls,
+                "t 1 (m n ch) h w -> t n m ch h w",
+                ch=3,
+                n=len(self.args.cameras),
+                m=2,
+            )
+        else:
+            assert False, f"{ len(state_ls) }"
 
         frame_ids = list(range(len(state_ls) - 1))
         num_frames = len(frame_ids)
@@ -94,18 +97,15 @@ class Dataset(torch.utils.data.Dataset):
         horizon = len(frame_ids)
         state_dict[0].extend(frame_ids)
         state_dict[1].extend(state_ls[:-1])
-
         state_dict[2].extend(action_ls[1:])
-
-        # state_dict[3].extend(attn_indices)
         # make sure number of attn_indices match number of state_dict
         if len(attn_indices) > horizon:
             attn_indices = attn_indices[:horizon]
-        state_dict[3].extend(attn_indices) 
-
-        state_dict[4].extend(action_ls[:-1])  # gripper pos
+        if self.low_dim == False:
+            state_dict[3].extend(attn_indices) 
+            state_dict[4].extend(action_ls[:-1])  # gripper pos
         print("Success !")
-        print("Gonna save at", taskvar_dir + '/' + f"ep{episode}.npy")
+        print("Gonna save at", taskvar_dir + '/' + f"low_dim_ep{episode}.npy")
         try:
             # np.save(taskvar_dir + '/' + f"ep{episode}.npy", state_dict)  # type: ignore
             with open(f"{taskvar_dir}/ep{episode}.pkl", 'wb') as f:
