@@ -13,13 +13,13 @@ from Preprocess.dataset import Dataset
 
 
 class Arguments(tap.Tap):
-    data_dir = "/home/ubuntu/workspace/new_train_data/"
+    data_dir = "/home/ubuntu/workspace/new_val_data/"
     seed: int = 2
     tasks = ("push_buttons",)
     cameras = ("left_shoulder", "right_shoulder", "wrist")
     output = data_dir + "datasets"
     max_variations: int = 3
-    specific_vars: str = '0 2 13 16 '
+    specific_vars: str = '13 16 '
     offset: int = 0
     num_workers: int = 4
     low_dim: bool = False # whether we use low_dim_obs (1) or 0.

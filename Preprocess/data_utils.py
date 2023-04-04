@@ -404,7 +404,6 @@ def get_observation(args, task_str: str, low_dim, variation: int, episode: int, 
 
     state_ls = []
     action_ls = []
-
     for f in key_frame:
         if low_dim == False:
             state, action = env.get_obs_action(demo._observations[f])
@@ -413,9 +412,8 @@ def get_observation(args, task_str: str, low_dim, variation: int, episode: int, 
         else:
             state, action = env.get_obs_action(_demo._observations[f])
             state = get_low_dim_obs(demo._observations[f])
-
             state= torch.tensor(state)
             # print("\t\t", state.shape, demo._observations[f].task_low_dim_state.shape)
-        state_ls.append(state.unsqueeze(0))
+            state_ls.append(state.unsqueeze(0))
         action_ls.append(action.unsqueeze(0))
     return demo, state_ls, action_ls
