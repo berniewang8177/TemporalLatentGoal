@@ -16,8 +16,8 @@ xvfb-run python3 Scripts2/test_lowdim.py \
 --oracle_goal \
 --name "VALA" \
 --lang_emb "W2V" \
---ref_variations "4 7" \
---var_num "10 " \
+--ref_variations "4 16 " \
+--var_num "1 " \
 --failed_demo 10 \
 --load_model \
 --load_name "NearestNeighbor"

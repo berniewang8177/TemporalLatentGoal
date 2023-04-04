@@ -104,20 +104,27 @@ class NearestNeighbor:
             for episode_path in episodes:
                 with open(episode_path, 'rb') as f:
                     episode = pickle.load(f)
-
                     frame_id = episode[0]
-                    state = episode[1][0]
-                    action = episode[2][0]
+                    state = torch.cat( episode[1],  dim = 0)
+                    action = torch.cat( episode[2],  dim = 0)
                 self.ref_data.append(state)
                 self.ref_action.append(action)
         
-        self.size = len(self.ref_data)
+        
 
-        self.ref_states = torch.cat(self.ref_data)
-        self.ref_actions =  torch.cat(self.ref_action)
+        self.ref_states = torch.stack(self.ref_data)
+        self.ref_actions =  torch.stack(self.ref_action)
 
-    def get_action(self, state):
+        size, horizon, _ = self.ref_states.shape
+        self.size = size
+        self.horizon = horizon
+
+    def get_action(self, state, step):
+        if step >= self.horizon:
+            step = self.horizon - 1
         states = einops.repeat(state, "d -> repeat d", repeat = self.size)
         states = torch.tensor(states)
-        index = F.cosine_similarity(self.ref_states, states).argmax().item()
-        return self.ref_actions[index:index+1]
+        ref_states = self.ref_states[:,step,:]
+        index = F.cosine_similarity(ref_states, states).argmax().item()
+
+        return self.ref_actions[:,step,:][index:index+1]

@@ -11,7 +11,7 @@ import pickle
 # deep learning stuff
 import torch
 # project-specific
-from .data_utils import RLBenchEnv, get_observation 
+from .data_utils import RLBenchEnv, get_observation
 from Utils.utils import get_attn_indices_from_demo
 
 class Dataset(torch.utils.data.Dataset):
@@ -82,7 +82,7 @@ class Dataset(torch.utils.data.Dataset):
 
         frame_ids = list(range(len(state_ls) - 1))
         num_frames = len(frame_ids)
-        
+
         if (task in self.variable_lengths and num_frames > self.max_eps_dict[task]) or (
             task not in self.variable_lengths and num_frames != self.max_eps_dict[task]
         ):
@@ -105,7 +105,6 @@ class Dataset(torch.utils.data.Dataset):
             state_dict[4].extend(action_ls[:-1])  # gripper pos
         print("Success !")
         print("Gonna save at", taskvar_dir + '/' + f"ep{episode}.npy")
-
         try:
             # np.save(taskvar_dir + '/' + f"ep{episode}.npy", state_dict)  # type: ignore
             if self.low_dim == False:

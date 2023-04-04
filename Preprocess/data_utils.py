@@ -206,6 +206,7 @@ class RLBenchEnv:
         with open(path, 'rb') as f:
             demos = Demo(pickle.load(f))
         return demos
+
     def create_obs_config(
         self, low_dim, apply_rgb, apply_depth, apply_pc, apply_cameras, **kwargs
     ):
@@ -338,7 +339,8 @@ class RLBenchEnv:
                         gripper = output["gripper"]
                         action = torch.cat( [ position, rotation, gripper ], dim = 1)
                     else:
-                        action = agent.get_action(obs.task_low_dim_state)
+                        # some element at not available at test time, use my own get_low_dim_obs
+                        action = agent.get_action(get_low_dim_obs(obs), step_id)
                     if action is None:
                         break
                     # update the observation based on the predicted action
@@ -368,14 +370,30 @@ class RLBenchEnv:
 
         return success_rate, success_rgbs_episode, failed_rgbs_episode
 
+def get_low_dim_obs(obs):
+        vec = [] if obs.gripper_open is None else [[obs.gripper_open]]
+        # print(len(np.concatenate(vec)))
+        for i, data in enumerate( [ 
+            obs.gripper_pose, 
+            obs.gripper_joint_positions, obs.task_low_dim_state]):
+            if data is not None:
+                vec.append(data)
+                # print(data.shape, len(np.concatenate(vec)) )
+            else:
+                assert False, f" element at index {i} is None"
+        return np.concatenate(vec) if len(vec) > 0 else np.array([])
+
 def get_observation(args, task_str: str, low_dim, variation: int, episode: int, env: RLBenchEnv):
     if low_dim == False:
         demos = env.get_demo(task_str, variation, episode)
         demo = demos[0]
+        key_frame = keypoint_discovery(demo)
     else:
+        # use the picture (_demo) for keyframe discovery
+        _demos = env.get_demo(task_str, variation, episode)
+        _demo = _demos[0]
         demo = env.get_low_dim_demo(args, task_str, variation, episode)
-
-    key_frame = keypoint_discovery(demo)
+        key_frame = keypoint_discovery(_demo)
     # HACK for tower3
     if task_str == "tower3":
         key_frame = [k for i, k in enumerate(key_frame) if i % 6 in set([1, 4])]
@@ -388,14 +406,16 @@ def get_observation(args, task_str: str, low_dim, variation: int, episode: int, 
     action_ls = []
 
     for f in key_frame:
-        state, action = env.get_obs_action(demo._observations[f])
         if low_dim == False:
+            state, action = env.get_obs_action(demo._observations[f])
             state = transform(state)
+            state_ls.append(state.unsqueeze(0))
         else:
-            state = demo._observations[f].task_low_dim_state
-            state= torch.tensor(state)
+            state, action = env.get_obs_action(_demo._observations[f])
+            state = get_low_dim_obs(demo._observations[f])
 
+            state= torch.tensor(state)
+            # print("\t\t", state.shape, demo._observations[f].task_low_dim_state.shape)
         state_ls.append(state.unsqueeze(0))
         action_ls.append(action.unsqueeze(0))
-
     return demo, state_ls, action_ls
