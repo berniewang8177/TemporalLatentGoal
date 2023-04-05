@@ -85,7 +85,7 @@ class Mover:
         return obs, reward, terminate , images
 
 class NearestNeighbor:
-    def __init__(self, args, ref_data_paths, goals, oracle = False):
+    def __init__(self, args, ref_data_paths, oracle = False):
         """Init the reference dataset for retrieval
         
         ref_data_paths: reference data location
@@ -96,7 +96,6 @@ class NearestNeighbor:
         self.oracle = oracle
         self.args = args
         self.paths = ref_data_paths
-        self.goals = goals
         self.ref_data = []
         self.ref_action = []
         # identify variation

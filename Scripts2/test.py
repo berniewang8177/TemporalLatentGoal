@@ -33,7 +33,6 @@ from Utils.utils import (
 if __name__ == "__main__":
     args = Arguments().parse_args()
     args.tasks = args.tasks.split() # create a list of task
-
     # fix training seed
     set_seed(args.seed)
 

@@ -62,8 +62,7 @@ if __name__ == "__main__":
 
     for task_str in args.tasks:
         # get 1 nearest neighbor actor
-        goals = None 
-        nn_actor = NearestNeighbor( args, paths, goals)
+        nn_actor = NearestNeighbor( args, paths,  args.oracle_goal)
 
         success_rate, sucess_rgbs_episode, failed_rgbs_episode = env.evaluate(
             task_str = args.tasks[0],
