@@ -67,6 +67,7 @@ class Agent:
         if self.cross_atten == 'VALA':
             if args.oracle_goal:
                 self.goal_emb = OracleGoal(32)
+
             else:
                 self.goal_emb = None
                 # use ours Vision-temporally-Attends-Language-to-Act

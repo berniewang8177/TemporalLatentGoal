@@ -44,7 +44,7 @@ if __name__ == "__main__":
         print("Load model sucess")
     else:
         assert False, f"please load the model for the evaluation !"
-    
+    # the model will be init by the loaded model
     # load RLBench environment
     env = RLBenchEnv(
         data_path= args.dataset_val[0], # place holder, we don't actually need it 

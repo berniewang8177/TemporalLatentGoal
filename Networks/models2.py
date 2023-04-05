@@ -246,6 +246,7 @@ class Models(nn.Module):
             lang_features = None
             vision_features = features
         else:
+            
             # VALA forward
             if self.goal_emb is not None:
                 # inflate vision mask and flip it
@@ -261,6 +262,7 @@ class Models(nn.Module):
                     # FiLM setup
                     lang_goal = einops.repeat(goals, "B T dim -> (B view) T dim", view = views)
             else: 
+                
                 # vision mask is inflated so that 1st dim: Bxviews
                 lang_goal, inflate_pad_mask = self.VALA_forward( tokens, padding_mask_lang, visual_tokens.clone(), padding_mask_vision)
             visual_obs = einops.rearrange(visual_tokens, 'B T views dim -> (B views) T dim')
