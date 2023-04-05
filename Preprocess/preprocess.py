@@ -13,7 +13,7 @@ from Preprocess.dataset import Dataset
 
 
 class Arguments(tap.Tap):
-    data_dir = "/home/ubuntu/workspace/new_train_data/"
+    data_dir = "/home/ubuntu/workspace/new_val_data/"
     seed: int = 2
     tasks = ("push_buttons",)
     cameras = ("left_shoulder", "right_shoulder", "wrist")
