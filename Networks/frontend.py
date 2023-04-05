@@ -98,7 +98,6 @@ class UnetFrontend(nn.Module):
 
         rgb_obs_ = einops.rearrange(rgb, "b t n ch h w -> (b t n) ch h w")
         rgb_obs_ = self.rgb_preprocess(rgb_obs_)
-
         x = self.to_feat(rgb_obs_)
 
         # encoding features with U-net encoder

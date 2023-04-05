@@ -1,0 +1,802 @@
+
+Random seed for training set as 2
+In total, 35.096089 M # of params
+get instruction path: /home/yiqiw2/experiment/language_rl/new_train_data/push_buttons+1
+get instruction path: /home/yiqiw2/experiment/language_rl/new_train_data/push_buttons+13
+Num ep. 200
+get instruction path:
+get instruction path: /home/yiqiw2/experiment/language_rl/new_val_data/push_buttons+1
+Num ep. 10
+get instruction path: /home/yiqiw2/experiment/language_rl/new_val_data/push_buttons+16
+  0%|                                                                                                            | 0/2000 [00:00<?, ?it/s]/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/autograd/__init__.py:197: UserWarning: replication_pad2d_backward_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at ../aten/src/ATen/Context.cpp:82.)
+  Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/autograd/__init__.py:197: UserWarning: upsample_bilinear2d_backward_out_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at ../aten/src/ATen/Context.cpp:82.)
+  Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:138: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn("Detected call of `lr_scheduler.step()` before `optimizer.step()`. "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  2%|██▍                                                                                                | 49/2000 [00:46<26:06,  1.25it/s]
+Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  5%|████▉                                                                                              | 99/2000 [01:29<26:26,  1.20it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  7%|███████▎                                                                                          | 149/2000 [02:12<18:27,  1.67it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 10%|█████████▋                                                                                        | 198/2000 [02:55<26:24,  1.14it/s]
+
+ 10%|█████████▊                                                                                        | 199/2000 [02:56<25:34,  1.17it/s]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 12%|████████████▏                                                                                     | 249/2000 [03:38<24:06,  1.21it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 15%|██████████████▌                                                                                   | 298/2000 [04:22<23:16,  1.22it/s]
+
+ 15%|██████████████▋                                                                                   | 299/2000 [04:22<20:40,  1.37it/s]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 17%|█████████████████                                                                                 | 349/2000 [05:07<22:51,  1.20it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 20%|███████████████████▌                                                                              | 398/2000 [05:49<22:52,  1.17it/s]
+
+ 20%|███████████████████▌                                                                              | 399/2000 [05:50<22:56,  1.16it/s]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 22%|██████████████████████                                                                            | 449/2000 [06:34<21:24,  1.21it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 25%|████████████████████████▍                                                                         | 499/2000 [07:18<21:19,  1.17it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 27%|██████████████████████████▉                                                                       | 549/2000 [08:01<20:25,  1.18it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 30%|█████████████████████████████▎                                                                    | 599/2000 [08:46<19:22,  1.20it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 32%|███████████████████████████████▊                                                                  | 649/2000 [09:32<19:33,  1.15it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 35%|██████████████████████████████████▎                                                               | 699/2000 [10:16<20:45,  1.04it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 37%|████████████████████████████████████▋                                                             | 748/2000 [10:59<15:08,  1.38it/s]
+
+ 37%|████████████████████████████████████▋                                                             | 749/2000 [10:59<13:36,  1.53it/s]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 40%|███████████████████████████████████████▏                                                          | 799/2000 [11:44<17:06,  1.17it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 42%|█████████████████████████████████████████▌                                                        | 849/2000 [12:28<16:27,  1.17it/s]
+
+ 42%|█████████████████████████████████████████▋                                                        | 850/2000 [12:31<26:28,  1.38s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 45%|████████████████████████████████████████████                                                      | 899/2000 [13:12<13:28,  1.36it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 47%|██████████████████████████████████████████████▌                                                   | 949/2000 [13:58<16:11,  1.08it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 50%|████████████████████████████████████████████████▉                                                 | 999/2000 [14:41<13:54,  1.20it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 52%|██████████████████████████████████████████████████▉                                              | 1049/2000 [15:24<11:56,  1.33it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 55%|█████████████████████████████████████████████████████▎                                           | 1099/2000 [16:18<16:19,  1.09s/it]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 57%|███████████████████████████████████████████████████████▋                                         | 1149/2000 [17:22<18:11,  1.28s/it]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 60%|██████████████████████████████████████████████████████████▏                                      | 1199/2000 [18:07<14:51,  1.11s/it]
+
+ 60%|██████████████████████████████████████████████████████████▏                                      | 1200/2000 [18:09<21:00,  1.58s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 62%|████████████████████████████████████████████████████████████▌                                    | 1249/2000 [18:50<10:09,  1.23it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 65%|███████████████████████████████████████████████████████████████                                  | 1299/2000 [19:34<09:54,  1.18it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 67%|█████████████████████████████████████████████████████████████████▍                               | 1349/2000 [20:18<09:10,  1.18it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 70%|███████████████████████████████████████████████████████████████████▊                             | 1399/2000 [21:04<08:11,  1.22it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 72%|██████████████████████████████████████████████████████████████████████▎                          | 1449/2000 [21:47<07:15,  1.26it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 75%|████████████████████████████████████████████████████████████████████████▋                        | 1499/2000 [22:30<07:00,  1.19it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 77%|███████████████████████████████████████████████████████████████████████████▏                     | 1549/2000 [23:15<06:01,  1.25it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+ 79%|████████████████████████████████████████████████████████████████████████████▍                    | 1575/2000 [23:39<06:22,  1.11it/s]
+Traceback (most recent call last):
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Train/training.py", line 94, in training
+    sample = next(iter_loader)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 628, in __next__
+    data = self._next_data()
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1306, in _next_data
+    raise StopIteration
+StopIteration
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Scripts2/train.py", line 77, in <module>
+    training(
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Train/training.py", line 97, in training
+    sample = next(iter_loader)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 628, in __next__
+    data = self._next_data()
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1316, in _next_data
+    idx, data = self._get_data()
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1282, in _get_data
+    success, data = self._try_get_data()
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1120, in _try_get_data
+    data = self._data_queue.get(timeout=timeout)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/multiprocessing/queues.py", line 113, in get
+    if not self._poll(timeout):
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/multiprocessing/connection.py", line 257, in poll
+    return self._poll(timeout)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/multiprocessing/connection.py", line 424, in _poll
+    r = wait([self], timeout)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/multiprocessing/connection.py", line 931, in wait
+    ready = selector.select(timeout)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/selectors.py", line 416, in select
+    fd_event_list = self._selector.poll(timeout)
+KeyboardInterrupt

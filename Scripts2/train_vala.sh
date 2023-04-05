@@ -1,8 +1,8 @@
 #!/bin/bash
 # "0:0:400" "1:1 7:1000" "2:2 5:1000"
-WARM=3
+WARM=10
 # "10 13:7 10:2000" "4 16:1 4:2000" "4 7:4 7 10:2000"
-for var_setup in "10 13:7 10:2000" "4 16:1 4:2000" "4 7:4 7 10:2000"
+for var_setup in "13 1: 16:2000"
 do
     var=$(echo $var_setup | cut -d ":" -f 1)
     var_val=$(echo $var_setup | cut -d ":" -f 2) 
@@ -14,9 +14,9 @@ do
     let WARMUP="$TRAIN / $WARM"
 
     python3 Scripts2/train.py \
-    --accumulate_grad_batches 2\
-    --lr 0.0001 \
-    --device cuda:0 \
+    --accumulate_grad_batches 1\
+    --lr 0.00005 \
+    --device cuda:1 \
     --name "VALA" \
     --lang_emb "W2V" \
     --variations "$var" \

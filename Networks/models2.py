@@ -90,6 +90,7 @@ class TemporalTransformer(nn.Module):
         padding_mask:
             restrict attention to unpadded area
         """
+        
         out, attn = self.encoder(
                 src = x,
                 src_mask = causal_mask,
@@ -229,7 +230,7 @@ class Models(nn.Module):
         tokens, eoses = instructions
         # obtain visual features in patch. Vectorize each patch and add embeddings
         # last layer feature and residuals from U-net encoder are alway returned
-        visual_tokens, residuals, views = self.frontend(rgb, pcd)
+        visual_tokens, residuals, views = self.frontend(rgb.clone(), pcd.clone())
         # reverse the order of residuals (for unet decoding)
         residuals.reverse()
         _, _ch, H,W = residuals[0].shape

@@ -1,0 +1,33 @@
+
+Random seed for training set as 2
+In total, 35.096089 M # of params
+get instruction path: /home/yiqiw2/experiment/language_rl/new_train_data/push_buttons+13
+get instruction path: /home/yiqiw2/experiment/language_rl/new_train_data/push_buttons+1
+Num ep. 200
+get instruction path: /home/yiqiw2/experiment/language_rl/new_val_data/push_buttons+16
+Num ep. 10
+  0%|                                                                                               | 0/2000 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Scripts2/train.py", line 77, in <module>
+    training(
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Train/training.py", line 94, in training
+    sample = next(iter_loader)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 628, in __next__
+    data = self._next_data()
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1333, in _next_data
+    return self._process_data(data)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 1359, in _process_data
+    data.reraise()
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/_utils.py", line 543, in reraise
+    raise exception
+AssertionError: Caught AssertionError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/utils/data/_utils/worker.py", line 302, in _worker_loop
+    data = fetcher.fetch(index)
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/utils/data/_utils/fetch.py", line 58, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/utils/data/_utils/fetch.py", line 58, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Utils/dataset.py", line 276, in __getitem__
+    print( f"{episode_path} {var_num}" )
+AssertionError: /home/yiqiw2/experiment/language_rl/new_train_data/push_buttons+1/ep18.pkl 1

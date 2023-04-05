@@ -85,20 +85,23 @@ class Mover:
         return obs, reward, terminate , images
 
 class NearestNeighbor:
-    def __init__(self, args, ref_data_paths, goals):
+    def __init__(self, args, ref_data_paths, goals, oracle = False):
         """Init the reference dataset for retrieval
         
         ref_data_paths: reference data location
         goals (Optional): goals for each dataset
+        oracle: if True, then half+half stiching
         
         """
+        self.oracle = oracle
         self.args = args
         self.paths = ref_data_paths
         self.goals = goals
         self.ref_data = []
         self.ref_action = []
-
-        for path in self.paths:
+        # identify variation
+        self.ref_var = []
+        for v, path in enumerate(self.paths):
             episodes = list(pathlib.Path(path).glob('low_dim_ep*'))
 
             for episode_path in episodes:
@@ -109,22 +112,34 @@ class NearestNeighbor:
                     action = torch.cat( episode[2],  dim = 0)
                 self.ref_data.append(state)
                 self.ref_action.append(action)
+                self.ref_var.append(v)
         
-        
-
         self.ref_states = torch.stack(self.ref_data)
         self.ref_actions =  torch.stack(self.ref_action)
+        # We assume variation given by self.paths is in a certain order so that
+        # the test run == stiching of first half of 1st var and second half of 2nd var.
+        self.ref_var = np.array(self.ref_var)
 
         size, horizon, _ = self.ref_states.shape
         self.size = size
         self.horizon = horizon
 
     def get_action(self, state, step):
+        """if orcale == True, we narrow down the action retrieval via human heuristics"""
         if step >= self.horizon:
             step = self.horizon - 1
+        if self.oracle and step < 2:
+            select = self.ref_var == 0
+        else:
+            select = self.ref_var == 1
+
         states = einops.repeat(state, "d -> repeat d", repeat = self.size)
         states = torch.tensor(states)
-        ref_states = self.ref_states[:,step,:]
-        index = F.cosine_similarity(ref_states, states).argmax().item()
-
-        return self.ref_actions[:,step,:][index:index+1]
+        if self.oracle == False:
+            ref_states = self.ref_states[:,step,:] 
+            index = F.cosine_similarity(ref_states, states).argmax().item()
+            return self.ref_actions[index:index+1,step,:]
+        else:
+            ref_states = self.ref_states[select,step,:] 
+            index = F.cosine_similarity(ref_states, states[select]).argmax().item()
+            return self.ref_actions[select][index:index+1,step,:]

@@ -1,0 +1,775 @@
+wandb_version: 1
+
+_action_groups:
+  desc: null
+  value:
+  - <argparse._ArgumentGroup object at 0x7fbece941ee0>
+  - <argparse._ArgumentGroup object at 0x7fbece941ac0>
+_actions:
+  desc: null
+  value:
+  - _StoreAction(option_strings=['--accumulate_grad_batches'], dest='accumulate_grad_batches',
+    nargs=None, const=None, default=2, type=<class 'int'>, choices=None, required=False,
+    help='(int, default=2) ', metavar=None)
+  - _StoreAction(option_strings=['--cameras'], dest='cameras', nargs='*', const=None,
+    default=('wrist', 'left_shoulder', 'right_shoulder'), type=<tap.utils.TupleTypeEnforcer
+    object at 0x7fbece9574f0>, choices=None, required=False, help="(Tuple[str, ...],
+    default=('wrist', 'left_shoulder', 'right_shoulder')) ", metavar=None)
+  - _StoreAction(option_strings=['--checkpoint'], dest='checkpoint', nargs=None, const=None,
+    default=None, type=<class 'pathlib.Path'>, choices=None, required=False, help='(Optional[pathlib.Path],
+    default=None) ', metavar=None)
+  - _StoreAction(option_strings=['--checkpoint_period'], dest='checkpoint_period',
+    nargs=None, const=None, default=10, type=<class 'int'>, choices=None, required=False,
+    help='(int, default=10) ', metavar=None)
+  - _StoreAction(option_strings=['--dataset'], dest='dataset', nargs='*', const=None,
+    default=['/home/yiqiw2/experiment/language_rl/new_train_data/'], type=<class 'pathlib.Path'>,
+    choices=None, required=False, help="(List[pathlib.Path], default=['/home/yiqiw2/experiment/language_rl/new_train_data/'])
+    ", metavar=None)
+  - _StoreAction(option_strings=['--dataset_val'], dest='dataset_val', nargs='*',
+    const=None, default=['/home/yiqiw2/experiment/language_rl/new_val_data/'], type=<class
+    'pathlib.Path'>, choices=None, required=False, help="(List[pathlib.Path], default=['/home/yiqiw2/experiment/language_rl/new_val_data/'])
+    ", metavar=None)
+  - _StoreAction(option_strings=['--device'], dest='device', nargs=None, const=None,
+    default='cuda:0', type=<class 'str'>, choices=None, required=False, help='(str,
+    default=cuda:0) ', metavar=None)
+  - _StoreAction(option_strings=['--xp'], dest='xp', nargs=None, const=None, default=PosixPath('/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Train/xp'),
+    type=<class 'pathlib.Path'>, choices=None, required=False, help='(Path, default=/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Train/xp)
+    ', metavar=None)
+  - _StoreAction(option_strings=['--name'], dest='name', nargs=None, const=None, default='LAVA',
+    type=<class 'str'>, choices=None, required=False, help='(str, default=LAVA) ',
+    metavar=None)
+  - _StoreAction(option_strings=['--num_workers'], dest='num_workers', nargs=None,
+    const=None, default=5, type=<class 'int'>, choices=None, required=False, help='(int,
+    default=5) ', metavar=None)
+  - _StoreAction(option_strings=['--max_tries'], dest='max_tries', nargs=None, const=None,
+    default=10, type=<class 'int'>, choices=None, required=False, help='(int, default=10)
+    ', metavar=None)
+  - _StoreAction(option_strings=['--max_episodes_per_taskvar'], dest='max_episodes_per_taskvar',
+    nargs=None, const=None, default=100, type=<class 'int'>, choices=None, required=False,
+    help='(int, default=100) ', metavar=None)
+  - _StoreAction(option_strings=['--instructions'], dest='instructions', nargs=None,
+    const=None, default=None, type=<class 'pathlib.Path'>, choices=None, required=False,
+    help='(Optional[pathlib.Path], default=None) ', metavar=None)
+  - _StoreAction(option_strings=['--cache_size'], dest='cache_size', nargs=None, const=None,
+    default=100, type=<class 'int'>, choices=None, required=False, help='(int, default=100)
+    ', metavar=None)
+  - _StoreAction(option_strings=['--lang_emb'], dest='lang_emb', nargs=None, const=None,
+    default='CLIP', type=<class 'str'>, choices=None, required=False, help='(str,
+    default=CLIP) ', metavar=None)
+  - _StoreAction(option_strings=['--seed'], dest='seed', nargs=None, const=None, default=2,
+    type=<class 'int'>, choices=None, required=False, help='(int, default=2) ', metavar=None)
+  - '_StoreAction(option_strings=[''--tasks''], dest=''tasks'', nargs=None, const=None,
+    default=''push_buttons'', type=<class ''str''>, choices=None, required=False,
+    help=''(str, default=push_buttons) # if multi-tasks, then "task_a task_b task_c
+    "'', metavar=None)'
+  - _StoreAction(option_strings=['--variations'], dest='variations', nargs=None, const=None,
+    default='1 ', type=<class 'str'>, choices=None, required=False, help='(str, default=1
+    ) if variations 1 2 3 then "1 2 3"', metavar=None)
+  - _StoreAction(option_strings=['--val_variations'], dest='val_variations', nargs=None,
+    const=None, default='7 ', type=<class 'str'>, choices=None, required=False, help='(str,
+    default=7 ) ', metavar=None)
+  - _StoreAction(option_strings=['--episodes_json_path'], dest='episodes_json_path',
+    nargs=None, const=None, default='/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Preprocess/episodes.json',
+    type=<class 'str'>, choices=None, required=False, help='(str, default=/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Preprocess/episodes.json)
+    ', metavar=None)
+  - _StoreAction(option_strings=['--val_number'], dest='val_number', nargs=None, const=None,
+    default=10, type=<class 'int'>, choices=None, required=False, help='(int, default=10)
+    frequency of validation', metavar=None)
+  - _StoreAction(option_strings=['--batch_size'], dest='batch_size', nargs=None, const=None,
+    default=32, type=<class 'int'>, choices=None, required=False, help='(int, default=32)
+    ', metavar=None)
+  - _StoreAction(option_strings=['--lr'], dest='lr', nargs=None, const=None, default=0.001,
+    type=<class 'float'>, choices=None, required=False, help='(float, default=0.001)
+    ', metavar=None)
+  - _StoreAction(option_strings=['--warmup'], dest='warmup', nargs=None, const=None,
+    default=100, type=<class 'int'>, choices=None, required=False, help='(int, default=100)
+    ', metavar=None)
+  - _StoreAction(option_strings=['--val_batch_size'], dest='val_batch_size', nargs=None,
+    const=None, default=10, type=<class 'int'>, choices=None, required=False, help='(int,
+    default=10) given the fact that the dataset has only 10 episodes', metavar=None)
+  - _StoreAction(option_strings=['--train_iters'], dest='train_iters', nargs=None,
+    const=None, default=100, type=<class 'int'>, choices=None, required=False, help='(int,
+    default=100) ', metavar=None)
+  - _StoreTrueAction(option_strings=['--jitter'], dest='jitter', nargs=0, const=True,
+    default=False, type=None, choices=None, required=False, help='(bool, default=False)
+    ', metavar=None)
+  - _StoreTrueAction(option_strings=['--load_model'], dest='load_model', nargs=0,
+    const=True, default=False, type=None, choices=None, required=False, help='(bool,
+    default=False) ', metavar=None)
+  - _StoreAction(option_strings=['--load_name'], dest='load_name', nargs=None, const=None,
+    default='', type=<class 'str'>, choices=None, required=False, help='(str, default=)
+    ', metavar=None)
+  - _StoreTrueAction(option_strings=['--save_model'], dest='save_model', nargs=0,
+    const=True, default=False, type=None, choices=None, required=False, help='(bool,
+    default=False) whether saviing the best model', metavar=None)
+  - _StoreAction(option_strings=['--save_path'], dest='save_path', nargs=None, const=None,
+    default='/home/yiqiw2/experiment/language_rl/saved_model', type=<class 'str'>,
+    choices=None, required=False, help='(str, default=/home/yiqiw2/experiment/language_rl/saved_model)
+    ', metavar=None)
+  - _StoreFalseAction(option_strings=['--headless'], dest='headless', nargs=0, const=False,
+    default=True, type=None, choices=None, required=False, help='(bool, default=True)
+    ', metavar=None)
+  - _StoreAction(option_strings=['--output'], dest='output', nargs=None, const=None,
+    default=PosixPath('/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Train/records.txt'),
+    type=<class 'pathlib.Path'>, choices=None, required=False, help='(Path, default=/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Train/records.txt)
+    ', metavar=None)
+  - _StoreAction(option_strings=['--depth'], dest='depth', nargs=None, const=None,
+    default=5, type=<class 'int'>, choices=None, required=False, help='(int, default=5)
+    ', metavar=None)
+  - _StoreAction(option_strings=['--dim_feedforward'], dest='dim_feedforward', nargs=None,
+    const=None, default=512, type=<class 'int'>, choices=None, required=False, help='(int,
+    default=512) ', metavar=None)
+  - _StoreAction(option_strings=['--hidden_dim'], dest='hidden_dim', nargs=None, const=None,
+    default=32, type=<class 'int'>, choices=None, required=False, help='(int, default=32)
+    used for visual tokens', metavar=None)
+  - _StoreAction(option_strings=['--instr_size'], dest='instr_size', nargs=None, const=None,
+    default=512, type=<class 'int'>, choices=None, required=False, help='(int, default=512)
+    ', metavar=None)
+  - _StoreAction(option_strings=['--mask_obs_prob'], dest='mask_obs_prob', nargs=None,
+    const=None, default=0.0, type=<class 'float'>, choices=None, required=False, help='(float,
+    default=0.0) ', metavar=None)
+  - _StoreAction(option_strings=['--num_layers'], dest='num_layers', nargs=None, const=None,
+    default=1, type=<class 'int'>, choices=None, required=False, help='(int, default=1)
+    ', metavar=None)
+  - _StoreAction(option_strings=['--cross_layers'], dest='cross_layers', nargs=None,
+    const=None, default=3, type=<class 'int'>, choices=None, required=False, help="(int,
+    default=3) will be double for LAVA since it doesn't have policy", metavar=None)
+  - _StoreAction(option_strings=['--policy_layers'], dest='policy_layers', nargs=None,
+    const=None, default=3, type=<class 'int'>, choices=None, required=False, help='(int,
+    default=3) ', metavar=None)
+  - _StoreAction(option_strings=['--expert_counts'], dest='expert_counts', nargs=None,
+    const=None, default=1, type=<class 'int'>, choices=None, required=False, help='(int,
+    default=1) default 1, if using VALA, then 6 = 2 modalities x 3 views', metavar=None)
+  - _StoreTrueAction(option_strings=['--modality_fusion'], dest='modality_fusion',
+    nargs=0, const=True, default=False, type=None, choices=None, required=False, help='(bool,
+    default=False) whether we fuse lang_goal and vision or not', metavar=None)
+  - _StoreFalseAction(option_strings=['--position_offset'], dest='position_offset',
+    nargs=0, const=False, default=True, type=None, choices=None, required=False, help='(bool,
+    default=True) ', metavar=None)
+  - _StoreTrueAction(option_strings=['--lang_offset'], dest='lang_offset', nargs=0,
+    const=True, default=False, type=None, choices=None, required=False, help='(bool,
+    default=False) ', metavar=None)
+  - _StoreTrueAction(option_strings=['--offset_emb'], dest='offset_emb', nargs=0,
+    const=True, default=False, type=None, choices=None, required=False, help='(bool,
+    default=False) add multi-view and time embedding before making a prediction',
+    metavar=None)
+  - _StoreAction(option_strings=['--max_episode_length'], dest='max_episode_length',
+    nargs=None, const=None, default=10, type=<class 'int'>, choices=None, required=False,
+    help='(int, default=10) ', metavar=None)
+  - _StoreFalseAction(option_strings=['--oracle_goal'], dest='oracle_goal', nargs=0,
+    const=False, default=True, type=None, choices=None, required=False, help='(bool,
+    default=True) we manually provide sub-goal per step', metavar=None)
+  - _StoreTrueAction(option_strings=['--log_to_wandb'], dest='log_to_wandb', nargs=0,
+    const=True, default=False, type=None, choices=None, required=False, help='(bool,
+    default=False) ', metavar=None)
+  - _HelpAction(option_strings=['-h', '--help'], dest='help', nargs=0, const=None,
+    default='==SUPPRESS==', type=None, choices=None, required=False, help='show this
+    help message and exit', metavar=None)
+_annotations:
+  desc: null
+  value:
+    accumulate_grad_batches: builtins.int
+    batch_size: builtins.int
+    cache_size: builtins.int
+    cameras: typing.Tuple[str, ...]
+    checkpoint: typing.Optional[pathlib.Path]
+    checkpoint_period: builtins.int
+    cross_layers: builtins.int
+    dataset: typing.List[pathlib.Path]
+    dataset_val: typing.List[pathlib.Path]
+    depth: builtins.int
+    device: builtins.str
+    dim_feedforward: builtins.int
+    episodes_json_path: builtins.str
+    expert_counts: builtins.int
+    headless: builtins.bool
+    hidden_dim: builtins.int
+    instr_size: builtins.int
+    instructions: typing.Optional[pathlib.Path]
+    jitter: builtins.bool
+    lang_emb: builtins.str
+    lang_offset: builtins.bool
+    load_model: builtins.bool
+    load_name: builtins.str
+    log_to_wandb: builtins.bool
+    lr: builtins.float
+    mask_obs_prob: builtins.float
+    max_episode_length: builtins.int
+    max_episodes_per_taskvar: builtins.int
+    max_tries: builtins.int
+    modality_fusion: builtins.bool
+    name: builtins.str
+    num_layers: builtins.int
+    num_workers: builtins.int
+    offset_emb: builtins.bool
+    oracle_goal: builtins.bool
+    output: pathlib.Path
+    policy_layers: builtins.int
+    position_offset: builtins.bool
+    save_model: builtins.bool
+    save_path: builtins.str
+    seed: builtins.int
+    tasks: builtins.str
+    train_iters: builtins.int
+    val_batch_size: builtins.int
+    val_number: builtins.int
+    val_variations: builtins.str
+    variations: builtins.str
+    warmup: builtins.int
+    xp: pathlib.Path
+_defaults:
+  desc: null
+  value: {}
+_explicit_bool:
+  desc: null
+  value: false
+_has_negative_number_optionals:
+  desc: null
+  value: []
+_initialized:
+  desc: null
+  value: true
+_mutually_exclusive_groups:
+  desc: null
+  value: []
+_negative_number_matcher:
+  desc: null
+  value: re.compile('^-\\d+$|^-\\d*\\.\\d+$')
+_option_string_actions:
+  desc: null
+  value:
+    --accumulate_grad_batches: _StoreAction(option_strings=['--accumulate_grad_batches'],
+      dest='accumulate_grad_batches', nargs=None, const=None, default=2, type=<class
+      'int'>, choices=None, required=False, help='(int, default=2) ', metavar=None)
+    --batch_size: _StoreAction(option_strings=['--batch_size'], dest='batch_size',
+      nargs=None, const=None, default=32, type=<class 'int'>, choices=None, required=False,
+      help='(int, default=32) ', metavar=None)
+    --cache_size: _StoreAction(option_strings=['--cache_size'], dest='cache_size',
+      nargs=None, const=None, default=100, type=<class 'int'>, choices=None, required=False,
+      help='(int, default=100) ', metavar=None)
+    --cameras: _StoreAction(option_strings=['--cameras'], dest='cameras', nargs='*',
+      const=None, default=('wrist', 'left_shoulder', 'right_shoulder'), type=<tap.utils.TupleTypeEnforcer
+      object at 0x7fbece9574f0>, choices=None, required=False, help="(Tuple[str, ...],
+      default=('wrist', 'left_shoulder', 'right_shoulder')) ", metavar=None)
+    --checkpoint: _StoreAction(option_strings=['--checkpoint'], dest='checkpoint',
+      nargs=None, const=None, default=None, type=<class 'pathlib.Path'>, choices=None,
+      required=False, help='(Optional[pathlib.Path], default=None) ', metavar=None)
+    --checkpoint_period: _StoreAction(option_strings=['--checkpoint_period'], dest='checkpoint_period',
+      nargs=None, const=None, default=10, type=<class 'int'>, choices=None, required=False,
+      help='(int, default=10) ', metavar=None)
+    --cross_layers: _StoreAction(option_strings=['--cross_layers'], dest='cross_layers',
+      nargs=None, const=None, default=3, type=<class 'int'>, choices=None, required=False,
+      help="(int, default=3) will be double for LAVA since it doesn't have policy",
+      metavar=None)
+    --dataset: _StoreAction(option_strings=['--dataset'], dest='dataset', nargs='*',
+      const=None, default=['/home/yiqiw2/experiment/language_rl/new_train_data/'],
+      type=<class 'pathlib.Path'>, choices=None, required=False, help="(List[pathlib.Path],
+      default=['/home/yiqiw2/experiment/language_rl/new_train_data/']) ", metavar=None)
+    --dataset_val: _StoreAction(option_strings=['--dataset_val'], dest='dataset_val',
+      nargs='*', const=None, default=['/home/yiqiw2/experiment/language_rl/new_val_data/'],
+      type=<class 'pathlib.Path'>, choices=None, required=False, help="(List[pathlib.Path],
+      default=['/home/yiqiw2/experiment/language_rl/new_val_data/']) ", metavar=None)
+    --depth: _StoreAction(option_strings=['--depth'], dest='depth', nargs=None, const=None,
+      default=5, type=<class 'int'>, choices=None, required=False, help='(int, default=5)
+      ', metavar=None)
+    --device: _StoreAction(option_strings=['--device'], dest='device', nargs=None,
+      const=None, default='cuda:0', type=<class 'str'>, choices=None, required=False,
+      help='(str, default=cuda:0) ', metavar=None)
+    --dim_feedforward: _StoreAction(option_strings=['--dim_feedforward'], dest='dim_feedforward',
+      nargs=None, const=None, default=512, type=<class 'int'>, choices=None, required=False,
+      help='(int, default=512) ', metavar=None)
+    --episodes_json_path: _StoreAction(option_strings=['--episodes_json_path'], dest='episodes_json_path',
+      nargs=None, const=None, default='/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Preprocess/episodes.json',
+      type=<class 'str'>, choices=None, required=False, help='(str, default=/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Preprocess/episodes.json)
+      ', metavar=None)
+    --expert_counts: _StoreAction(option_strings=['--expert_counts'], dest='expert_counts',
+      nargs=None, const=None, default=1, type=<class 'int'>, choices=None, required=False,
+      help='(int, default=1) default 1, if using VALA, then 6 = 2 modalities x 3 views',
+      metavar=None)
+    --headless: _StoreFalseAction(option_strings=['--headless'], dest='headless',
+      nargs=0, const=False, default=True, type=None, choices=None, required=False,
+      help='(bool, default=True) ', metavar=None)
+    --help: _HelpAction(option_strings=['-h', '--help'], dest='help', nargs=0, const=None,
+      default='==SUPPRESS==', type=None, choices=None, required=False, help='show
+      this help message and exit', metavar=None)
+    --hidden_dim: _StoreAction(option_strings=['--hidden_dim'], dest='hidden_dim',
+      nargs=None, const=None, default=32, type=<class 'int'>, choices=None, required=False,
+      help='(int, default=32) used for visual tokens', metavar=None)
+    --instr_size: _StoreAction(option_strings=['--instr_size'], dest='instr_size',
+      nargs=None, const=None, default=512, type=<class 'int'>, choices=None, required=False,
+      help='(int, default=512) ', metavar=None)
+    --instructions: _StoreAction(option_strings=['--instructions'], dest='instructions',
+      nargs=None, const=None, default=None, type=<class 'pathlib.Path'>, choices=None,
+      required=False, help='(Optional[pathlib.Path], default=None) ', metavar=None)
+    --jitter: _StoreTrueAction(option_strings=['--jitter'], dest='jitter', nargs=0,
+      const=True, default=False, type=None, choices=None, required=False, help='(bool,
+      default=False) ', metavar=None)
+    --lang_emb: _StoreAction(option_strings=['--lang_emb'], dest='lang_emb', nargs=None,
+      const=None, default='CLIP', type=<class 'str'>, choices=None, required=False,
+      help='(str, default=CLIP) ', metavar=None)
+    --lang_offset: _StoreTrueAction(option_strings=['--lang_offset'], dest='lang_offset',
+      nargs=0, const=True, default=False, type=None, choices=None, required=False,
+      help='(bool, default=False) ', metavar=None)
+    --load_model: _StoreTrueAction(option_strings=['--load_model'], dest='load_model',
+      nargs=0, const=True, default=False, type=None, choices=None, required=False,
+      help='(bool, default=False) ', metavar=None)
+    --load_name: _StoreAction(option_strings=['--load_name'], dest='load_name', nargs=None,
+      const=None, default='', type=<class 'str'>, choices=None, required=False, help='(str,
+      default=) ', metavar=None)
+    --log_to_wandb: _StoreTrueAction(option_strings=['--log_to_wandb'], dest='log_to_wandb',
+      nargs=0, const=True, default=False, type=None, choices=None, required=False,
+      help='(bool, default=False) ', metavar=None)
+    --lr: _StoreAction(option_strings=['--lr'], dest='lr', nargs=None, const=None,
+      default=0.001, type=<class 'float'>, choices=None, required=False, help='(float,
+      default=0.001) ', metavar=None)
+    --mask_obs_prob: _StoreAction(option_strings=['--mask_obs_prob'], dest='mask_obs_prob',
+      nargs=None, const=None, default=0.0, type=<class 'float'>, choices=None, required=False,
+      help='(float, default=0.0) ', metavar=None)
+    --max_episode_length: _StoreAction(option_strings=['--max_episode_length'], dest='max_episode_length',
+      nargs=None, const=None, default=10, type=<class 'int'>, choices=None, required=False,
+      help='(int, default=10) ', metavar=None)
+    --max_episodes_per_taskvar: _StoreAction(option_strings=['--max_episodes_per_taskvar'],
+      dest='max_episodes_per_taskvar', nargs=None, const=None, default=100, type=<class
+      'int'>, choices=None, required=False, help='(int, default=100) ', metavar=None)
+    --max_tries: _StoreAction(option_strings=['--max_tries'], dest='max_tries', nargs=None,
+      const=None, default=10, type=<class 'int'>, choices=None, required=False, help='(int,
+      default=10) ', metavar=None)
+    --modality_fusion: _StoreTrueAction(option_strings=['--modality_fusion'], dest='modality_fusion',
+      nargs=0, const=True, default=False, type=None, choices=None, required=False,
+      help='(bool, default=False) whether we fuse lang_goal and vision or not', metavar=None)
+    --name: _StoreAction(option_strings=['--name'], dest='name', nargs=None, const=None,
+      default='LAVA', type=<class 'str'>, choices=None, required=False, help='(str,
+      default=LAVA) ', metavar=None)
+    --num_layers: _StoreAction(option_strings=['--num_layers'], dest='num_layers',
+      nargs=None, const=None, default=1, type=<class 'int'>, choices=None, required=False,
+      help='(int, default=1) ', metavar=None)
+    --num_workers: _StoreAction(option_strings=['--num_workers'], dest='num_workers',
+      nargs=None, const=None, default=5, type=<class 'int'>, choices=None, required=False,
+      help='(int, default=5) ', metavar=None)
+    --offset_emb: _StoreTrueAction(option_strings=['--offset_emb'], dest='offset_emb',
+      nargs=0, const=True, default=False, type=None, choices=None, required=False,
+      help='(bool, default=False) add multi-view and time embedding before making
+      a prediction', metavar=None)
+    --oracle_goal: _StoreFalseAction(option_strings=['--oracle_goal'], dest='oracle_goal',
+      nargs=0, const=False, default=True, type=None, choices=None, required=False,
+      help='(bool, default=True) we manually provide sub-goal per step', metavar=None)
+    --output: _StoreAction(option_strings=['--output'], dest='output', nargs=None,
+      const=None, default=PosixPath('/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Train/records.txt'),
+      type=<class 'pathlib.Path'>, choices=None, required=False, help='(Path, default=/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Train/records.txt)
+      ', metavar=None)
+    --policy_layers: _StoreAction(option_strings=['--policy_layers'], dest='policy_layers',
+      nargs=None, const=None, default=3, type=<class 'int'>, choices=None, required=False,
+      help='(int, default=3) ', metavar=None)
+    --position_offset: _StoreFalseAction(option_strings=['--position_offset'], dest='position_offset',
+      nargs=0, const=False, default=True, type=None, choices=None, required=False,
+      help='(bool, default=True) ', metavar=None)
+    --save_model: _StoreTrueAction(option_strings=['--save_model'], dest='save_model',
+      nargs=0, const=True, default=False, type=None, choices=None, required=False,
+      help='(bool, default=False) whether saviing the best model', metavar=None)
+    --save_path: _StoreAction(option_strings=['--save_path'], dest='save_path', nargs=None,
+      const=None, default='/home/yiqiw2/experiment/language_rl/saved_model', type=<class
+      'str'>, choices=None, required=False, help='(str, default=/home/yiqiw2/experiment/language_rl/saved_model)
+      ', metavar=None)
+    --seed: _StoreAction(option_strings=['--seed'], dest='seed', nargs=None, const=None,
+      default=2, type=<class 'int'>, choices=None, required=False, help='(int, default=2)
+      ', metavar=None)
+    --tasks: '_StoreAction(option_strings=[''--tasks''], dest=''tasks'', nargs=None,
+      const=None, default=''push_buttons'', type=<class ''str''>, choices=None, required=False,
+      help=''(str, default=push_buttons) # if multi-tasks, then "task_a task_b task_c
+      "'', metavar=None)'
+    --train_iters: _StoreAction(option_strings=['--train_iters'], dest='train_iters',
+      nargs=None, const=None, default=100, type=<class 'int'>, choices=None, required=False,
+      help='(int, default=100) ', metavar=None)
+    --val_batch_size: _StoreAction(option_strings=['--val_batch_size'], dest='val_batch_size',
+      nargs=None, const=None, default=10, type=<class 'int'>, choices=None, required=False,
+      help='(int, default=10) given the fact that the dataset has only 10 episodes',
+      metavar=None)
+    --val_number: _StoreAction(option_strings=['--val_number'], dest='val_number',
+      nargs=None, const=None, default=10, type=<class 'int'>, choices=None, required=False,
+      help='(int, default=10) frequency of validation', metavar=None)
+    --val_variations: _StoreAction(option_strings=['--val_variations'], dest='val_variations',
+      nargs=None, const=None, default='7 ', type=<class 'str'>, choices=None, required=False,
+      help='(str, default=7 ) ', metavar=None)
+    --variations: _StoreAction(option_strings=['--variations'], dest='variations',
+      nargs=None, const=None, default='1 ', type=<class 'str'>, choices=None, required=False,
+      help='(str, default=1 ) if variations 1 2 3 then "1 2 3"', metavar=None)
+    --warmup: _StoreAction(option_strings=['--warmup'], dest='warmup', nargs=None,
+      const=None, default=100, type=<class 'int'>, choices=None, required=False, help='(int,
+      default=100) ', metavar=None)
+    --xp: _StoreAction(option_strings=['--xp'], dest='xp', nargs=None, const=None,
+      default=PosixPath('/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Train/xp'),
+      type=<class 'pathlib.Path'>, choices=None, required=False, help='(Path, default=/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Train/xp)
+      ', metavar=None)
+    -h: _HelpAction(option_strings=['-h', '--help'], dest='help', nargs=0, const=None,
+      default='==SUPPRESS==', type=None, choices=None, required=False, help='show
+      this help message and exit', metavar=None)
+_optionals:
+  desc: null
+  value: <argparse._ArgumentGroup object at 0x7fbece941ac0>
+_parsed:
+  desc: null
+  value: true
+_positionals:
+  desc: null
+  value: <argparse._ArgumentGroup object at 0x7fbece941ee0>
+_registries:
+  desc: null
+  value:
+    action:
+      append: argparse._AppendAction
+      append_const: argparse._AppendConstAction
+      count: argparse._CountAction
+      extend: argparse._ExtendAction
+      help: argparse._HelpAction
+      'null': argparse._StoreAction
+      parsers: argparse._SubParsersAction
+      store: argparse._StoreAction
+      store_const: argparse._StoreConstAction
+      store_false: argparse._StoreFalseAction
+      store_true: argparse._StoreTrueAction
+      version: argparse._VersionAction
+    type:
+      'null': argparse.ArgumentParser.__init__.<locals>.identity
+_subparser_buffer:
+  desc: null
+  value: []
+_subparsers:
+  desc: null
+  value: null
+_underscores_to_dashes:
+  desc: null
+  value: false
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.13.10
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    python_version: 3.9.16
+    start_time: 1680639625.525299
+    t:
+      1:
+      - 1
+      - 41
+      - 55
+      2:
+      - 1
+      - 41
+      - 55
+      3:
+      - 13
+      - 16
+      - 23
+      4: 3.9.16
+      5: 0.13.10
+      8:
+      - 5
+accumulate_grad_batches:
+  desc: null
+  value: 2
+add_help:
+  desc: null
+  value: true
+allow_abbrev:
+  desc: null
+  value: true
+args_from_configs:
+  desc: null
+  value: []
+argument_buffer:
+  desc: null
+  value:
+    help:
+    - - -h
+      - --help
+    - action: help
+      default: ==SUPPRESS==
+      help: show this help message and exit
+argument_default:
+  desc: null
+  value: null
+batch_size:
+  desc: null
+  value: 32
+cache_size:
+  desc: null
+  value: 100
+cameras:
+  desc: null
+  value:
+  - wrist
+  - left_shoulder
+  - right_shoulder
+checkpoint:
+  desc: null
+  value: null
+checkpoint_period:
+  desc: null
+  value: 10
+class_variables:
+  desc: null
+  value:
+    accumulate_grad_batches:
+      comment: ''
+    batch_size:
+      comment: ''
+    cache_size:
+      comment: ''
+    cameras:
+      comment: ''
+    checkpoint:
+      comment: ''
+    checkpoint_period:
+      comment: ''
+    cross_layers:
+      comment: will be double for LAVA since it doesn't have policy
+    dataset:
+      comment: ''
+    dataset_val:
+      comment: ''
+    depth:
+      comment: ''
+    device:
+      comment: ''
+    dim_feedforward:
+      comment: ''
+    episodes_json_path:
+      comment: ''
+    expert_counts:
+      comment: default 1, if using VALA, then 6 = 2 modalities x 3 views
+    headless:
+      comment: ''
+    hidden_dim:
+      comment: used for visual tokens
+    instr_size:
+      comment: ''
+    instructions:
+      comment: ''
+    jitter:
+      comment: ''
+    lang_emb:
+      comment: ''
+    lang_offset:
+      comment: ''
+    load_model:
+      comment: ''
+    load_name:
+      comment: ''
+    log_to_wandb:
+      comment: ''
+    lr:
+      comment: ''
+    mask_obs_prob:
+      comment: ''
+    max_episode_length:
+      comment: ''
+    max_episodes_per_taskvar:
+      comment: ''
+    max_tries:
+      comment: ''
+    modality_fusion:
+      comment: whether we fuse lang_goal and vision or not
+    name:
+      comment: ''
+    num_layers:
+      comment: ''
+    num_workers:
+      comment: ''
+    offset_emb:
+      comment: add multi-view and time embedding before making a prediction
+    oracle_goal:
+      comment: we manually provide sub-goal per step
+    output:
+      comment: ''
+    policy_layers:
+      comment: ''
+    position_offset:
+      comment: ''
+    save_model:
+      comment: whether saviing the best model
+    save_path:
+      comment: ''
+    seed:
+      comment: ''
+    tasks:
+      comment: '# if multi-tasks, then "task_a task_b task_c "'
+    train_iters:
+      comment: ''
+    val_batch_size:
+      comment: given the fact that the dataset has only 10 episodes
+    val_number:
+      comment: frequency of validation
+    val_variations:
+      comment: ''
+    variations:
+      comment: if variations 1 2 3 then "1 2 3"
+    warmup:
+      comment: ''
+    xp:
+      comment: ''
+conflict_handler:
+  desc: null
+  value: error
+cross_layers:
+  desc: null
+  value: 3
+dataset:
+  desc: null
+  value:
+  - /home/yiqiw2/experiment/language_rl/new_train_data/
+dataset_val:
+  desc: null
+  value:
+  - /home/yiqiw2/experiment/language_rl/new_val_data/
+depth:
+  desc: null
+  value: 5
+description:
+  desc: null
+  value: null
+device:
+  desc: null
+  value: cuda:2
+dim_feedforward:
+  desc: null
+  value: 512
+epilog:
+  desc: null
+  value: null
+episodes_json_path:
+  desc: null
+  value: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Preprocess/episodes.json
+exit_on_error:
+  desc: null
+  value: true
+expert_counts:
+  desc: null
+  value: 1
+extra_args:
+  desc: null
+  value: []
+formatter_class:
+  desc: null
+  value: argparse.HelpFormatter
+fromfile_prefix_chars:
+  desc: null
+  value: null
+headless:
+  desc: null
+  value: true
+hidden_dim:
+  desc: null
+  value: 32
+instr_size:
+  desc: null
+  value: 512
+instructions:
+  desc: null
+  value: null
+jitter:
+  desc: null
+  value: false
+lang_emb:
+  desc: null
+  value: W2V
+lang_offset:
+  desc: null
+  value: false
+load_model:
+  desc: null
+  value: false
+load_name:
+  desc: null
+  value: ''
+log_to_wandb:
+  desc: null
+  value: true
+lr:
+  desc: null
+  value: 0.0001
+mask_obs_prob:
+  desc: null
+  value: 0.0
+max_episode_length:
+  desc: null
+  value: 10
+max_episodes_per_taskvar:
+  desc: null
+  value: 100
+max_tries:
+  desc: null
+  value: 10
+modality_fusion:
+  desc: null
+  value: false
+name:
+  desc: null
+  value: VALA
+num_layers:
+  desc: null
+  value: 1
+num_workers:
+  desc: null
+  value: 5
+offset_emb:
+  desc: null
+  value: false
+oracle_goal:
+  desc: null
+  value: true
+output:
+  desc: null
+  value: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Train/records.txt
+policy_layers:
+  desc: null
+  value: 3
+position_offset:
+  desc: null
+  value: true
+prefix_chars:
+  desc: null
+  value: '-'
+prog:
+  desc: null
+  value: train.py
+save_model:
+  desc: null
+  value: false
+save_path:
+  desc: null
+  value: /home/yiqiw2/experiment/language_rl/saved_model
+seed:
+  desc: null
+  value: 2
+tasks:
+  desc: null
+  value:
+  - push_buttons
+train_iters:
+  desc: null
+  value: 2000
+usage:
+  desc: null
+  value: null
+val_batch_size:
+  desc: null
+  value: 10
+val_number:
+  desc: null
+  value: 40
+val_variations:
+  desc: null
+  value:
+  - '16'
+variations:
+  desc: null
+  value:
+  - '13'
+  - '1'
+warmup:
+  desc: null
+  value: 666
+xp:
+  desc: null
+  value: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Train/xp

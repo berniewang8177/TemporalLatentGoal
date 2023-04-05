@@ -113,7 +113,7 @@ class Agent:
             offset_emb = args.offset_emb
             ).to(self.device)
 
-        self.model = Models(
+        self.model =  Models(
             frontend = self.frontend,
             cross_atten1 = self.lang_vision,
             cross_atten2 = self.vision_lang,
@@ -126,7 +126,7 @@ class Agent:
         
         self.optimizer = optim.AdamW( self.model.parameters(), lr = args.lr)
         # self.optimizer = Lion(self.model.parameters(), lr = args.lr)
-        lr_ratio = 0.5 
+        lr_ratio = 0.25
         self.scheduler = torch.optim.lr_scheduler.LambdaLR(
             self.optimizer,
             lambda steps: min((steps+1)/args.warmup, 1) if steps < args.warmup else lr_ratio + (1-lr_ratio) * ( 0.9970 ** (steps-args.warmup) )

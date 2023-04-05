@@ -5,15 +5,18 @@ from pathlib import Path
 import wandb
 import os
 # os.environ["CUBLAS_WORKSPACE_CONFIG"]=":4096:2"
-os.environ["CUBLAS_WORKSPACE_CONFIG"]=":16:8"
+# os.environ["CUBLAS_WORKSPACE_CONFIG"]=":16:8"
 # RLbench
 
 
 # deep learning stuff
 import torch
-torch.use_deterministic_algorithms(True, warn_only=True)
-torch.backends.cudnn.deterministic = True
-torch.backends.cudnn.benchmark = False
+# import torch._dynamo as dynamo
+# dynamo.config.verbose=True
+# dynamo.config.suppress_errors = True
+# torch.use_deterministic_algorithms(True, warn_only=True)
+# torch.backends.cudnn.deterministic = True
+# torch.backends.cudnn.benchmark = False
 import torch.nn as nn
 # for debugging
 torch.autograd.set_detect_anomaly(True)

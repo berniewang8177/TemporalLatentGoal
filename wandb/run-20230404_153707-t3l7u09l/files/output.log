@@ -1,0 +1,955 @@
+
+Random seed for training set as 2
+In total, 35.096089 M # of params
+get instruction path: /home/yiqiw2/experiment/language_rl/new_train_data/push_buttons+1
+get instruction path: /home/yiqiw2/experiment/language_rl/new_train_data/push_buttons+13
+Num ep. 200
+get instruction path: /home/yiqiw2/experiment/language_rl/new_val_data/push_buttons+1
+Num ep. 10
+get instruction path: /home/yiqiw2/experiment/language_rl/new_val_data/push_buttons+16
+Num ep. 10
+  0%|          | 0/2000 [00:00<?, ?it/s]/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/autograd/__init__.py:197: UserWarning: replication_pad2d_backward_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at ../aten/src/ATen/Context.cpp:82.)
+  Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/autograd/__init__.py:197: UserWarning: upsample_bilinear2d_backward_out_cuda does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at ../aten/src/ATen/Context.cpp:82.)
+  Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:138: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn("Detected call of `lr_scheduler.step()` before `optimizer.step()`. "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  2%|▏         | 49/2000 [00:42<27:37,  1.18it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  5%|▍         | 99/2000 [01:25<25:59,  1.22it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  7%|▋         | 149/2000 [02:10<24:55,  1.24it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 10%|▉         | 199/2000 [02:54<23:44,  1.26it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 12%|█▏        | 249/2000 [03:37<24:59,  1.17it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 15%|█▍        | 299/2000 [04:19<16:03,  1.77it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 17%|█▋        | 349/2000 [05:04<22:03,  1.25it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 20%|█▉        | 399/2000 [05:48<23:00,  1.16it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 22%|██▏       | 449/2000 [06:31<21:49,  1.18it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 25%|██▍       | 499/2000 [07:14<20:47,  1.20it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 27%|██▋       | 549/2000 [07:59<20:08,  1.20it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 30%|██▉       | 599/2000 [08:40<19:47,  1.18it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 32%|███▏      | 649/2000 [09:24<16:51,  1.34it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 35%|███▍      | 699/2000 [10:08<19:56,  1.09it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 37%|███▋      | 749/2000 [10:52<18:04,  1.15it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 40%|███▉      | 799/2000 [11:35<17:03,  1.17it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 42%|████▏     | 849/2000 [12:18<11:56,  1.61it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 45%|████▍     | 899/2000 [13:02<15:54,  1.15it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 47%|████▋     | 949/2000 [13:46<16:58,  1.03it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 50%|████▉     | 999/2000 [14:27<11:15,  1.48it/s]
+
+ 50%|█████     | 1000/2000 [14:30<22:35,  1.36s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 52%|█████▏    | 1049/2000 [15:11<13:30,  1.17it/s]
+
+ 52%|█████▎    | 1050/2000 [15:14<22:48,  1.44s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 55%|█████▍    | 1099/2000 [15:56<12:54,  1.16it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 57%|█████▋    | 1149/2000 [16:39<11:57,  1.19it/s]
+
+ 57%|█████▊    | 1150/2000 [16:42<20:49,  1.47s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 60%|█████▉    | 1199/2000 [17:24<14:22,  1.08s/it]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 62%|██████▏   | 1249/2000 [18:10<15:19,  1.22s/it]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 65%|██████▍   | 1299/2000 [19:14<13:32,  1.16s/it]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 67%|██████▋   | 1349/2000 [19:58<07:07,  1.52it/s]
+
+ 68%|██████▊   | 1350/2000 [20:00<13:26,  1.24s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 70%|██████▉   | 1399/2000 [20:43<08:17,  1.21it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 72%|███████▏  | 1449/2000 [21:25<07:25,  1.24it/s]
+
+ 72%|███████▎  | 1450/2000 [21:29<17:04,  1.86s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 75%|███████▍  | 1499/2000 [22:08<06:55,  1.20it/s]
+
+ 75%|███████▌  | 1500/2000 [22:11<11:58,  1.44s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 77%|███████▋  | 1549/2000 [22:52<05:47,  1.30it/s]
+
+ 78%|███████▊  | 1550/2000 [22:55<09:37,  1.28s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 80%|███████▉  | 1599/2000 [23:37<05:40,  1.18it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 82%|████████▏ | 1649/2000 [24:20<04:59,  1.17it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 85%|████████▍ | 1699/2000 [25:01<03:45,  1.33it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 87%|████████▋ | 1749/2000 [25:46<03:23,  1.23it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 90%|████████▉ | 1799/2000 [26:30<02:51,  1.17it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 92%|█████████▏| 1849/2000 [27:11<02:01,  1.24it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 95%|█████████▍| 1899/2000 [27:56<01:08,  1.47it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 97%|█████████▋| 1949/2000 [28:39<00:39,  1.30it/s]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+100%|█████████▉| 1999/2000 [29:23<00:00,  1.17it/s]
+Delete one!	Saved one!
+
+100%|██████████| 2000/2000 [29:26<00:00,  1.13it/s]

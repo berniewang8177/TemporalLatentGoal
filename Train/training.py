@@ -119,7 +119,9 @@ def training(
 
             if step_id % args.accumulate_grad_batches == 0:
                 optimizer.zero_grad()
-
+            for mask in padding_mask:
+                if sum(mask) != 4:
+                    assert False, f"{mask}"
             # forward
             pred = agent.model(
                 rgbs,
@@ -140,9 +142,8 @@ def training(
                 torch.nn.utils.clip_grad_norm_(agent.model.parameters(), .25)
                 optimizer.step()
             
-            # move this inside the if state before
-            if agent.scheduler is not None:
-                agent.scheduler.step()
+                if agent.scheduler is not None:
+                    agent.scheduler.step()
 
             del sample
             del pred

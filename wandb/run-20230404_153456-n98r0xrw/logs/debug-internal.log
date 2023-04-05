@@ -1,0 +1,677 @@
+2023-04-04 15:34:56,355 INFO    StreamThr :40206 [internal.py:wandb_internal():87] W&B internal server running at pid: 40206, started at: 2023-04-04 15:34:56.354844
+2023-04-04 15:34:56,356 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status
+2023-04-04 15:34:56,363 INFO    WriterThread:40206 [datastore.py:open_for_write():85] open: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/run-n98r0xrw.wandb
+2023-04-04 15:34:56,364 DEBUG   SenderThread:40206 [sender.py:send():336] send: header
+2023-04-04 15:34:56,378 DEBUG   SenderThread:40206 [sender.py:send():336] send: run
+2023-04-04 15:34:56,766 INFO    SenderThread:40206 [dir_watcher.py:__init__():216] watching files in: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files
+2023-04-04 15:34:56,766 INFO    SenderThread:40206 [sender.py:_start_run_threads():1067] run started: n98r0xrw with start time 1680636896.354319
+2023-04-04 15:34:56,769 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:34:56,770 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:34:56,775 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: check_version
+2023-04-04 15:34:56,775 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: check_version
+2023-04-04 15:34:56,882 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: run_start
+2023-04-04 15:34:56,886 DEBUG   HandlerThread:40206 [system_info.py:__init__():31] System info init
+2023-04-04 15:34:56,887 DEBUG   HandlerThread:40206 [system_info.py:__init__():46] System info init done
+2023-04-04 15:34:56,887 INFO    HandlerThread:40206 [system_monitor.py:start():151] Starting system monitor
+2023-04-04 15:34:56,887 INFO    SystemMonitor:40206 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2023-04-04 15:34:56,887 INFO    HandlerThread:40206 [system_monitor.py:probe():172] Collecting system info
+2023-04-04 15:34:56,887 INFO    SystemMonitor:40206 [interfaces.py:start():168] Started cpu
+2023-04-04 15:34:56,888 INFO    SystemMonitor:40206 [interfaces.py:start():168] Started disk
+2023-04-04 15:34:56,888 INFO    SystemMonitor:40206 [interfaces.py:start():168] Started gpu
+2023-04-04 15:34:56,889 INFO    SystemMonitor:40206 [interfaces.py:start():168] Started memory
+2023-04-04 15:34:56,889 INFO    SystemMonitor:40206 [interfaces.py:start():168] Started network
+2023-04-04 15:34:56,922 DEBUG   HandlerThread:40206 [system_info.py:probe():195] Probing system
+2023-04-04 15:34:56,929 DEBUG   HandlerThread:40206 [system_info.py:_probe_git():180] Probing git
+2023-04-04 15:34:56,941 DEBUG   HandlerThread:40206 [system_info.py:_probe_git():188] Probing git done
+2023-04-04 15:34:56,941 DEBUG   HandlerThread:40206 [system_info.py:probe():241] Probing system done
+2023-04-04 15:34:56,941 DEBUG   HandlerThread:40206 [system_monitor.py:probe():181] {'os': 'Linux-3.10.0-1160.36.2.el7.x86_64-x86_64-with-glibc2.17', 'python': '3.9.16', 'heartbeatAt': '2023-04-04T19:34:56.922447', 'startedAt': '2023-04-04T19:34:56.348586', 'docker': None, 'cuda': None, 'args': ('--log_to_wandb', '--save_model', '--accumulate_grad_batches', '2', '--lr', '0.00005', '--device', 'cuda:1', '--name', 'VALA', '--lang_emb', 'W2V', '--variations', '1 13', '--val_variations', '1 16', '--train_iters', '2000', '--val_number', '40', '--warmup', '666'), 'state': 'running', 'program': '/home/yiqiw2/experiment/language_rl/TemporalLatentGoal/Scripts2/train.py', 'codePath': 'Scripts2/train.py', 'git': {'remote': 'https://github.com/berniewang8177/TemporalLatentGoal.git', 'commit': 'c80ba9c1073de69de4f76ca7feee325bc8690ec3'}, 'email': None, 'root': '/home/yiqiw2/experiment/language_rl/TemporalLatentGoal', 'host': 'mead.ece.local.cmu.edu', 'username': 'yiqiw2', 'executable': '/home/yiqiw2/miniconda3/envs/rlnlp/bin/python3', 'cpu_count': 16, 'cpu_count_logical': 32, 'cpu_freq': {'current': 4194.964249999999, 'min': 1200.0, 'max': 4400.0}, 'cpu_freq_per_core': [{'current': 4299.829, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.829, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.829, 'min': 1200.0, 'max': 4400.0}, {'current': 3503.32, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.829, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.829, 'min': 1200.0, 'max': 4400.0}, {'current': 4167.332, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.829, 'min': 1200.0, 'max': 4400.0}, {'current': 4300.048, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.389, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.829, 'min': 1200.0, 'max': 4400.0}, {'current': 4210.18, 'min': 1200.0, 'max': 4400.0}, {'current': 4293.896, 'min': 1200.0, 'max': 4400.0}, {'current': 4287.084, 'min': 1200.0, 'max': 4400.0}, {'current': 4273.681, 'min': 1200.0, 'max': 4400.0}, {'current': 3914.428, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.829, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.829, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.829, 'min': 1200.0, 'max': 4400.0}, {'current': 3516.284, 'min': 1200.0, 'max': 4400.0}, {'current': 3517.163, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.829, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.829, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.829, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.829, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.829, 'min': 1200.0, 'max': 4400.0}, {'current': 4298.73, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.829, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.169, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.829, 'min': 1200.0, 'max': 4400.0}, {'current': 4296.533, 'min': 1200.0, 'max': 4400.0}, {'current': 4299.829, 'min': 1200.0, 'max': 4400.0}], 'disk': {'total': 157.70965576171875, 'used': 43.80561065673828}, 'gpu': 'Tesla V100-PCIE-32GB', 'gpu_count': 4, 'gpu_devices': [{'name': 'Tesla V100-PCIE-32GB', 'memory_total': 34089730048}, {'name': 'Tesla V100-PCIE-32GB', 'memory_total': 34089730048}, {'name': 'Tesla V100-PCIE-32GB', 'memory_total': 34089730048}, {'name': 'Tesla V100-PCIE-32GB', 'memory_total': 34089730048}], 'memory': {'total': 251.4088363647461}}
+2023-04-04 15:34:56,941 INFO    HandlerThread:40206 [system_monitor.py:probe():182] Finished collecting system info
+2023-04-04 15:34:56,941 INFO    HandlerThread:40206 [system_monitor.py:probe():185] Publishing system info
+2023-04-04 15:34:56,941 DEBUG   HandlerThread:40206 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-04-04 15:34:56,942 DEBUG   HandlerThread:40206 [system_info.py:_save_pip():67] Saving pip packages done
+2023-04-04 15:34:56,942 DEBUG   HandlerThread:40206 [system_info.py:_save_conda():74] Saving list of conda packages installed into the current environment
+2023-04-04 15:34:57,767 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_created():275] file/dir created: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/requirements.txt
+2023-04-04 15:34:57,767 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_created():275] file/dir created: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:34:57,768 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_created():275] file/dir created: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/conda-environment.yaml
+2023-04-04 15:34:59,024 DEBUG   HandlerThread:40206 [system_info.py:_save_conda():86] Saving conda packages done
+2023-04-04 15:34:59,025 INFO    HandlerThread:40206 [system_monitor.py:probe():187] Finished publishing system info
+2023-04-04 15:34:59,027 DEBUG   SenderThread:40206 [sender.py:send():336] send: files
+2023-04-04 15:34:59,027 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-metadata.json with policy now
+2023-04-04 15:34:59,031 DEBUG   SenderThread:40206 [sender.py:send():336] send: telemetry
+2023-04-04 15:34:59,032 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: stop_status
+2023-04-04 15:34:59,032 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: stop_status
+2023-04-04 15:34:59,487 INFO    wandb-upload_0:40206 [upload_job.py:push():138] Uploaded file /tmp/tmpbelbdfh3wandb/nxchm2y3-wandb-metadata.json
+2023-04-04 15:34:59,767 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/conda-environment.yaml
+2023-04-04 15:34:59,767 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_created():275] file/dir created: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-metadata.json
+2023-04-04 15:34:59,767 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_created():275] file/dir created: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:01,767 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:02,170 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:35:05,769 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:06,769 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:07,809 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:35:08,422 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:08,424 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:08,424 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:08,424 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:08,770 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:09,595 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:09,596 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:09,596 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:09,597 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:09,770 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:10,770 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:10,840 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:10,841 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:10,841 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:10,841 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:11,771 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:12,106 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:12,118 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:12,119 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:12,119 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:12,771 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:12,771 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:13,119 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:35:13,426 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:13,428 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:13,429 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:13,453 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:13,771 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:14,031 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:35:14,031 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:35:14,698 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:14,699 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:14,699 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:14,712 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:14,772 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:14,772 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:16,074 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:16,074 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:16,075 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:16,075 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:16,772 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:16,773 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:17,449 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:17,450 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:17,450 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:17,450 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:17,773 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:18,450 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:35:18,773 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:18,794 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:18,794 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:18,794 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:18,795 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:19,060 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:35:19,776 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:20,061 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:20,062 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:20,063 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:20,063 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:20,777 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:20,777 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:21,185 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:21,186 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:21,186 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:21,187 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:21,777 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:22,332 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:22,333 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:22,333 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:22,333 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:22,777 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:22,778 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:23,609 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:23,610 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:23,610 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:23,610 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:35:23,611 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:23,778 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:24,063 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:35:24,778 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:24,874 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:24,875 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:24,876 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:24,876 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:25,779 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:26,206 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:26,207 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:26,207 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:26,208 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:26,779 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:26,779 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:27,458 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:27,460 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:27,460 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:27,461 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:27,779 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:28,780 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:28,790 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:28,791 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:28,797 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:35:28,980 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:28,980 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:29,064 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:35:29,668 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:29,669 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:29,669 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:29,670 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:29,780 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/config.yaml
+2023-04-04 15:35:29,780 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:30,564 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:30,564 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:30,565 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:30,565 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:30,781 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:30,781 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:31,661 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:31,661 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:31,661 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:31,662 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:31,781 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:32,774 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:32,775 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:32,775 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:32,776 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:32,781 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:32,782 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:34,000 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:34,002 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:34,002 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:34,002 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:35:34,010 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:34,065 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:35:34,782 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:34,783 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:34,956 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:34,957 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:34,957 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:34,957 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:35,783 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:36,105 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:36,106 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:36,106 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:36,119 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:36,783 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:36,783 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:36,924 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:36,927 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:36,927 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:36,928 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:37,783 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:37,818 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:37,819 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:37,820 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:37,820 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:38,784 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:38,784 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:39,122 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:35:39,123 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:39,124 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:39,124 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:39,124 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:35:39,131 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:39,784 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:40,416 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:40,417 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:40,417 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:40,418 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:40,785 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:40,785 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:41,501 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:41,502 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:41,502 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:41,503 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:41,785 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:42,621 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:42,622 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:42,622 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:42,622 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:42,785 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:42,785 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:43,706 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:43,706 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:43,707 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:43,707 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:43,789 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:44,123 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:35:44,708 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:35:44,789 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:44,868 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:44,869 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:44,869 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:44,870 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:45,791 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:46,094 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:46,094 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:46,095 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:46,095 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:46,792 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:46,792 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:47,334 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:47,335 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:47,335 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:47,336 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:47,795 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:48,632 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:48,633 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:48,633 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:48,633 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:48,795 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:48,796 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:49,134 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:35:49,737 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:49,738 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:49,738 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:49,739 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:35:49,739 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:49,796 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:50,432 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:50,433 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:50,433 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:50,450 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:50,796 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:50,796 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:51,198 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:51,199 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:51,199 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:51,199 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:51,797 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:52,555 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:52,556 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:52,557 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:52,557 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:52,797 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:52,797 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:53,902 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:53,903 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:53,903 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:53,903 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:54,186 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:35:54,798 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:54,798 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:54,904 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:35:55,241 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:55,242 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:55,243 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:55,252 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:55,798 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:56,529 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:56,530 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:56,531 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:56,531 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:56,798 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:56,799 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:56,889 DEBUG   SystemMonitor:40206 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2023-04-04 15:35:56,891 DEBUG   SenderThread:40206 [sender.py:send():336] send: stats
+2023-04-04 15:35:57,855 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:57,856 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:57,856 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:57,857 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:58,799 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:35:58,799 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:35:59,185 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:35:59,186 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:35:59,186 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:35:59,198 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:35:59,226 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:35:59,801 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:00,198 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:36:00,414 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:00,415 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:00,415 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:00,416 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:00,800 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:00,800 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:01,760 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:01,761 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:01,761 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:01,762 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:01,800 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:02,801 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:03,117 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:03,118 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:03,118 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:03,118 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:03,801 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:04,228 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:36:04,415 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:04,416 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:04,416 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:04,417 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:04,802 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:04,802 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:05,417 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:36:05,716 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:05,717 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:05,717 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:05,718 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:05,802 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:06,803 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:07,962 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:07,963 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:07,964 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:07,964 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:08,803 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:08,804 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:08,981 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:08,981 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:08,982 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:08,985 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:08,985 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:08,986 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:08,986 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:08,986 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:09,230 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:36:09,805 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:09,805 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:10,290 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:10,291 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:10,291 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:10,291 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:10,805 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:10,805 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:11,292 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:36:11,621 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:11,621 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:11,622 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:11,622 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:11,805 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:11,806 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:12,806 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:12,932 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:12,933 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:12,933 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:12,933 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:13,807 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:14,259 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:14,260 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:14,260 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:14,261 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:14,281 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:36:14,808 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:14,808 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:15,572 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:15,573 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:15,573 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:15,581 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:15,808 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:16,581 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:36:16,809 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:16,910 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:16,911 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:16,911 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:16,911 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:17,809 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:18,178 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:18,179 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:18,179 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:18,179 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:18,809 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:18,810 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:19,042 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:19,043 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:19,043 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:19,043 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:19,285 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:36:19,810 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:19,889 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:19,890 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:19,890 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:19,901 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:20,810 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:20,811 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:20,918 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:20,921 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:20,921 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:20,922 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:21,811 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:21,922 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:36:22,165 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:22,166 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:22,166 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:22,166 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:22,811 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:22,811 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:23,434 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:23,435 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:23,435 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:23,435 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:23,811 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:24,286 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:36:24,499 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:24,500 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:24,500 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:24,500 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:24,814 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:24,815 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:26,817 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:26,914 DEBUG   SenderThread:40206 [sender.py:send():336] send: stats
+2023-04-04 15:36:27,169 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:27,170 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:27,170 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:27,170 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:36:27,170 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:27,816 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:28,567 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:28,568 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:28,568 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:28,569 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:28,816 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:28,816 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:29,289 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:36:29,958 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:29,959 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:29,959 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:29,959 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:30,819 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:30,819 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:31,268 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:31,269 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:31,269 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:31,269 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:31,819 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:32,273 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:36:32,591 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:32,592 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:32,592 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:32,592 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:32,820 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:32,820 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:33,907 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:33,908 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:33,908 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:33,908 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:34,289 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:36:34,821 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:34,821 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:35,250 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:35,251 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:35,251 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:35,252 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:35,821 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:36,554 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:36,555 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:36,555 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:36,572 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:36,821 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:36,821 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:37,572 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:36:37,771 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:37,772 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:37,772 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:37,773 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:37,821 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:38,822 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:39,045 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:39,046 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:39,046 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:39,047 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:39,290 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:36:39,822 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:39,963 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:39,964 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:39,964 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:39,965 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:40,823 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:40,823 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:40,823 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:40,824 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:40,825 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:40,838 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:41,742 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:41,745 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:41,746 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:41,746 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:41,829 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:42,746 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:36:42,811 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:42,812 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:42,812 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:42,812 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:42,823 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:42,824 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:43,863 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:43,864 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:43,864 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:43,864 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:44,291 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:36:44,825 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:44,825 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:44,887 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-04 15:36:44,888 DEBUG   SenderThread:40206 [sender.py:send():336] send: history
+2023-04-04 15:36:44,888 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: summary_record
+2023-04-04 15:36:44,888 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:45,075 DEBUG   SenderThread:40206 [sender.py:send():336] send: exit
+2023-04-04 15:36:45,075 INFO    SenderThread:40206 [sender.py:send_exit():559] handling exit code: 255
+2023-04-04 15:36:45,076 INFO    SenderThread:40206 [sender.py:send_exit():561] handling runtime: 108
+2023-04-04 15:36:45,076 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:45,076 INFO    SenderThread:40206 [sender.py:send_exit():567] send defer
+2023-04-04 15:36:45,076 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: defer
+2023-04-04 15:36:45,076 INFO    HandlerThread:40206 [handler.py:handle_request_defer():170] handle defer: 0
+2023-04-04 15:36:45,076 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: defer
+2023-04-04 15:36:45,076 INFO    SenderThread:40206 [sender.py:send_request_defer():583] handle sender defer: 0
+2023-04-04 15:36:45,076 INFO    SenderThread:40206 [sender.py:transition_state():587] send defer: 1
+2023-04-04 15:36:45,077 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: defer
+2023-04-04 15:36:45,077 INFO    HandlerThread:40206 [handler.py:handle_request_defer():170] handle defer: 1
+2023-04-04 15:36:45,077 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: defer
+2023-04-04 15:36:45,077 INFO    SenderThread:40206 [sender.py:send_request_defer():583] handle sender defer: 1
+2023-04-04 15:36:45,077 INFO    SenderThread:40206 [sender.py:transition_state():587] send defer: 2
+2023-04-04 15:36:45,077 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: defer
+2023-04-04 15:36:45,077 INFO    HandlerThread:40206 [handler.py:handle_request_defer():170] handle defer: 2
+2023-04-04 15:36:45,077 INFO    HandlerThread:40206 [system_monitor.py:finish():161] Stopping system monitor
+2023-04-04 15:36:45,081 DEBUG   SystemMonitor:40206 [system_monitor.py:_start():137] Finished system metrics aggregation loop
+2023-04-04 15:36:45,081 DEBUG   SystemMonitor:40206 [system_monitor.py:_start():141] Publishing last batch of metrics
+2023-04-04 15:36:45,088 INFO    HandlerThread:40206 [interfaces.py:finish():175] Joined cpu
+2023-04-04 15:36:45,089 INFO    HandlerThread:40206 [interfaces.py:finish():175] Joined disk
+2023-04-04 15:36:45,648 INFO    HandlerThread:40206 [interfaces.py:finish():175] Joined gpu
+2023-04-04 15:36:45,648 INFO    HandlerThread:40206 [interfaces.py:finish():175] Joined memory
+2023-04-04 15:36:45,648 INFO    HandlerThread:40206 [interfaces.py:finish():175] Joined network
+2023-04-04 15:36:45,648 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: defer
+2023-04-04 15:36:45,649 INFO    SenderThread:40206 [sender.py:send_request_defer():583] handle sender defer: 2
+2023-04-04 15:36:45,649 INFO    SenderThread:40206 [sender.py:transition_state():587] send defer: 3
+2023-04-04 15:36:45,649 DEBUG   SenderThread:40206 [sender.py:send():336] send: stats
+2023-04-04 15:36:45,649 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: defer
+2023-04-04 15:36:45,649 INFO    HandlerThread:40206 [handler.py:handle_request_defer():170] handle defer: 3
+2023-04-04 15:36:45,649 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: defer
+2023-04-04 15:36:45,649 INFO    SenderThread:40206 [sender.py:send_request_defer():583] handle sender defer: 3
+2023-04-04 15:36:45,649 INFO    SenderThread:40206 [sender.py:transition_state():587] send defer: 4
+2023-04-04 15:36:45,649 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: defer
+2023-04-04 15:36:45,650 INFO    HandlerThread:40206 [handler.py:handle_request_defer():170] handle defer: 4
+2023-04-04 15:36:45,650 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: defer
+2023-04-04 15:36:45,650 INFO    SenderThread:40206 [sender.py:send_request_defer():583] handle sender defer: 4
+2023-04-04 15:36:45,650 INFO    SenderThread:40206 [sender.py:transition_state():587] send defer: 5
+2023-04-04 15:36:45,650 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: defer
+2023-04-04 15:36:45,650 INFO    HandlerThread:40206 [handler.py:handle_request_defer():170] handle defer: 5
+2023-04-04 15:36:45,650 DEBUG   SenderThread:40206 [sender.py:send():336] send: summary
+2023-04-04 15:36:45,650 INFO    SenderThread:40206 [sender.py:_save_file():1321] saving file wandb-summary.json with policy end
+2023-04-04 15:36:45,651 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: defer
+2023-04-04 15:36:45,651 INFO    SenderThread:40206 [sender.py:send_request_defer():583] handle sender defer: 5
+2023-04-04 15:36:45,651 INFO    SenderThread:40206 [sender.py:transition_state():587] send defer: 6
+2023-04-04 15:36:45,651 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: defer
+2023-04-04 15:36:45,651 INFO    HandlerThread:40206 [handler.py:handle_request_defer():170] handle defer: 6
+2023-04-04 15:36:45,651 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: defer
+2023-04-04 15:36:45,651 INFO    SenderThread:40206 [sender.py:send_request_defer():583] handle sender defer: 6
+2023-04-04 15:36:45,651 INFO    SenderThread:40206 [sender.py:transition_state():587] send defer: 7
+2023-04-04 15:36:45,651 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: status_report
+2023-04-04 15:36:45,651 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: defer
+2023-04-04 15:36:45,651 INFO    HandlerThread:40206 [handler.py:handle_request_defer():170] handle defer: 7
+2023-04-04 15:36:45,651 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: defer
+2023-04-04 15:36:45,651 INFO    SenderThread:40206 [sender.py:send_request_defer():583] handle sender defer: 7
+2023-04-04 15:36:45,825 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:46,072 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: poll_exit
+2023-04-04 15:36:46,825 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:47,967 INFO    SenderThread:40206 [sender.py:transition_state():587] send defer: 8
+2023-04-04 15:36:47,967 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: poll_exit
+2023-04-04 15:36:47,968 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: defer
+2023-04-04 15:36:47,968 INFO    HandlerThread:40206 [handler.py:handle_request_defer():170] handle defer: 8
+2023-04-04 15:36:47,968 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: defer
+2023-04-04 15:36:47,968 INFO    SenderThread:40206 [sender.py:send_request_defer():583] handle sender defer: 8
+2023-04-04 15:36:47,973 INFO    SenderThread:40206 [sender.py:transition_state():587] send defer: 9
+2023-04-04 15:36:47,974 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: defer
+2023-04-04 15:36:47,974 DEBUG   SenderThread:40206 [sender.py:send():336] send: artifact
+2023-04-04 15:36:47,974 INFO    HandlerThread:40206 [handler.py:handle_request_defer():170] handle defer: 9
+2023-04-04 15:36:48,826 INFO    Thread-13 :40206 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:48,887 INFO    wandb-upload_1:40206 [upload_job.py:push():93] Skipped uploading /home/yiqiw2/.local/share/wandb/artifacts/staging/tmp_8miu05f
+2023-04-04 15:36:49,186 INFO    wandb-upload_0:40206 [upload_job.py:push():96] Uploaded file /home/yiqiw2/.local/share/wandb/artifacts/staging/tmpmo9xqbx8
+2023-04-04 15:36:50,273 INFO    SenderThread:40206 [sender.py:send_artifact():1417] sent artifact job-https___github.com_berniewang8177_TemporalLatentGoal.git_Scripts2_train.py - {'id': 'QXJ0aWZhY3Q6NDEzNjg0NjEy', 'digest': '61755154df9b2f4af2fc1a4ffadb676a', 'state': 'PENDING', 'aliases': [], 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjU5MDU0NTM5', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6NDEzNjQzODAx', 'versionIndex': 11}}, 'version': 'latest'}
+2023-04-04 15:36:50,273 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: defer
+2023-04-04 15:36:50,273 INFO    SenderThread:40206 [sender.py:send_request_defer():583] handle sender defer: 9
+2023-04-04 15:36:50,273 INFO    SenderThread:40206 [dir_watcher.py:finish():362] shutting down directory watcher
+2023-04-04 15:36:50,827 INFO    SenderThread:40206 [dir_watcher.py:finish():392] scan: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files
+2023-04-04 15:36:50,827 INFO    SenderThread:40206 [dir_watcher.py:finish():406] scan save: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/config.yaml config.yaml
+2023-04-04 15:36:50,827 INFO    SenderThread:40206 [dir_watcher.py:finish():406] scan save: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json wandb-summary.json
+2023-04-04 15:36:50,827 INFO    SenderThread:40206 [dir_watcher.py:finish():406] scan save: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/requirements.txt requirements.txt
+2023-04-04 15:36:50,828 INFO    SenderThread:40206 [dir_watcher.py:finish():406] scan save: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/conda-environment.yaml conda-environment.yaml
+2023-04-04 15:36:50,834 INFO    SenderThread:40206 [dir_watcher.py:finish():406] scan save: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-metadata.json wandb-metadata.json
+2023-04-04 15:36:50,834 INFO    SenderThread:40206 [dir_watcher.py:finish():406] scan save: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log output.log
+2023-04-04 15:36:50,837 INFO    SenderThread:40206 [sender.py:transition_state():587] send defer: 10
+2023-04-04 15:36:50,837 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: defer
+2023-04-04 15:36:50,838 INFO    HandlerThread:40206 [handler.py:handle_request_defer():170] handle defer: 10
+2023-04-04 15:36:50,840 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: defer
+2023-04-04 15:36:50,840 INFO    SenderThread:40206 [sender.py:send_request_defer():583] handle sender defer: 10
+2023-04-04 15:36:50,840 INFO    SenderThread:40206 [file_pusher.py:finish():162] shutting down file pusher
+2023-04-04 15:36:51,074 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-04 15:36:51,220 INFO    wandb-upload_1:40206 [upload_job.py:push():138] Uploaded file /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/config.yaml
+2023-04-04 15:36:51,228 INFO    wandb-upload_2:40206 [upload_job.py:push():138] Uploaded file /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/requirements.txt
+2023-04-04 15:36:51,270 INFO    wandb-upload_4:40206 [upload_job.py:push():138] Uploaded file /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/output.log
+2023-04-04 15:36:51,293 INFO    wandb-upload_3:40206 [upload_job.py:push():138] Uploaded file /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/conda-environment.yaml
+2023-04-04 15:36:51,317 INFO    wandb-upload_0:40206 [upload_job.py:push():138] Uploaded file /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/files/wandb-summary.json
+2023-04-04 15:36:51,517 INFO    Thread-12 :40206 [sender.py:transition_state():587] send defer: 11
+2023-04-04 15:36:51,518 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: defer
+2023-04-04 15:36:51,518 INFO    HandlerThread:40206 [handler.py:handle_request_defer():170] handle defer: 11
+2023-04-04 15:36:51,518 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: defer
+2023-04-04 15:36:51,518 INFO    SenderThread:40206 [sender.py:send_request_defer():583] handle sender defer: 11
+2023-04-04 15:36:51,518 INFO    SenderThread:40206 [file_pusher.py:join():167] waiting for file pusher
+2023-04-04 15:36:51,518 INFO    SenderThread:40206 [sender.py:transition_state():587] send defer: 12
+2023-04-04 15:36:51,518 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: defer
+2023-04-04 15:36:51,518 INFO    HandlerThread:40206 [handler.py:handle_request_defer():170] handle defer: 12
+2023-04-04 15:36:51,519 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: defer
+2023-04-04 15:36:51,519 INFO    SenderThread:40206 [sender.py:send_request_defer():583] handle sender defer: 12
+2023-04-04 15:36:51,605 INFO    SenderThread:40206 [sender.py:transition_state():587] send defer: 13
+2023-04-04 15:36:51,605 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: defer
+2023-04-04 15:36:51,605 INFO    HandlerThread:40206 [handler.py:handle_request_defer():170] handle defer: 13
+2023-04-04 15:36:51,605 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: defer
+2023-04-04 15:36:51,605 INFO    SenderThread:40206 [sender.py:send_request_defer():583] handle sender defer: 13
+2023-04-04 15:36:51,606 INFO    SenderThread:40206 [sender.py:transition_state():587] send defer: 14
+2023-04-04 15:36:51,606 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: defer
+2023-04-04 15:36:51,606 DEBUG   SenderThread:40206 [sender.py:send():336] send: final
+2023-04-04 15:36:51,606 INFO    HandlerThread:40206 [handler.py:handle_request_defer():170] handle defer: 14
+2023-04-04 15:36:51,606 DEBUG   SenderThread:40206 [sender.py:send():336] send: footer
+2023-04-04 15:36:51,606 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: defer
+2023-04-04 15:36:51,606 INFO    SenderThread:40206 [sender.py:send_request_defer():583] handle sender defer: 14
+2023-04-04 15:36:51,607 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: poll_exit
+2023-04-04 15:36:51,607 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: poll_exit
+2023-04-04 15:36:51,607 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: server_info
+2023-04-04 15:36:51,608 DEBUG   SenderThread:40206 [sender.py:send_request():363] send_request: server_info
+2023-04-04 15:36:51,608 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: get_summary
+2023-04-04 15:36:51,611 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: sampled_history
+2023-04-04 15:36:51,741 INFO    MainThread:40206 [wandb_run.py:_footer_history_summary_info():3442] rendering history
+2023-04-04 15:36:51,741 INFO    MainThread:40206 [wandb_run.py:_footer_history_summary_info():3474] rendering summary
+2023-04-04 15:36:51,742 INFO    MainThread:40206 [wandb_run.py:_footer_sync_info():3398] logging synced files
+2023-04-04 15:36:51,742 DEBUG   HandlerThread:40206 [handler.py:handle_request():144] handle_request: shutdown
+2023-04-04 15:36:51,742 INFO    HandlerThread:40206 [handler.py:finish():841] shutting down handler
+2023-04-04 15:36:52,608 INFO    WriterThread:40206 [datastore.py:close():299] close: /home/yiqiw2/experiment/language_rl/TemporalLatentGoal/wandb/run-20230404_153456-n98r0xrw/run-n98r0xrw.wandb
+2023-04-04 15:36:52,741 INFO    SenderThread:40206 [sender.py:finish():1493] shutting down sender
+2023-04-04 15:36:52,741 INFO    SenderThread:40206 [file_pusher.py:finish():162] shutting down file pusher
+2023-04-04 15:36:52,741 INFO    SenderThread:40206 [file_pusher.py:join():167] waiting for file pusher
