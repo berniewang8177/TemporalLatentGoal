@@ -1,8 +1,8 @@
 #!/bin/bash
 # "0:0:400" "1:1 7:1000" "2:2 5:1000"
 WARM=10
-# "10 13:7 10:2000" "4 16:1 4:2000" "4 7:4 7 10:2000"
-for var_setup in "13 1: 16:2000"
+# "4 16:1 4:2000" "1 10:1 4:2000" "10 13:10 7:2000"  "4 7:4 7 10:2000"
+for var_setup in "4 16:1 4:2000" "1 10:1 4:2000" "10 13:10 7:2000"  "4 7:4 7 10:2000"
 do
     var=$(echo $var_setup | cut -d ":" -f 1)
     var_val=$(echo $var_setup | cut -d ":" -f 2) 
@@ -14,6 +14,8 @@ do
     let WARMUP="$TRAIN / $WARM"
 
     python3 Scripts2/train.py \
+    --save_model \
+    --log_to_wandb \
     --accumulate_grad_batches 1\
     --lr 0.00005 \
     --device cuda:1 \

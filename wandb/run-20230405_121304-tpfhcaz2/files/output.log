@@ -1,0 +1,992 @@
+
+Random seed for training set as 2
+In total, 35.096089 M # of params
+get instruction path: /home/yiqiw2/experiment/language_rl/new_train_data/push_buttons+4
+get instruction path: /home/yiqiw2/experiment/language_rl/new_train_data/push_buttons+7
+Num ep. 200
+get instruction path: /home/yiqiw2/experiment/language_rl/new_val_data/push_buttons+4
+Num ep. 10
+get instruction path: /home/yiqiw2/experiment/language_rl/new_val_data/push_buttons+7
+Num ep. 10
+get instruction path: /home/yiqiw2/experiment/language_rl/new_val_data/push_buttons+10
+Num ep. 10
+  0%|          | 0/2000 [00:00<?, ?it/s]/home/yiqiw2/miniconda3/envs/rlnlp/lib/python3.9/site-packages/torch/nn/functional.py:4999: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  warnings.warn(
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  2%|▏         | 49/2000 [00:44<23:59,  1.36it/s]
+Saved one!
+Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  5%|▍         | 99/2000 [01:31<25:54,  1.22it/s]
+Delete one!	Saved one!
+
+  5%|▌         | 100/2000 [01:35<56:04,  1.77s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  7%|▋         | 149/2000 [02:16<26:04,  1.18it/s]
+Delete one!	Saved one!
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 10%|▉         | 199/2000 [03:00<25:15,  1.19it/s]
+Delete one!	Saved one!
+
+ 10%|█         | 201/2000 [03:05<45:21,  1.51s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 12%|█▏        | 249/2000 [03:45<23:08,  1.26it/s]
+Delete one!	Saved one!
+
+ 12%|█▎        | 250/2000 [03:49<52:03,  1.79s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 15%|█▍        | 299/2000 [04:32<24:09,  1.17it/s]
+Delete one!	Saved one!
+
+ 15%|█▌        | 301/2000 [04:37<43:54,  1.55s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 17%|█▋        | 349/2000 [05:17<22:51,  1.20it/s]
+Delete one!	Saved one!
+
+ 18%|█▊        | 350/2000 [05:21<51:40,  1.88s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 20%|█▉        | 399/2000 [06:02<20:33,  1.30it/s]
+Delete one!	Saved one!
+
+ 20%|██        | 401/2000 [06:07<40:43,  1.53s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 22%|██▏       | 449/2000 [06:51<22:06,  1.17it/s]
+Delete one!	Saved one!
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 25%|██▍       | 499/2000 [07:35<21:23,  1.17it/s]
+Delete one!	Saved one!
+
+ 25%|██▌       | 500/2000 [07:39<47:57,  1.92s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 27%|██▋       | 549/2000 [08:20<20:13,  1.20it/s]
+Delete one!	Saved one!
+
+ 28%|██▊       | 551/2000 [08:26<37:51,  1.57s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 30%|██▉       | 599/2000 [09:08<18:47,  1.24it/s]
+Delete one!	Saved one!
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 32%|███▏      | 649/2000 [09:55<19:45,  1.14it/s]
+Delete one!	Saved one!
+
+ 32%|███▎      | 650/2000 [09:59<44:56,  2.00s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 35%|███▍      | 699/2000 [10:40<19:39,  1.10it/s]
+Delete one!	Saved one!
+
+ 35%|███▌      | 701/2000 [10:46<35:06,  1.62s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 37%|███▋      | 749/2000 [11:24<15:12,  1.37it/s]
+Delete one!	Saved one!
+
+ 38%|███▊      | 751/2000 [11:30<32:02,  1.54s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 40%|███▉      | 799/2000 [12:12<15:46,  1.27it/s]
+Delete one!	Saved one!
+
+ 40%|████      | 800/2000 [12:16<35:45,  1.79s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 42%|████▏     | 849/2000 [12:58<16:17,  1.18it/s]
+
+ 42%|████▎     | 850/2000 [13:02<37:02,  1.93s/it]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 45%|████▍     | 899/2000 [13:43<15:13,  1.21it/s]
+Delete one!	Saved one!
+
+ 45%|████▌     | 901/2000 [13:48<28:32,  1.56s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 47%|████▋     | 949/2000 [14:30<17:03,  1.03it/s]
+Delete one!	Saved one!
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 50%|████▉     | 999/2000 [15:16<14:57,  1.12it/s]
+Delete one!	Saved one!
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 52%|█████▏    | 1049/2000 [16:02<13:33,  1.17it/s]
+Delete one!	Saved one!
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 55%|█████▍    | 1099/2000 [16:49<12:31,  1.20it/s]
+Delete one!	Saved one!
+
+ 55%|█████▌    | 1101/2000 [16:54<23:34,  1.57s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 57%|█████▋    | 1149/2000 [17:36<11:41,  1.21it/s]
+Delete one!	Saved one!
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 60%|█████▉    | 1199/2000 [18:22<15:43,  1.18s/it]
+
+ 60%|██████    | 1200/2000 [18:26<27:30,  2.06s/it]
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 62%|██████▏   | 1249/2000 [19:06<10:52,  1.15it/s]
+Delete one!	Saved one!
+
+ 63%|██████▎   | 1251/2000 [19:11<18:51,  1.51s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 65%|██████▍   | 1299/2000 [19:52<09:17,  1.26it/s]
+Delete one!	Saved one!
+
+ 65%|██████▌   | 1301/2000 [19:57<17:37,  1.51s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 67%|██████▋   | 1349/2000 [20:38<09:07,  1.19it/s]
+Delete one!	Saved one!
+
+ 68%|██████▊   | 1350/2000 [20:43<20:10,  1.86s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 70%|██████▉   | 1399/2000 [21:23<08:15,  1.21it/s]
+Delete one!	Saved one!
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 72%|███████▏  | 1449/2000 [22:06<05:57,  1.54it/s]
+Delete one!	Saved one!
+
+ 73%|███████▎  | 1451/2000 [22:12<16:10,  1.77s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 75%|███████▍  | 1499/2000 [22:54<06:58,  1.20it/s]
+Delete one!	Saved one!
+
+ 75%|███████▌  | 1501/2000 [22:58<12:33,  1.51s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 77%|███████▋  | 1549/2000 [23:39<06:19,  1.19it/s]
+Delete one!	Saved one!
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 80%|███████▉  | 1599/2000 [24:24<05:36,  1.19it/s]
+Delete one!	Saved one!
+
+ 80%|████████  | 1601/2000 [24:29<10:16,  1.55s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 82%|████████▏ | 1649/2000 [25:10<04:54,  1.19it/s]
+Delete one!	Saved one!
+
+ 83%|████████▎ | 1651/2000 [25:15<08:17,  1.43s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 85%|████████▍ | 1699/2000 [25:56<04:08,  1.21it/s]
+Delete one!	Saved one!
+
+ 85%|████████▌ | 1701/2000 [26:01<07:33,  1.52s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 87%|████████▋ | 1749/2000 [26:41<03:29,  1.20it/s]
+Delete one!	Saved one!
+
+ 88%|████████▊ | 1750/2000 [26:45<07:31,  1.80s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 90%|████████▉ | 1799/2000 [27:26<02:23,  1.40it/s]
+Delete one!	Saved one!
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 92%|█████████▏| 1849/2000 [28:12<01:58,  1.27it/s]
+Delete one!	Saved one!
+
+ 93%|█████████▎| 1851/2000 [28:17<03:38,  1.47s/it]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 95%|█████████▍| 1899/2000 [28:57<01:27,  1.15it/s]
+Delete one!	Saved one!
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 97%|█████████▋| 1949/2000 [29:40<00:41,  1.22it/s]
+Delete one!	Saved one!
+Delete one!	Saved one!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+100%|█████████▉| 1999/2000 [30:26<00:00,  1.26it/s]
+Delete one!	Saved one!
+Delete one!	Saved one!
+
+100%|██████████| 2000/2000 [30:30<00:00,  1.09it/s]
